@@ -396,7 +396,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: MediaQuery.of(context).size.height,
                   child: SpinKitWave(
                     color: Color(0xFFcc0000),
-                    size: 35.0,
+                    size: 35.00,
                   ),
                 )
               : Container()),
