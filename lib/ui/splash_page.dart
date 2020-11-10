@@ -51,21 +51,21 @@ class _SplashPageState extends State<SplashPage> {
         seconds: 3,
         // the widget to run after running your splashscreen
         navigateAfterSeconds: rc.route.value,
-        // title: Text(
-        //   '[ RTLH APP ]',
-        //   style: TextStyle(
-        //     fontFamily: 'Nunito',
-        //     fontSize: 30,
-        //     color: Colors.white,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-        image: Image.asset(
-          'assets/logo/logo_rtlh_red.png',
-          height: 120,
-          alignment: Alignment.center,
+        title: Text(
+          'Kabupaten Magelang',
+          style: TextStyle(
+            fontFamily: 'Nunito',
+            fontSize: 23,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        backgroundColor: Color(0xFF1c1a30),
+        image: Image.asset(
+          'assets/logo/logo_rtlh_red_2.png',
+          height: (MediaQuery.of(context).size.width * 1 / 3) + 50,
+          alignment: Alignment.bottomCenter,
+        ),
+        backgroundColor: Color(0xFF2f2546),
         // styleTextUnderTheLoader: TextStyle(),
         photoSize: 100.0,
         loaderColor: Colors.amber,

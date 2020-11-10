@@ -22,6 +22,9 @@ class _LoginPageState extends State<LoginPage> {
   double padd = 50;
   double padd2 = 50;
 
+  double smallCircle(BuildContext ctx) => MediaQuery.of(ctx).size.width * 2 / 3;
+  double bigCircle(BuildContext ctx) => MediaQuery.of(ctx).size.width * 7 / 8;
+
   animated() async {
     await Future.delayed(Duration(milliseconds: 100), () {
       return setState(() {
@@ -61,24 +64,36 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final logo2 = Container(
-      height: 120,
+      height: (MediaQuery.of(context).size.width * 1 / 3) + 20,
       child: AnimatedPadding(
         curve: Curves.elasticOut,
         duration: Duration(seconds: 1),
         padding: EdgeInsets.all(padd),
         child: Image(
-          image: AssetImage('assets/logo/logo_rtlh_red.png'),
+          image: AssetImage('assets/logo/logo_rtlh_clr.png'),
         ),
       ),
     );
 
     final user = TextFormField(
+      style: TextStyle(fontSize: 20.0, color: Color(0xFFcc0000)),
       controller: ctrlUser,
       // maxLength: 50,
       keyboardType: TextInputType.text,
       autofocus: false,
       // initialValue: 'rafho@gmail.com',
       decoration: InputDecoration(
+        fillColor: Color.fromARGB(150, 255, 255, 255),
+        filled: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50.0),
+          borderSide: BorderSide(
+            color: Colors.grey[900],
+            width: 1.0,
+            style: BorderStyle.solid,
+          ),
+        ),
+
         // icon: Icon(Icons.mail),
         //untuk manambahkan widget bebas ke dalam field
         // prefix: Container(
@@ -99,10 +114,12 @@ class _LoginPageState extends State<LoginPage> {
         // prefixText: 'Email',
         // prefixStyle: TextStyle(color: Colors.red),
         labelText: 'Username',
-        // labelStyle: TextStyle(fontSize: 20.0),
+        labelStyle: TextStyle(fontSize: 20.0),
         // hintText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+        // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50.0),
+        ),
       ),
       validator: (value) {
         if (value.isEmpty) {
@@ -116,10 +133,21 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
+        style: TextStyle(fontSize: 20.0, color: Color(0xFFcc0000)),
         controller: ctrlPass,
         obscureText: showPass,
         autofocus: false,
         decoration: InputDecoration(
+          fillColor: Color.fromARGB(150, 255, 255, 255),
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            borderSide: BorderSide(
+              color: Colors.grey[900],
+              width: 1.0,
+              style: BorderStyle.solid,
+            ),
+          ),
           // icon: Icon(Icons.lock),
           prefixIcon: Icon(Icons.lock),
           suffixIcon: IconButton(
@@ -133,9 +161,10 @@ class _LoginPageState extends State<LoginPage> {
             },
           ),
           labelText: 'Password',
+          labelStyle: TextStyle(fontSize: 20.0),
           // hintText: 'Password',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+          // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0)),
         ),
         validator: (val) {
           if (val.isEmpty) {
@@ -256,7 +285,7 @@ class _LoginPageState extends State<LoginPage> {
                   size: 35.0,
                 )
               : Icon(
-                  Icons.power_settings_new,
+                  Icons.login_rounded,
                   color: Colors.white,
                   size: 40.0,
                 )),
@@ -271,7 +300,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       icon: Center(
           child: Icon(
-        Icons.power_settings_new,
+        Icons.login_rounded,
         color: Colors.white,
         size: 40.0,
         semanticLabel: 'Text to announce in accessibility modes',
@@ -316,19 +345,47 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     return Scaffold(
-      // backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFe4ebef),
       body: DoubleBackToCloseApp(
         snackBar: closeSnackBar(),
         child: Stack(children: <Widget>[
+          Positioned(
+            right: -smallCircle(context) / 3,
+            top: -smallCircle(context) / 2,
+            child: Container(
+              width: smallCircle(context),
+              height: smallCircle(context),
+              child: Image.asset('assets/logo/logo_rtlh_none_wth.png'),
+            ),
+          ),
+          Positioned(
+            right: bigCircle(context) / 1.5,
+            bottom: bigCircle(context) / 6,
+            child: Container(
+              width: bigCircle(context) / 2,
+              height: bigCircle(context),
+              child: Image.asset('assets/logo/logo_rtlh_none_wth.png'),
+            ),
+          ),
+          Positioned(
+            right: -bigCircle(context) / 3,
+            bottom: -bigCircle(context) / 4,
+            child: Container(
+              width: bigCircle(context),
+              height: bigCircle(context),
+              child: Image.asset('assets/logo/logo_rtlh_none_wth.png'),
+            ),
+          ),
           Center(
             child: ListView(
               shrinkWrap: true,
               padding: EdgeInsets.only(left: 34.0, right: 34.0),
               children: <Widget>[
                 AnimatedPadding(
-                    duration: Duration(seconds: 1),
-                    padding: EdgeInsets.all(padd2),
-                    child: forms)
+                  duration: Duration(seconds: 1),
+                  padding: EdgeInsets.all(padd2),
+                  child: forms,
+                )
               ],
             ),
           ),
@@ -338,7 +395,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: SpinKitWave(
-                    color: Colors.blue,
+                    color: Color(0xFFcc0000),
                     size: 35.0,
                   ),
                 )

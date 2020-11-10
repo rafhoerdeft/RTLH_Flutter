@@ -34,7 +34,7 @@ class RtlhApp extends StatelessWidget {
         // accentColor: Colors.grey[800],
         // brightness: Brightness.dark,
         // primarySwatch: Colors.grey,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: LoginPage(),
