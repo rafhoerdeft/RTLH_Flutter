@@ -89,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage> {
         }),
     );
 
-    return Center(
+    var _list = Center(
       child: ListView(
         padding: EdgeInsets.all(50),
         children: <Widget>[
@@ -105,7 +105,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 // _submit,
                 SizedBox(height: 10),
                 _customBtn,
-                SizedBox(height: 10),
+                SizedBox(height: 250),
                 Obx(() => Text('Name: ${usr.user.value.name}')),
                 Obx(() => Text('Age: ${usr.user.value.age}')),
               ],
@@ -113,6 +113,77 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ],
       ),
+    );
+
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            // floating: true,
+            elevation: 4,
+            // snap: true,
+            automaticallyImplyLeading: false,
+            // title: Text('MyApp'),
+            pinned: false,
+            backgroundColor: Color.fromARGB(0, 0, 0, 0),
+            expandedHeight:
+                (MediaQuery.of(context).size.height * 1 / 3) * 1 / 1.5,
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.pin,
+              background: Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Color(0xFF2f2546),
+                  borderRadius:
+                      BorderRadius.only(bottomLeft: Radius.circular(30)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Hi, ',
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.white),
+                            ),
+                            Text(
+                              'Rafho',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.account_circle,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Butuh, Sawangan',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            //     Container(
+            //   color: Colors.red,
+            // ),
+          ),
+        ];
+      },
+      body: _list,
     );
   }
 }

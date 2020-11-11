@@ -155,23 +155,23 @@ class MainPage extends StatelessWidget {
       // ),
       body: CustomScrollView(
         slivers: <Widget>[
-          // SliverAppBar(
-          //   floating: false,
-          //   elevation: 0,
-          //   snap: false,
-          //   automaticallyImplyLeading: false,
-          //   // title: Text('MyApp'),
-          //   pinned: true,
-          //   backgroundColor: Color.fromRGBO(255, 255, 255, 0.4),
-          //   expandedHeight: 56.5,
-          //   flexibleSpace: FlexibleSpaceBar(
-          //     // collapseMode: CollapseMode.pin,
-          //     background: Container(color: Colors.teal),
-          //   ),
-          //   //     Container(
-          //   //   color: Colors.red,
-          //   // ),
-          // ),
+          SliverAppBar(
+            // floating: false,
+            elevation: 0,
+            // snap: false,
+            automaticallyImplyLeading: false,
+            title: Text('MyApp'),
+            pinned: true,
+            backgroundColor: Color.fromRGBO(25, 255, 255, 1.0),
+            expandedHeight: 156.5,
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.pin,
+              background: Container(color: Colors.teal),
+            ),
+            //     Container(
+            //   color: Colors.red,
+            // ),
+          ),
           SliverList(
             delegate: SliverChildListDelegate(
               <Widget>[

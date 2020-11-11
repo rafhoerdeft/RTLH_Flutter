@@ -1,11 +1,13 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
+// import 'package:latihan_bloc/ui/page/main_page.dart';
 import '../config/routes/router_name.dart';
 import '../controller/template_controller.dart';
-import '../shared/login_shared.dart';
-import '../ui/page/map_page.dart';
+// import '../shared/login_shared.dart';
+// import '../ui/page/map_page.dart';
 import '../ui/page/crud_page.dart';
 import '../ui/page/dashboard_page.dart';
 import '../ui/page/profil_page.dart';
@@ -21,47 +23,50 @@ class _TemplatePageState extends State<TemplatePage> {
   final TemplateController tmp = Get.put(TemplateController());
 
   final List<PagesList> pagesList = [
-    PagesList(page: DashboardPage(), icon: Icons.web, title: 'Dashboard'),
-    PagesList(page: ProfilPage(), icon: Icons.people, title: 'Profil'),
-    PagesList(page: CrudPage(), icon: Icons.input, title: 'CRUD SQFLite'),
-    PagesList(page: MapPage(), icon: Icons.map, title: 'Map'),
+    PagesList(
+      page: DashboardPage(),
+      icon: Icons.web,
+      title: 'Dashboard',
+      color: Color(0xFFcc0000),
+    ),
+    PagesList(
+      page: ProfilPage(),
+      icon: Icons.menu,
+      title: 'RTLH',
+      color: Color(0xFFcc0000),
+    ),
+    PagesList(
+      page: CrudPage(),
+      icon: Icons.person,
+      title: 'Profil',
+      color: Color(0xFFcc0000),
+    ),
+    // PagesList(
+    //   page: MapPage(),
+    //   icon: Icons.map,
+    //   title: 'Map',
+    //   color: Color(0xFFcc0000),
+    // ),
   ];
 
   @override
   Widget build(BuildContext context) {
     var _appBar = AppBar(
-      backgroundColor: Colors.teal,
-      leading: IconButton(
-        icon: Icon(Icons.menu),
-        onPressed: () {
-          _scaffoldKey.currentState.openDrawer();
-        },
-      ),
+      backgroundColor: Color(0xFF2f2546),
+      // leading: IconButton(
+      //   icon: Icon(Icons.menu),
+      //   onPressed: () {
+      //     _scaffoldKey.currentState.openDrawer();
+      //   },
+      // ),
       title: Obx(() => Text("${tmp.title}")),
       centerTitle: true,
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.more_vert),
-          onPressed: () {},
-        ),
-      ],
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.teal, Color(0xff6610f2)],
-            begin: FractionalOffset.topLeft,
-            end: FractionalOffset.bottomRight,
-          ),
-          image: DecorationImage(
-            image: AssetImage('assets/img/background/pattern-dot.png'),
-            fit: BoxFit.fill,
-            repeat: ImageRepeat.repeat,
-            //make trasparent
-            colorFilter: ColorFilter.mode(
-                Colors.teal.withOpacity(0.2), BlendMode.dstATop),
-          ),
-        ),
-      ),
+      // actions: <Widget>[
+      //   IconButton(
+      //     icon: Icon(Icons.more_vert),
+      //     onPressed: () {},
+      //   ),
+      // ],
     );
 
     var _headerSideNav = DrawerHeader(
@@ -74,32 +79,6 @@ class _TemplatePageState extends State<TemplatePage> {
             style: TextStyle(color: Colors.white),
           ),
           Text('Tetek mak lampir gede', style: TextStyle(color: Colors.white))
-        ],
-      ),
-    );
-
-    var _sideNav = Drawer(
-      child: ListView(
-        children: <Widget>[
-          _headerSideNav,
-          ListTile(
-            title: Text('Tutorial'),
-            leading: Icon(Icons.filter),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('About'),
-            leading: Icon(Icons.face),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('SIgn Out'),
-            leading: Icon(Icons.settings_power),
-            onTap: () {
-              logout();
-              Get.offAllNamed(LoginRoute);
-            },
-          ),
         ],
       ),
     );
@@ -150,7 +129,7 @@ class _TemplatePageState extends State<TemplatePage> {
               padding: EdgeInsets.all(15),
               icon: Icon(
                 pg.value.icon,
-                color: (val.page_active == pg.key)
+                color: (val.page_active.value == pg.key)
                     ? Colors.blue
                     : Colors.grey[700],
               ),
@@ -159,6 +138,59 @@ class _TemplatePageState extends State<TemplatePage> {
               },
             );
           }).toList(),
+        ),
+      ),
+    );
+
+    var _bubbleNav = Container(
+      padding: EdgeInsets.all(16.0),
+      child: Container(
+        padding: EdgeInsets.all(4.0),
+        decoration: BoxDecoration(
+          color: Color(0xFF2F2546),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black26,
+                blurRadius: 2.0,
+                offset: Offset(0.0, 3.0))
+          ],
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.0),
+          ),
+        ),
+        // color: Colors.black26,
+        child: Obx(
+          () => BubbleBottomBar(
+            backgroundColor: Color(0xFF2F2546),
+            hasNotch: false,
+            // fabLocation: BubbleBottomBarFabLocation.end,
+            opacity: 1.0,
+            currentIndex: tmp.page_active.value,
+            onTap: (index) {
+              tmp.changePage(index, pagesList[index].title);
+            },
+            borderRadius: BorderRadius.circular(
+                15), //border radius doesn't work when the notch is enabled.
+            elevation: 0,
+            items: pagesList.asMap().entries.map((pg) {
+              return BubbleBottomBarItem(
+                backgroundColor: pg.value.color,
+                icon: Icon(
+                  pg.value.icon,
+                  color: Colors.grey[400],
+                ),
+                activeIcon: Icon(
+                  pg.value.icon,
+                  color: Colors.white,
+                  size: 33,
+                ),
+                title: Text(
+                  pg.value.title,
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
@@ -194,16 +226,17 @@ class _TemplatePageState extends State<TemplatePage> {
     );
 
     return Scaffold(
+      backgroundColor: Color(0xFFe4ebef),
       key: _scaffoldKey,
-      appBar: _appBar,
+      // appBar: _appBar,
+      extendBody: true,
       body: DoubleBackToCloseApp(
         snackBar: closeSnackBar(),
         child: _body,
       ),
-      bottomNavigationBar: _bottomNav,
-      drawer: _sideNav,
-      floatingActionButton: _fab,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: _bubbleNav,
+      // floatingActionButton: _fab,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }

@@ -27,10 +27,16 @@ class RtlhApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
     ]);
 
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xFF2f2546),
+      // statusBarBrightness: Brightness.dark,
+    ));
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Latihan Login',
       theme: ThemeData(
+        fontFamily: 'Nunito',
         // accentColor: Colors.grey[800],
         // brightness: Brightness.dark,
         // primarySwatch: Colors.grey,
