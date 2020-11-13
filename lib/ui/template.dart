@@ -3,6 +3,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 // import 'package:latihan_bloc/ui/page/main_page.dart';
 import '../config/routes/router_name.dart';
 import '../controller/template_controller.dart';
@@ -29,18 +30,21 @@ class _TemplatePageState extends State<TemplatePage> {
       icon: Icons.web,
       title: 'Dashboard',
       color: Color(0xFFcc0000),
+      sizeIcon: 29,
     ),
     PagesList(
       page: ProfilPage(),
       icon: RtlhIcon.logo_rtlh,
       title: 'RTLH',
       color: Color(0xFFcc0000),
+      sizeIcon: 25,
     ),
     PagesList(
       page: CrudPage(),
-      icon: Icons.person,
+      icon: OMIcons.person,
       title: 'Profil',
       color: Color(0xFFcc0000),
+      sizeIcon: 29,
     ),
     // PagesList(
     //   page: MapPage(),
@@ -118,6 +122,7 @@ class _TemplatePageState extends State<TemplatePage> {
                 icon: Icon(
                   pg.value.icon,
                   color: Colors.grey[400],
+                  size: pg.value.sizeIcon,
                 ),
                 activeIcon: Icon(
                   pg.value.icon,
@@ -166,7 +171,7 @@ class _TemplatePageState extends State<TemplatePage> {
     );
 
     return Scaffold(
-      backgroundColor: Color(0xFFe4ebef),
+      // backgroundColor: Color(0xFFe4ebef),
       key: _scaffoldKey,
       // appBar: _appBar,
       extendBody: true,

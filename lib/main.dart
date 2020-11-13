@@ -40,6 +40,7 @@ class RtlhApp extends StatelessWidget {
         // accentColor: Colors.grey[800],
         // brightness: Brightness.dark,
         // primarySwatch: Colors.grey,
+        scaffoldBackgroundColor: Color(0xFFe4ebef),
         primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

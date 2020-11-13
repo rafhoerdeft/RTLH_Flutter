@@ -25,6 +25,7 @@ class PagesList {
   final dynamic icon;
   final String title;
   final dynamic color;
+  final double sizeIcon;
 
-  PagesList({this.page, this.icon, this.title, this.color});
+  PagesList({this.page, this.icon, this.title, this.color, this.sizeIcon});
 }

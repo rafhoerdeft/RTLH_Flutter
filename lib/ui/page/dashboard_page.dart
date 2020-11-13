@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:latihan_bloc/config/routes/router_name.dart';
 import 'package:latihan_bloc/shared/login_shared.dart';
-import 'package:latihan_bloc/widget/Icons/rtlh_icon_icons.dart';
 import '../../controller/dashboard_controller.dart';
 import '../style/dashboard_style.dart';
 
@@ -16,29 +15,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   final _formKey = GlobalKey<FormState>();
   final DashboardController dash = Get.put(DashboardController());
-
-  final List<GridList> gridList = [
-    GridList(
-      icon: RtlhIcon.logo_rtlh,
-      title: 'RTLH',
-      count: '0',
-    ),
-    GridList(
-      icon: Icons.verified,
-      title: 'Diterima',
-      count: '0',
-    ),
-    GridList(
-      icon: Icons.cancel_outlined,
-      title: 'Ditolak',
-      count: '0',
-    ),
-    GridList(
-      icon: Icons.settings,
-      title: 'Diproses',
-      count: '0',
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,55 +34,103 @@ class _DashboardPageState extends State<DashboardPage> {
                   fontWeight: FontWeight.bold),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 1 / 2.2,
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 1.5,
-                children: gridList.asMap().entries.map((grid) {
-                  return Parent(
-                    style: gridDashStyle,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              grid.value.title,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(grid.value.count,
+              height: MediaQuery.of(context).size.height * 1 / 2.25,
+              child: Obx(
+                () => GridView.count(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 1.5,
+                  children: dash.list_grid.value.asMap().entries.map((grid) {
+                    return Parent(
+                      style: gridDashStyle,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                grid.value.title,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
-                                    fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        Icon(
-                          grid.value.icon,
-                          color: Colors.white,
-                          size: 50,
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(grid.value.count,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                          Icon(
+                            grid.value.icon,
+                            color: Colors.white,
+                            size: 50,
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
             Text(
-              'Hari ini',
+              'Terakhir Update',
               style: TextStyle(
                   color: Color(0xFF2f2546),
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Obx(
+              () => Column(
+                children: dash.last_update.value.asMap().entries.map(
+                  (last) {
+                    return Parent(
+                      style: gridDashStyle.clone()
+                        ..background.color(Colors.white)
+                        ..margin(top: 10),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Color(0xFFCC0000),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "NIK : " + last.value.nik,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF2f2546)),
+                              ),
+                              Text(
+                                "Nama : " + last.value.nama,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF2f2546),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
             ),
           ],
         )
@@ -123,7 +147,7 @@ class _DashboardPageState extends State<DashboardPage> {
             automaticallyImplyLeading: false,
             // title: Text('MyApp'),
             pinned: false,
-            backgroundColor: Color.fromARGB(0, 0, 0, 0),
+            backgroundColor: Colors.transparent,
             expandedHeight:
                 (MediaQuery.of(context).size.height * 1 / 3) * 1 / 1.5,
             flexibleSpace: FlexibleSpaceBar(
