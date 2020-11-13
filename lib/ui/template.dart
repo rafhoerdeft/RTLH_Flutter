@@ -12,6 +12,7 @@ import '../ui/page/crud_page.dart';
 import '../ui/page/dashboard_page.dart';
 import '../ui/page/profil_page.dart';
 import '../widget/dialog_widget.dart';
+import '../widget/Icons/rtlh_icon_icons.dart';
 
 class TemplatePage extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _TemplatePageState extends State<TemplatePage> {
     ),
     PagesList(
       page: ProfilPage(),
-      icon: Icons.menu,
+      icon: RtlhIcon.logo_rtlh,
       title: 'RTLH',
       color: Color(0xFFcc0000),
     ),
@@ -69,20 +70,6 @@ class _TemplatePageState extends State<TemplatePage> {
       // ],
     );
 
-    var _headerSideNav = DrawerHeader(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Colors.blue, Colors.teal])),
-      child: Column(
-        children: <Widget>[
-          Text(
-            'Side Navigation',
-            style: TextStyle(color: Colors.white),
-          ),
-          Text('Tetek mak lampir gede', style: TextStyle(color: Colors.white))
-        ],
-      ),
-    );
-
     var _body = GetBuilder<TemplateController>(
       builder: (tmp) => PageView(
         // scrollDirection: Axis.vertical,
@@ -92,53 +79,6 @@ class _TemplatePageState extends State<TemplatePage> {
         controller: tmp.pageCtrl,
         physics: NeverScrollableScrollPhysics(),
         children: pagesList.map((pg) => pg.page).toList(),
-      ),
-    );
-
-    var _nav = BottomNavigationBar(
-      selectedItemColor: Colors.teal,
-      // backgroundColor: Colors.teal,
-      currentIndex: 1,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          title: Text('Home'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.refresh),
-          title: Text('Reload'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.face),
-          title: Text('Flutter'),
-        ),
-      ],
-    );
-
-    var _bottomNav = BottomAppBar(
-      elevation: 0,
-      color: Colors.white,
-      shape: CircularNotchedRectangle(),
-      notchMargin: 5,
-      child: GetBuilder<TemplateController>(
-        builder: (val) => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: pagesList.asMap().entries.map((pg) {
-            return IconButton(
-              tooltip: pg.value.title,
-              padding: EdgeInsets.all(15),
-              icon: Icon(
-                pg.value.icon,
-                color: (val.page_active.value == pg.key)
-                    ? Colors.blue
-                    : Colors.grey[700],
-              ),
-              onPressed: () {
-                tmp.changePage(pg.key, pg.value.title);
-              },
-            );
-          }).toList(),
-        ),
       ),
     );
 

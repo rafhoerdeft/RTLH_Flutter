@@ -144,34 +144,34 @@ class MainPage extends StatelessWidget {
     );
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      // appBar: PreferredSize(
-      //   preferredSize: Size.fromHeight(50),
-      //   child: AppBar(
-      //     backgroundColor: Color.fromRGBO(255, 255, 255, 0),
-      //     elevation: 0,
-      //     automaticallyImplyLeading: false,
-      //   ),
-      // ),
+      // extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: AppBar(
+          backgroundColor: Colors.teal,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+        ),
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            // floating: false,
-            elevation: 0,
-            // snap: false,
-            automaticallyImplyLeading: false,
-            title: Text('MyApp'),
-            pinned: true,
-            backgroundColor: Color.fromRGBO(25, 255, 255, 1.0),
-            expandedHeight: 156.5,
-            flexibleSpace: FlexibleSpaceBar(
-              collapseMode: CollapseMode.pin,
-              background: Container(color: Colors.teal),
-            ),
-            //     Container(
-            //   color: Colors.red,
-            // ),
-          ),
+          // SliverAppBar(
+          //   // floating: false,
+          //   elevation: 0,
+          //   // snap: false,
+          //   automaticallyImplyLeading: false,
+          //   title: Text('MyApp'),
+          //   pinned: true,
+          //   backgroundColor: Color.fromRGBO(25, 255, 255, 1.0),
+          //   expandedHeight: 156.5,
+          //   flexibleSpace: FlexibleSpaceBar(
+          //     collapseMode: CollapseMode.pin,
+          //     background: Container(color: Colors.teal),
+          //   ),
+          //   //     Container(
+          //   //   color: Colors.red,
+          //   // ),
+          // ),
           SliverList(
             delegate: SliverChildListDelegate(
               <Widget>[
