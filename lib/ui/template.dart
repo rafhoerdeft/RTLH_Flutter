@@ -52,7 +52,7 @@ class _TemplatePageState extends State<TemplatePage> {
           tmp.changePage(index, pagesList[index].title);
         },
         controller: tmp.pageCtrl,
-        physics: NeverScrollableScrollPhysics(),
+        // physics: NeverScrollableScrollPhysics(),
         children: pagesList.map((pg) => pg.page).toList(),
       ),
     );
