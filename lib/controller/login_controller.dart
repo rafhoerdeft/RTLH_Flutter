@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latihan_bloc/config/routes/router_name.dart';
-import 'package:latihan_bloc/service/auth_service.dart';
-import 'package:latihan_bloc/widget/dialog_widget.dart';
+import '../config/routes/router_name.dart';
+import '../service/auth_service.dart';
+import '../widget/dialog_widget.dart';
 
 class LoginController extends GetxController {
   final loading = false.obs;

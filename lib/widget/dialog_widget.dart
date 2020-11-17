@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
@@ -75,7 +76,38 @@ closeSnackBar() {
         Text('Tap back again to close', style: TextStyle(fontSize: 20)),
       ],
     ),
+    behavior: SnackBarBehavior.floating,
   );
+}
+
+closeFlushBar(BuildContext context) {
+  return Flushbar(
+    // title: "Keluar Aplikasi",
+    // message: "Tekan tombol Back lagi untuk keluar",
+    backgroundColor: Colors.amber[900],
+    showProgressIndicator: true,
+    progressIndicatorBackgroundColor: Colors.red,
+    messageText: Row(
+      children: <Widget>[
+        Shimmer.fromColors(
+          baseColor: Colors.red,
+          highlightColor: Colors.yellow,
+          child: Icon(
+            Icons.warning,
+            size: 35,
+          ),
+        ),
+        SizedBox(width: 10),
+        Text('Tekan tombol Back lagi untuk keluar',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )),
+      ],
+    ),
+    duration: Duration(seconds: 3),
+  )..show(context);
 }
 
 tampilToast(BuildContext context, String content, Color color) {

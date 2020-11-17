@@ -1,9 +1,8 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../config/routes/router_name.dart';
 import '../shared/login_shared.dart';
-import '../widget/dialog_widget.dart';
+// import '../widget/dialog_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -82,10 +81,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
-      body: DoubleBackToCloseApp(
-        child: body,
-        snackBar: closeSnackBar(),
-      ),
+      body: body,
     );
   }
 }

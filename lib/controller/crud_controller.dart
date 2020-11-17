@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:latihan_bloc/config/database/sqflite_database.dart';
+import '../config/database/sqflite_database.dart';
 
 class CrudController extends GetxController {
   final queryRows = [].obs;

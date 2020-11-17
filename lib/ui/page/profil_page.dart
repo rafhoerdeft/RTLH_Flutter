@@ -1,6 +1,9 @@
+import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controller/sum_controller.dart';
+import '../../controller/profil_controller.dart';
+import '../../ui/style/all_style.dart';
+import '../../config/config.dart';
 
 class ProfilPage extends StatefulWidget {
   @override
@@ -8,30 +11,169 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  final SumController sum = Get.put(SumController());
+  final ProfilController prof = Get.put(ProfilController());
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Obx(() => Text("Counter #1: ${sum.count1}")),
-          Obx(() => Text("Counter #2: ${sum.count2}")),
-          SizedBox(width: 100, child: Divider(color: Colors.black)),
-          Obx(() => Text("Counter #2: ${sum.sum}")),
-          SizedBox(height: 20),
-          RaisedButton(
-            child: Text('Increment Counter #1'),
-            onPressed: () {
-              sum.increment1();
-            },
+    return Obx(
+      () => ListView(
+        shrinkWrap: true,
+        padding: EdgeInsets.fromLTRB(20, 40, 20, 85),
+        children: [
+          Parent(
+            style: boxStyle.clone()
+              ..borderRadius(all: 20)
+              ..elevation(4, opacity: 0.8),
+            child: Column(
+              children: [
+                Hero(
+                  tag: 'iconPP',
+                  child: Icon(
+                    Icons.account_circle,
+                    size: getSizeH1(context) + 50,
+                    color: lightColor,
+                  ),
+                ),
+                Txt(
+                  prof.nama_user.value,
+                  style: txtStyle.clone()..fontSize(getSizeH5(context)),
+                ),
+                SizedBox(height: 10),
+                Parent(
+                  style: boxStyle.clone()
+                    ..background.color(redColor)
+                    ..padding(all: 10),
+                  child: IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Txt(
+                              'Pending',
+                              style: txtStyle.clone()
+                                ..fontSize(getSizeH7(context)),
+                            ),
+                            Txt(
+                              prof.pending.value.toString(),
+                              style: txtStyle.clone()
+                                ..fontSize(getSizeH7(context)),
+                            )
+                          ],
+                        ),
+                        VerticalDivider(
+                          color: lightColor,
+                          thickness: 1,
+                        ),
+                        Column(
+                          children: [
+                            Txt(
+                              'Upload',
+                              style: txtStyle.clone()
+                                ..fontSize(getSizeH7(context)),
+                            ),
+                            Txt(
+                              prof.upload.value.toString(),
+                              style: txtStyle.clone()
+                                ..fontSize(getSizeH7(context)),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          RaisedButton(
-            child: Text('Increment Counter #2'),
-            onPressed: () {
-              sum.increment2();
-            },
+          SizedBox(
+            height: 20,
+          ),
+          Txt(
+            'Pengaturan Aplikasi',
+            style: txtStyle.clone()
+              ..textAlign.left()
+              ..textColor(pmColor)
+              ..fontSize(getSizeH7(context)),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Parent(
+            style: boxStyle.clone()
+              ..background.color(lightColor)
+              ..margin(bottom: 10),
+            child: Txt(
+              'Edit Profil',
+              style: txtStyle.clone()
+                ..textAlign.left()
+                ..textColor(pmColor)
+                ..fontSize(getSizeH9(context)),
+            ),
+          ),
+          Parent(
+            style: boxStyle.clone()
+              ..background.color(lightColor)
+              ..margin(bottom: 10),
+            child: Txt(
+              'Tentang Aplikasi',
+              style: txtStyle.clone()
+                ..textAlign.left()
+                ..textColor(pmColor)
+                ..fontSize(getSizeH9(context)),
+            ),
+          ),
+          Parent(
+            style: boxStyle.clone()
+              ..background.color(lightColor)
+              ..margin(bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Txt(
+                  'Versi',
+                  style: txtStyle.clone()
+                    ..textAlign.left()
+                    ..textColor(pmColor)
+                    ..fontSize(getSizeH9(context)),
+                ),
+                Txt(
+                  prof.version.value,
+                  style: txtStyle.clone()
+                    ..textAlign.right()
+                    ..textColor(pmColor)
+                    ..fontSize(getSizeH9(context)),
+                ),
+              ],
+            ),
+          ),
+          Parent(
+            style: boxStyle.clone()
+              ..background.color(lightColor)
+              ..padding(all: 0)
+              ..margin(bottom: 10),
+            child: MaterialButton(
+              padding: EdgeInsets.all(15),
+              onPressed: () {
+                print('Logout');
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Txt(
+                    'Logout',
+                    style: txtStyle.clone()
+                      ..textAlign.left()
+                      ..textColor(pmColor)
+                      ..fontSize(getSizeH9(context)),
+                  ),
+                  Icon(
+                    Icons.logout,
+                    size: getSizeH7(context),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

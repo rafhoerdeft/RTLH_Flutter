@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'config/config.dart';
 import 'config/routes/router.dart';
 import 'config/routes/router_name.dart';
+import 'config/theme_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,22 +30,20 @@ class RtlhApp extends StatelessWidget {
     ]);
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color(0xFF2f2546),
+      statusBarColor: pmColor,
       // statusBarBrightness: Brightness.dark,
     ));
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Latihan Login',
-      theme: ThemeData(
-        fontFamily: 'Nunito',
-        // accentColor: Colors.grey[800],
-        // brightness: Brightness.dark,
-        // primarySwatch: Colors.grey,
-        scaffoldBackgroundColor: Color(0xFFe4ebef),
-        primarySwatch: Colors.deepPurple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      // theme: ThemeData(
+      //   fontFamily: 'Nunito',
+      //   scaffoldBackgroundColor: Color(0xFFe4ebef),
+      //   primarySwatch: Colors.deepPurple,
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
+      theme: appThemeData,
       // home: LoginPage(),
       // onGenerateRoute: onGenerateRoute,
       initialRoute: SplashRoute,

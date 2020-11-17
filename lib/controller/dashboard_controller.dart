@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latihan_bloc/model/grid_list_model.dart';
-import 'package:latihan_bloc/model/last_update_model.dart';
-import 'package:latihan_bloc/shared/login_shared.dart';
-import 'package:latihan_bloc/widget/Icons/rtlh_icon_icons.dart';
+import '../model/grid_list_model.dart';
+import '../model/last_update_model.dart';
+import '../shared/login_shared.dart';
+import '../widget/Icons/rtlh_icon_icons.dart';
 
 class DashboardController extends GetxController {
   final nama_user = ''.obs;

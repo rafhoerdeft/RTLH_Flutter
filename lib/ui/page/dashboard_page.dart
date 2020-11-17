@@ -1,9 +1,10 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:latihan_bloc/config/routes/router_name.dart';
-import 'package:latihan_bloc/shared/login_shared.dart';
+import '../../config/config.dart';
+import '../../config/routes/router_name.dart';
+import '../../shared/login_shared.dart';
 import '../../controller/dashboard_controller.dart';
 import '../style/dashboard_style.dart';
 
@@ -13,14 +14,14 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final _formKey = GlobalKey<FormState>();
   final DashboardController dash = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
+    // print(getWidth(context) / 100 * 3.65);
     var _list = ListView(
       shrinkWrap: true,
-      padding: EdgeInsets.only(left: 20, top: 15, right: 20, bottom: 100),
+      padding: EdgeInsets.only(left: 20, top: 15, right: 20, bottom: 95),
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -29,14 +30,15 @@ class _DashboardPageState extends State<DashboardPage> {
             Text(
               'Dashboard',
               style: TextStyle(
-                  color: Color(0xFF2f2546),
-                  fontSize: 20,
+                  color: pmColor,
+                  fontSize: getSizeH7(context),
                   fontWeight: FontWeight.bold),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 1 / 2.25,
+              // height: getHeight(context) * 1 / 2.35,
               child: Obx(
                 () => GridView.count(
+                  padding: EdgeInsets.only(top: 20, bottom: 20),
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
@@ -56,21 +58,23 @@ class _DashboardPageState extends State<DashboardPage> {
                               Text(
                                 grid.value.title,
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
+                                    color: lightColor,
+                                    fontSize: getSizeH7(context) - 2,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(grid.value.count,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                grid.value.count,
+                                style: TextStyle(
+                                    color: lightColor,
+                                    fontSize: getSizeH7(context) - 2,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
                           Icon(
                             grid.value.icon,
-                            color: Colors.white,
-                            size: 50,
+                            color: lightColor,
+                            size: getSizeH1(context),
                           ),
                         ],
                       ),
@@ -79,11 +83,16 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
             ),
+            Divider(
+              thickness: 1,
+              color: lightColor,
+              height: 25,
+            ),
             Text(
               'Terakhir Update',
               style: TextStyle(
-                  color: Color(0xFF2f2546),
-                  fontSize: 20,
+                  color: pmColor,
+                  fontSize: getSizeH7(context),
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -93,14 +102,14 @@ class _DashboardPageState extends State<DashboardPage> {
                   (last) {
                     return Parent(
                       style: gridDashStyle.clone()
-                        ..background.color(Colors.white)
+                        ..background.color(lightColor)
                         ..margin(top: 10),
                       child: Row(
                         children: <Widget>[
                           Icon(
                             Icons.person,
-                            size: 50,
-                            color: Color(0xFFCC0000),
+                            size: getSizeH1(context),
+                            color: redColor,
                           ),
                           SizedBox(
                             width: 10,
@@ -111,16 +120,16 @@ class _DashboardPageState extends State<DashboardPage> {
                               Text(
                                 "NIK : " + last.value.nik,
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: getSizeH7(context),
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF2f2546)),
+                                    color: pmColor),
                               ),
                               Text(
                                 "Nama : " + last.value.nama,
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: getSizeH9(context),
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF2f2546),
+                                  color: pmColor,
                                 ),
                               ),
                             ],
@@ -148,20 +157,18 @@ class _DashboardPageState extends State<DashboardPage> {
             // title: Text('MyApp'),
             pinned: false,
             backgroundColor: Colors.transparent,
-            expandedHeight:
-                (MediaQuery.of(context).size.height * 1 / 3) * 1 / 1.5,
+            expandedHeight: (getHeight(context) * 1 / 3) * 1 / 1.5,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.pin,
               background: Parent(
-                style: headerDashStyle.clone()..padding(bottom: 5),
+                style: headerDashStyle.clone()..padding(bottom: 10),
                 child: Parent(
                   style: headerDashStyle.clone()
                     ..padding(bottom: 10)
-                    ..background.color(Color(0xFFcc0000))
-                    ..elevation(3, opacity: 0.5),
+                    ..background.color(redColor)
+                    ..elevation(4, opacity: 0.8),
                   child: Parent(
-                    style: headerDashStyle.clone()
-                      ..background.color(Color(0xFF2f2546)),
+                    style: headerDashStyle.clone()..background.color(pmColor),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -175,43 +182,48 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Text(
                                   'Hi, ',
                                   style: TextStyle(
-                                      fontSize: 27, color: Colors.white),
+                                      fontSize: getSizeH5(context),
+                                      color: lightColor),
                                 ),
                                 Obx(
                                   () => Text(
                                     dash.nama_user.value,
                                     style: TextStyle(
-                                        fontSize: 27,
-                                        color: Colors.white,
+                                        fontSize: getSizeH5(context),
+                                        color: lightColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.account_circle,
-                              size: 50,
-                              color: Colors.white,
+                            Hero(
+                              tag: 'iconPP',
+                              child: Icon(
+                                Icons.account_circle,
+                                size: getSizeH1(context),
+                                color: lightColor,
+                              ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Butuh, Sawangan',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: getSizeH7(context),
+                                  color: lightColor),
                             ),
                             SizedBox(
-                              height: 50,
-                              width: 50,
+                              height: getSizeH2(context),
+                              width: getSizeH1(context),
                               child: MaterialButton(
-                                splashColor: Color(0xFFcc0000),
+                                splashColor: redColor,
                                 padding: EdgeInsets.all(0),
                                 elevation: 5,
-                                // color: Color(0xFFcc0000),
+                                // color: redColor,
                                 onPressed: () {
                                   logout();
                                   Get.offAllNamed(LoginRoute);
@@ -219,8 +231,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                 shape: StadiumBorder(),
                                 child: Icon(
                                   Icons.sync,
-                                  size: 30,
-                                  color: Colors.white,
+                                  size: getSizeH4(context),
+                                  color: lightColor,
                                 ),
                               ),
                             ),

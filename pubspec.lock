@@ -120,6 +120,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.2.1"
+  flushbar:
+    dependency: "direct main"
+    description:
+      name: flushbar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.10.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -191,6 +198,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  get_version:
+    dependency: "direct main"
+    description:
+      name: get_version
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.2"
   google_fonts:
     dependency: "direct main"
     description:
@@ -261,6 +275,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1"
+  package_info:
+    dependency: transitive
+    description:
+      name: package_info
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.3+2"
   path:
     dependency: transitive
     description:

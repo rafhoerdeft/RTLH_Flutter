@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:latihan_bloc/config/routes/router_name.dart';
-import 'package:latihan_bloc/shared/login_shared.dart';
+import '../config/routes/router_name.dart';
+import '../shared/login_shared.dart';
 
 class RouteController extends GetxController {
   final route = LoginRoute.obs;

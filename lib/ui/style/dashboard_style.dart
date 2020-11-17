@@ -1,5 +1,6 @@
 import 'package:division/division.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+import '../../config/config.dart';
 
 ParentStyle headerDashStyle = ParentStyle()
   ..width(double.infinity)
@@ -13,6 +14,6 @@ ParentStyle headerDashStyle = ParentStyle()
 
 ParentStyle gridDashStyle = ParentStyle()
   ..borderRadius(all: 10)
-  ..background.color(Color(0xFF9f9bb4))
+  ..background.color(scColor)
   ..padding(all: 20);
 // ..elevation(3, opacity: 0.5);

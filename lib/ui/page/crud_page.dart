@@ -56,7 +56,7 @@ class _CrudPageState extends State<CrudPage> {
         maxLength: 3,
         keyboardType: TextInputType.number,
         autofocus: false,
-        inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.portrait),
           labelText: 'Age',

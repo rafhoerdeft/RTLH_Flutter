@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../controller/main_controller.dart';
 import '../../widget/boxcard_widget.dart';
 import '../../widget/carousel_widget.dart';
-import '../../config/size_config.dart';
+import '../../config/config.dart';
 
 class MainPage extends StatelessWidget {
   final MainController mainc = Get.put(MainController());

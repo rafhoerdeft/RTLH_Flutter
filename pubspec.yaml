@@ -1,4 +1,4 @@
-name: latihan_bloc
+name: rtlh_app
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -29,12 +29,14 @@ dependencies:
   division: ^0.8.8
   double_back_to_close_app: ^1.2.0
   email_validator: ^1.0.5
+  flushbar: ^1.10.4
   flutter_slidable: ^0.5.3
   flutter_speed_dial: ^1.2.5
   flutter_spinkit: ^4.1.2
   geolocator: ^6.0.0+4
   get: ^3.10.2
   get_ip: ^0.4.0
+  get_version: ^0.2.2
   google_fonts: ^1.1.0
   google_maps_flutter: ^0.5.33
   http: ^0.12.2

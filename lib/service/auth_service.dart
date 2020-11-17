@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get_ip/get_ip.dart';
 import 'package:http/http.dart' as http;
 // import 'package:http/io_client.dart';
-import 'package:latihan_bloc/config/api_config.dart';
-import 'package:latihan_bloc/shared/login_shared.dart';
+import '../config/api_config.dart';
+import '../shared/login_shared.dart';
 
 class AuthService {
   Future<dynamic> signIn(String username, String password) async {

@@ -1,5 +1,5 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
-import 'package:email_validator/email_validator.dart';
+// import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -7,6 +7,7 @@ import '../widget/dialog_widget.dart';
 import 'package:slide_button/slide_button.dart';
 import 'package:slider_button/slider_button.dart';
 import '../controller/login_controller.dart';
+import '../config/config.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -76,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final user = TextFormField(
-      style: TextStyle(fontSize: 20.0, color: Color(0xFFcc0000)),
+      style: TextStyle(fontSize: getSizeH7(context), color: redColor),
       controller: ctrlUser,
       // maxLength: 50,
       keyboardType: TextInputType.text,
@@ -114,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
         // prefixText: 'Email',
         // prefixStyle: TextStyle(color: Colors.red),
         labelText: 'Username',
-        labelStyle: TextStyle(fontSize: 20.0),
+        labelStyle: TextStyle(fontSize: getSizeH7(context)),
         // hintText: 'Email',
         // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
@@ -133,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
-        style: TextStyle(fontSize: 20.0, color: Color(0xFFcc0000)),
+        style: TextStyle(fontSize: getSizeH7(context), color: redColor),
         controller: ctrlPass,
         obscureText: showPass,
         autofocus: false,
@@ -161,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
             },
           ),
           labelText: 'Password',
-          labelStyle: TextStyle(fontSize: 20.0),
+          labelStyle: TextStyle(fontSize: getSizeH7(context)),
           // hintText: 'Password',
           // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0)),
@@ -253,8 +254,8 @@ class _LoginPageState extends State<LoginPage> {
       dismissThresholds: 0.6,
       vibrationFlag: true,
       child: Container(
-        height: 60.0,
-        width: 60.0,
+        height: getWidth(context) / 100 * 14.6, //60
+        width: getWidth(context) / 100 * 14.6, //60
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.orange, Colors.red],
@@ -282,12 +283,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Obx(() => (login.loading.value)
               ? SpinKitFadingCircle(
                   color: Colors.white,
-                  size: 35.0,
+                  size: getWidth(context) / 100 * 8.55, //35
                 )
               : Icon(
                   Icons.login_rounded,
                   color: Colors.white,
-                  size: 40.0,
+                  size: getWidth(context) / 100 * 9.75, //40
                 )),
         ),
       ),
@@ -296,13 +297,16 @@ class _LoginPageState extends State<LoginPage> {
       label: Text(
         "Slide button to login",
         style: TextStyle(
-            color: Colors.grey[600], fontWeight: FontWeight.w500, fontSize: 17),
+          color: Colors.grey[600],
+          fontWeight: FontWeight.w500,
+          fontSize: getWidth(context) / 100 * 4.2, //17
+        ),
       ),
       icon: Center(
           child: Icon(
         Icons.login_rounded,
         color: Colors.white,
-        size: 40.0,
+        size: getWidth(context) / 100 * 9.75, //40
         semanticLabel: 'Text to announce in accessibility modes',
       )),
 
@@ -395,7 +399,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: SpinKitWave(
-                    color: Color(0xFFcc0000),
+                    color: redColor,
                     size: 35.0,
                   ),
                 )
