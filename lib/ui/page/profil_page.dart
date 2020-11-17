@@ -1,9 +1,12 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../shared/login_shared.dart';
 import '../../controller/profil_controller.dart';
 import '../../ui/style/all_style.dart';
 import '../../config/config.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ProfilPage extends StatefulWidget {
   @override
@@ -137,13 +140,18 @@ class _ProfilPageState extends State<ProfilPage> {
                     ..textColor(pmColor)
                     ..fontSize(getSizeH9(context)),
                 ),
-                Txt(
-                  prof.version.value,
-                  style: txtStyle.clone()
-                    ..textAlign.right()
-                    ..textColor(pmColor)
-                    ..fontSize(getSizeH9(context)),
-                ),
+                (prof.version.value != '0')
+                    ? Txt(
+                        prof.version.value,
+                        style: txtStyle.clone()
+                          ..textAlign.right()
+                          ..textColor(pmColor)
+                          ..fontSize(getSizeH9(context)),
+                      )
+                    : SpinKitHourGlass(
+                        color: pmColor,
+                        size: getSizeH7(context),
+                      ),
               ],
             ),
           ),
@@ -155,7 +163,23 @@ class _ProfilPageState extends State<ProfilPage> {
             child: MaterialButton(
               padding: EdgeInsets.all(15),
               onPressed: () {
-                print('Logout');
+                // print('Logout');
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.WARNING,
+                  headerAnimationLoop: false,
+                  animType: AnimType.TOPSLIDE,
+                  title: 'Logout',
+                  desc: 'Apakah anda yakin akan logout?',
+                  btnCancelIcon: Icons.cancel,
+                  btnCancelText: 'Batal',
+                  btnCancelOnPress: () {},
+                  btnOkIcon: Icons.check_circle,
+                  btnOkText: 'Ya',
+                  btnOkOnPress: () {
+                    logout();
+                  },
+                )..show();
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

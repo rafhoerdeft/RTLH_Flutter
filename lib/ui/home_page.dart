@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../config/routes/router_name.dart';
 import '../shared/login_shared.dart';
-// import '../widget/dialog_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override

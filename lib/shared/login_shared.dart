@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+import '../config/routes/router_name.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void saveLogin(dynamic data) async {
@@ -22,6 +24,8 @@ void logout() async {
   log.setString("alamat", '');
   log.setString("no_telp", '');
   log.setString("role", '');
+
+  Get.offAllNamed(LoginRoute);
 }
 
 Future<bool> getStatus() async {

@@ -1,16 +1,10 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-// import 'package:latihan_bloc/ui/page/main_page.dart';
-// import '../config/routes/router_name.dart';
 import '../config/config.dart';
 import '../controller/template_controller.dart';
-// import '../shared/login_shared.dart';
-// import '../ui/page/map_page.dart';
-// import '../ui/page/crud_page.dart';
 import '../ui/page/dashboard_page.dart';
 import '../ui/page/profil_page.dart';
 import '../widget/dialog_widget.dart';
@@ -50,24 +44,6 @@ class _TemplatePageState extends State<TemplatePage> {
         sizeIcon: getWidth(context) / 100 * 7.05, //29
       ),
     ];
-
-    // var _appBar = AppBar(
-    //   backgroundColor: pmColor,
-    //   // leading: IconButton(
-    //   //   icon: Icon(Icons.menu),
-    //   //   onPressed: () {
-    //   //     _scaffoldKey.currentState.openDrawer();
-    //   //   },
-    //   // ),
-    //   title: Obx(() => Text("${tmp.title}")),
-    //   centerTitle: true,
-    //   // actions: <Widget>[
-    //   //   IconButton(
-    //   //     icon: Icon(Icons.more_vert),
-    //   //     onPressed: () {},
-    //   //   ),
-    //   // ],
-    // );
 
     var _body = GetBuilder<TemplateController>(
       builder: (tmp) => PageView(
@@ -135,36 +111,6 @@ class _TemplatePageState extends State<TemplatePage> {
         ),
       ),
     );
-
-    // var _fab = FloatingActionButton(
-    //   child: Icon(Icons.dashboard),
-    //   tooltip: 'Floating Menu',
-    //   backgroundColor: Colors.teal,
-    //   onPressed: () {
-    //     Get.toNamed(MainRoute);
-    //   },
-    // );
-
-    // var _fabDial = SpeedDial(
-    //   animatedIcon: AnimatedIcons.menu_close,
-    //   // overlayColor: Colors.teal,
-    //   overlayOpacity: 0.5,
-    //   // closeManually: false,
-    //   curve: Curves.decelerate,
-    //   children: [
-    //     SpeedDialChild(
-    //         child: Icon(Icons.ac_unit),
-    //         label: 'First Button',
-    //         onTap: () {},
-    //         backgroundColor: Colors.amber[700]),
-    //     SpeedDialChild(
-    //       child: Icon(Icons.ac_unit),
-    //       label: 'First Button',
-    //       backgroundColor: Colors.teal,
-    //       onTap: () {},
-    //     ),
-    //   ],
-    // );
 
     return Scaffold(
       key: _scaffoldKey,

@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-// import 'package:google_fonts/google_fonts.dart';
 // import '../config/routes/router_name.dart';
 import '../controller/route_controller.dart';
 import 'package:splashscreen/splashscreen.dart';

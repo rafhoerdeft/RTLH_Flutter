@@ -1,10 +1,7 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../config/config.dart';
-import '../../config/routes/router_name.dart';
-import '../../shared/login_shared.dart';
 import '../../controller/dashboard_controller.dart';
 import '../style/dashboard_style.dart';
 
@@ -224,10 +221,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 padding: EdgeInsets.all(0),
                                 elevation: 5,
                                 // color: redColor,
-                                onPressed: () {
-                                  logout();
-                                  Get.offAllNamed(LoginRoute);
-                                },
+                                onPressed: () {},
                                 shape: StadiumBorder(),
                                 child: Icon(
                                   Icons.sync,
