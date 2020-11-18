@@ -54,15 +54,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final logo = Hero(
-      tag: 'hero',
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 48.0,
-        child: Image.asset('assets/logo/logo_rtlh_red.png'),
-      ),
-    );
-
     final logo2 = Container(
       height: (MediaQuery.of(context).size.width * 1 / 3) + 20,
       child: AnimatedPadding(

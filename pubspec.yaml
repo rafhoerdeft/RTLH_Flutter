@@ -30,6 +30,7 @@ dependencies:
   division: ^0.8.8
   double_back_to_close_app: ^1.2.0
   email_validator: ^1.0.5
+  expandable: ^4.1.4
   flushbar: ^1.10.4
   flutter_slidable: ^0.5.3
   flutter_speed_dial: ^1.2.5

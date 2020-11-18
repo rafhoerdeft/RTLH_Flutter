@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SumController extends GetxController {
+class RtlhController extends GetxController {
   final count1 = 0.obs;
   final count2 = 0.obs;
 
@@ -8,4 +9,11 @@ class SumController extends GetxController {
   increment2() => count2.value++;
 
   int get sum => count1.value + count2.value;
+}
+
+class TabList {
+  final Widget page;
+  final String title;
+
+  TabList({this.page, this.title});
 }

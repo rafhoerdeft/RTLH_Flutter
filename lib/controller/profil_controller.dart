@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_version/get_version.dart';
@@ -8,6 +9,13 @@ class ProfilController extends GetxController {
   final pending = 120.obs;
   final upload = 200.obs;
   final version = '0'.obs;
+
+  final formKey = GlobalKey<FormState>();
+  TextEditingController ctrlNama = TextEditingController();
+  TextEditingController ctrlUser = TextEditingController();
+  TextEditingController ctrlPass = TextEditingController();
+  TextEditingController ctrlConfPass = TextEditingController();
+  TextEditingController ctrlNoHp = TextEditingController();
 
   @override
   void onInit() {

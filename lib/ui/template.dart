@@ -3,6 +3,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:rtlh_app/ui/page/rtlh_page.dart';
 import '../config/config.dart';
 import '../controller/template_controller.dart';
 import '../ui/page/dashboard_page.dart';
@@ -30,7 +31,7 @@ class _TemplatePageState extends State<TemplatePage> {
         sizeIcon: getWidth(context) / 100 * 7.05, //29
       ),
       PagesList(
-        page: ProfilPage(),
+        page: RtlhPage(),
         icon: RtlhIcon.logo_rtlh,
         title: 'RTLH',
         color: redColor,
@@ -114,7 +115,6 @@ class _TemplatePageState extends State<TemplatePage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: _appBar,
       extendBody: true,
       body: DoubleBackToCloseApp(
         snackBar: closeSnackBar(),

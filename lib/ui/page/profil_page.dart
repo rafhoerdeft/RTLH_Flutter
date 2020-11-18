@@ -1,6 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:division/division.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../shared/login_shared.dart';
 import '../../controller/profil_controller.dart';
@@ -18,6 +20,127 @@ class _ProfilPageState extends State<ProfilPage> {
 
   @override
   Widget build(BuildContext context) {
+    var txtNama = TextFormField(
+      controller: prof.ctrlNama,
+      keyboardType: TextInputType.text,
+      autofocus: false,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.person),
+        labelText: 'Nama User',
+        // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Data harus diisi!';
+        }
+        return null;
+      },
+    );
+
+    var txtNoHp = TextFormField(
+      controller: prof.ctrlNoHp,
+      maxLength: 15,
+      keyboardType: TextInputType.number,
+      autofocus: false,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.contact_phone),
+        labelText: 'Nomor HP',
+        // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Data harus diisi!';
+        }
+        return null;
+      },
+    );
+
+    var txtUser = TextFormField(
+      controller: prof.ctrlUser,
+      keyboardType: TextInputType.text,
+      autofocus: false,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.account_circle),
+        labelText: 'Username',
+        // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Data harus diisi!';
+        }
+        return null;
+      },
+    );
+
+    var txtPass = TextFormField(
+      controller: prof.ctrlPass,
+      keyboardType: TextInputType.text,
+      obscureText: true,
+      autofocus: false,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.lock),
+        labelText: 'Password',
+        // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Data harus diisi!';
+        }
+        return null;
+      },
+    );
+
+    var txtConfPass = TextFormField(
+      controller: prof.ctrlConfPass,
+      keyboardType: TextInputType.text,
+      obscureText: true,
+      autofocus: false,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.lock),
+        labelText: 'Konfirmasi Password',
+        // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Data harus diisi!';
+        } else {
+          if (prof.ctrlPass.text != prof.ctrlConfPass.text) {
+            return 'Password tidak sama!';
+          }
+        }
+        return null;
+      },
+    );
+
+    var btnSave = AnimatedButton(
+      pressEvent: () {
+        if (prof.formKey.currentState.validate()) {}
+      },
+      text: 'Simpan',
+      width: double.infinity,
+      color: redColor,
+      icon: Icons.save,
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    );
+
+    var formProfil = Form(
+      key: prof.formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          txtNama,
+          txtNoHp,
+          txtUser,
+          txtPass,
+          txtConfPass,
+          SizedBox(height: 20),
+          btnSave,
+          // SizedBox(height: 10),
+        ],
+      ),
+    );
+
     return Obx(
       () => SafeArea(
         child: ListView(
@@ -105,26 +228,59 @@ class _ProfilPageState extends State<ProfilPage> {
             ),
             Parent(
               style: boxStyle.clone()
+                ..padding(left: 6, top: 6, bottom: 4, right: 6)
                 ..background.color(lightColor)
                 ..margin(bottom: 10),
-              child: Txt(
-                'Edit Profil',
-                style: txtStyle.clone()
-                  ..textAlign.left()
-                  ..textColor(pmColor)
-                  ..fontSize(getSizeH9(context)),
+              child: ExpandablePanel(
+                header: Txt(
+                  'Edit Profil',
+                  style: txtStyle.clone()
+                    ..padding(all: 10)
+                    ..textAlign.left()
+                    ..textColor(pmColor)
+                    ..fontSize(getSizeH9(context)),
+                ),
+                expanded: Column(
+                  children: [
+                    Divider(
+                      thickness: 1,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: formProfil,
+                    ),
+                  ],
+                ),
               ),
             ),
             Parent(
               style: boxStyle.clone()
+                ..padding(left: 6, top: 6, bottom: 4, right: 6)
                 ..background.color(lightColor)
                 ..margin(bottom: 10),
-              child: Txt(
-                'Tentang Aplikasi',
-                style: txtStyle.clone()
-                  ..textAlign.left()
-                  ..textColor(pmColor)
-                  ..fontSize(getSizeH9(context)),
+              child: ExpandablePanel(
+                header: Txt(
+                  'Tentang Aplikasi',
+                  style: txtStyle.clone()
+                    ..padding(all: 10)
+                    ..textAlign.left()
+                    ..textColor(pmColor)
+                    ..fontSize(getSizeH9(context)),
+                ),
+                expanded: Column(
+                  children: [
+                    Divider(
+                      thickness: 1,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        'Aplikasi ini dibuat oleh DISKOMINFO Kab. Magelang. Fungsi aplikasi ini adalah untuk mempermudah para petugas fasilitator RTLH melakukan verifikasi data di lapangan.',
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Parent(

@@ -163,7 +163,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   style: headerDashStyle.clone()
                     ..padding(bottom: 10)
                     ..background.color(redColor)
-                    ..elevation(4, opacity: 0.8),
+                    ..elevation(3, opacity: 0.9),
                   child: Parent(
                     style: headerDashStyle.clone()..background.color(pmColor),
                     child: Column(
