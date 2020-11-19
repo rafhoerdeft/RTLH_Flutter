@@ -5,10 +5,10 @@ import 'package:get_version/get_version.dart';
 import '../shared/login_shared.dart';
 
 class ProfilController extends GetxController {
-  final nama_user = ''.obs;
+  final nama_user = '...'.obs;
   final pending = 120.obs;
   final upload = 200.obs;
-  final version = '0'.obs;
+  final version = '...'.obs;
 
   final formKey = GlobalKey<FormState>();
   TextEditingController ctrlNama = TextEditingController();

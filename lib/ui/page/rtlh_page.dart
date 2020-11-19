@@ -1,6 +1,9 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-import 'package:rtlh_app/controller/rtlh_controller.dart';
+import '../../controller/rtlh_controller.dart';
+import '../../ui/page/rtlh/daftar_rtlh_page.dart';
+import '../../ui/page/rtlh/pending_rtlh_page.dart';
+import '../../ui/page/rtlh/upload_rtlh_page.dart';
 import '../../config/config.dart';
 import '../../ui/style/all_style.dart';
 
@@ -12,7 +15,11 @@ class RtlhPage extends StatefulWidget {
 class _RtlhPageState extends State<RtlhPage> {
   @override
   Widget build(BuildContext context) {
-    final List<TabList> tabList = [];
+    final List<TabList> tabList = [
+      TabList(title: 'Daftar', page: DaftarRtlhPage()),
+      TabList(title: 'Pending', page: PendingRtlhPage()),
+      TabList(title: 'Upload', page: UploadRtlhPage()),
+    ];
 
     return DefaultTabController(
         length: 3,
@@ -29,56 +36,36 @@ class _RtlhPageState extends State<RtlhPage> {
                 backgroundColor: pmColor,
                 elevation: 0,
                 bottom: TabBar(
-                    labelColor: lightColor,
-                    unselectedLabelColor: lightColor,
-                    indicatorSize: TabBarIndicatorSize.label,
-                    indicator: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                      color: redColor,
+                  labelColor: lightColor,
+                  unselectedLabelColor: lightColor,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
                     ),
-                    tabs: [
-                      Tab(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Txt(
-                            'Daftar',
-                            style: txtStyle.clone()
-                              ..fontSize(getSizeH9(context)),
-                          ),
+                    color: redColor,
+                  ),
+                  tabs: tabList.asMap().entries.map((tab) {
+                    return Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Txt(
+                          tab.value.title,
+                          style: txtStyle.clone()..fontSize(getSizeH9(context)),
                         ),
                       ),
-                      Tab(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Txt(
-                            'Pending',
-                            style: txtStyle.clone()
-                              ..fontSize(getSizeH9(context)),
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Txt(
-                            'Upload',
-                            style: txtStyle.clone()
-                              ..fontSize(getSizeH9(context)),
-                          ),
-                        ),
-                      ),
-                    ]),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ),
-          body: TabBarView(children: [
-            Icon(Icons.apps),
-            Icon(Icons.movie),
-            Icon(Icons.games),
-          ]),
+          body: TabBarView(
+            children: tabList.asMap().entries.map((tab) {
+              return tab.value.page;
+            }).toList(),
+          ),
         ));
   }
 }

@@ -8,7 +8,6 @@ import '../../shared/login_shared.dart';
 import '../../controller/profil_controller.dart';
 import '../../ui/style/all_style.dart';
 import '../../config/config.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ProfilPage extends StatefulWidget {
   @override
@@ -297,18 +296,13 @@ class _ProfilPageState extends State<ProfilPage> {
                       ..textColor(pmColor)
                       ..fontSize(getSizeH9(context)),
                   ),
-                  (prof.version.value != '0')
-                      ? Txt(
-                          prof.version.value,
-                          style: txtStyle.clone()
-                            ..textAlign.right()
-                            ..textColor(pmColor)
-                            ..fontSize(getSizeH9(context)),
-                        )
-                      : SpinKitHourGlass(
-                          color: pmColor,
-                          size: getSizeH7(context),
-                        ),
+                  Txt(
+                    prof.version.value,
+                    style: txtStyle.clone()
+                      ..textAlign.right()
+                      ..textColor(pmColor)
+                      ..fontSize(getSizeH9(context)),
+                  ),
                 ],
               ),
             ),
