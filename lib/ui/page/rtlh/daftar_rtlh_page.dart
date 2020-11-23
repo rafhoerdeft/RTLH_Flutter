@@ -182,25 +182,28 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      "NIK : " + last.value.nik,
-                                      style: TextStyle(
-                                          fontSize: getSizeH7(context),
-                                          fontWeight: FontWeight.bold,
-                                          color: pmColor),
-                                    ),
-                                    Text(
-                                      "Nama : " + last.value.nama,
-                                      style: TextStyle(
-                                        fontSize: getSizeH9(context),
-                                        fontWeight: FontWeight.bold,
-                                        color: pmColor,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "NIK : " + last.value.nik,
+                                        style: TextStyle(
+                                            fontSize: getSizeH7(context),
+                                            fontWeight: FontWeight.bold,
+                                            color: pmColor),
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        "Nama : " + last.value.nama,
+                                        style: TextStyle(
+                                          fontSize: getSizeH9(context),
+                                          fontWeight: FontWeight.bold,
+                                          color: pmColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 )
                               ],
                             ),

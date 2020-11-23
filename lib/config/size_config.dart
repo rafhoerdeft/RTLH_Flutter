@@ -37,54 +37,63 @@ getHeight(BuildContext context) {
 
 getSizeH1(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 12.18;
+  // double txtSize = 50;
 
   return txtSize; //50
 }
 
 getSizeH2(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 9.75;
+  // double txtSize = 40;
 
   return txtSize; //40
 }
 
 getSizeH3(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 8.55;
+  // double txtSize = 35;
 
   return txtSize; //35
 }
 
 getSizeH4(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 7.3;
+  // double txtSize = 30;
 
   return txtSize; //30
 }
 
 getSizeH5(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 6.55;
+  // double txtSize = 27;
 
   return txtSize; //27
 }
 
 getSizeH6(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 6.1;
+  // double txtSize = 25;
 
   return txtSize; //25
 }
 
 getSizeH7(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 4.9;
+  // double txtSize = 20;
 
   return txtSize; //20
 }
 
 getSizeH8(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 4.15;
+  // double txtSize = 17;
 
   return txtSize; //17
 }
 
 getSizeH9(BuildContext context) {
   double txtSize = getWidth(context) / 100 * 3.65;
+  // double txtSize = 15;
 
   return txtSize; //15
 }

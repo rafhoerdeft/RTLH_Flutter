@@ -49,24 +49,26 @@ class _DashboardPageState extends State<DashboardPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                grid.value.title,
-                                style: TextStyle(
-                                    color: lightColor,
-                                    fontSize: getSizeH7(context) - 2,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                grid.value.count,
-                                style: TextStyle(
-                                    color: lightColor,
-                                    fontSize: getSizeH7(context) - 2,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  grid.value.title,
+                                  style: TextStyle(
+                                      color: lightColor,
+                                      fontSize: getSizeH7(context) - 2,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  grid.value.count,
+                                  style: TextStyle(
+                                      color: lightColor,
+                                      fontSize: getSizeH7(context) - 2,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                           Icon(
                             grid.value.icon,
@@ -111,25 +113,28 @@ class _DashboardPageState extends State<DashboardPage> {
                           SizedBox(
                             width: 10,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "NIK : " + last.value.nik,
-                                style: TextStyle(
-                                    fontSize: getSizeH7(context),
-                                    fontWeight: FontWeight.bold,
-                                    color: pmColor),
-                              ),
-                              Text(
-                                "Nama : " + last.value.nama,
-                                style: TextStyle(
-                                  fontSize: getSizeH9(context),
-                                  fontWeight: FontWeight.bold,
-                                  color: pmColor,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "NIK : " + last.value.nik,
+                                  softWrap: true,
+                                  style: TextStyle(
+                                      fontSize: getSizeH7(context),
+                                      fontWeight: FontWeight.bold,
+                                      color: pmColor),
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  "Nama : " + last.value.nama,
+                                  style: TextStyle(
+                                    fontSize: getSizeH9(context),
+                                    fontWeight: FontWeight.bold,
+                                    color: pmColor,
+                                  ),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),
