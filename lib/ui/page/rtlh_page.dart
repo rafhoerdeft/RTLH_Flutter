@@ -36,6 +36,7 @@ class _RtlhPageState extends State<RtlhPage> {
                 backgroundColor: pmColor,
                 elevation: 0,
                 bottom: TabBar(
+                  // physics: NeverScrollableScrollPhysics(),
                   labelColor: lightColor,
                   unselectedLabelColor: lightColor,
                   indicatorSize: TabBarIndicatorSize.label,
@@ -62,6 +63,7 @@ class _RtlhPageState extends State<RtlhPage> {
             ),
           ),
           body: TabBarView(
+            // physics: NeverScrollableScrollPhysics(),
             children: tabList.asMap().entries.map((tab) {
               return tab.value.page;
             }).toList(),

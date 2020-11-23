@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../widget/dialog_widget.dart';
-import 'package:slide_button/slide_button.dart';
 import 'package:slider_button/slider_button.dart';
 import '../controller/login_controller.dart';
 import '../config/config.dart';
@@ -217,19 +216,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    );
-
-    final slideButtonLogin = SlideButton(
-      height: 64,
-      slidingChild: Align(
-        alignment: Alignment.centerRight,
-        child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.chevron_right)),
-      ),
-      backgroundColor: Colors.white,
-      slidingBarColor: Colors.blue,
-      slideDirection: SlideDirection.RIGHT,
     );
 
     final sliderButton = SliderButton(
