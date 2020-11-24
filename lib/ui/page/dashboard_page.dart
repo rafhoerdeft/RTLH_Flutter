@@ -28,7 +28,7 @@ class _DashboardPageState extends State<DashboardPage> {
               'Dashboard',
               style: TextStyle(
                   color: pmColor,
-                  fontSize: getSizeH7(context),
+                  fontSize: getSizeH8(context),
                   fontWeight: FontWeight.bold),
             ),
             Container(
@@ -57,23 +57,25 @@ class _DashboardPageState extends State<DashboardPage> {
                                   grid.value.title,
                                   style: TextStyle(
                                       color: lightColor,
-                                      fontSize: getSizeH7(context) - 2,
+                                      fontSize: getSizeH9(context),
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   grid.value.count,
                                   style: TextStyle(
                                       color: lightColor,
-                                      fontSize: getSizeH7(context) - 2,
+                                      fontSize: getSizeH9(context),
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                           ),
-                          Icon(
-                            grid.value.icon,
-                            color: lightColor,
-                            size: getSizeH1(context),
+                          LayoutBuilder(
+                            builder: (context, constraint) => Icon(
+                              grid.value.icon,
+                              color: lightColor,
+                              size: constraint.biggest.height - 15,
+                            ),
                           ),
                         ],
                       ),
@@ -91,7 +93,7 @@ class _DashboardPageState extends State<DashboardPage> {
               'Terakhir Update',
               style: TextStyle(
                   color: pmColor,
-                  fontSize: getSizeH7(context),
+                  fontSize: getSizeH8(context),
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -121,7 +123,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   "NIK : " + last.value.nik,
                                   softWrap: true,
                                   style: TextStyle(
-                                      fontSize: getSizeH7(context),
+                                      fontSize: getSizeH8(context),
                                       fontWeight: FontWeight.bold,
                                       color: pmColor),
                                 ),
@@ -184,14 +186,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Text(
                                   'Hi, ',
                                   style: TextStyle(
-                                      fontSize: getSizeH5(context),
+                                      fontSize: getSizeH6(context),
                                       color: lightColor),
                                 ),
                                 Obx(
                                   () => Text(
                                     dash.nama_user.value,
                                     style: TextStyle(
-                                        fontSize: getSizeH5(context),
+                                        fontSize: getSizeH6(context),
                                         color: lightColor,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -215,7 +217,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             Text(
                               'Butuh, Sawangan',
                               style: TextStyle(
-                                  fontSize: getSizeH7(context),
+                                  fontSize: getSizeH8(context),
                                   color: lightColor),
                             ),
                             SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:rtlh_app/config/config.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
 
@@ -73,7 +74,9 @@ closeSnackBar() {
           ),
         ),
         SizedBox(width: 10),
-        Text('Tap back again to close', style: TextStyle(fontSize: 20)),
+        Expanded(
+            child: Text('Tap back again to close',
+                style: TextStyle(fontSize: 20))),
       ],
     ),
     behavior: SnackBarBehavior.floating,
@@ -98,12 +101,14 @@ closeFlushBar(BuildContext context) {
           ),
         ),
         SizedBox(width: 10),
-        Text('Tekan tombol Back lagi untuk keluar',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            )),
+        Expanded(
+          child: Text('Tekan tombol Back lagi untuk keluar',
+              style: TextStyle(
+                fontSize: getSizeH9(context),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
       ],
     ),
     duration: Duration(seconds: 3),
@@ -115,4 +120,36 @@ tampilToast(BuildContext context, String content, Color color) {
       backgroundColor: color,
       duration: Toast.LENGTH_LONG,
       gravity: Toast.BOTTOM);
+}
+
+tampilFlushBar(BuildContext context, String content, Color color) {
+  return Flushbar(
+    // title: "Keluar Aplikasi",
+    // message: "Tekan tombol Back lagi untuk keluar",
+    backgroundColor: color,
+    showProgressIndicator: false,
+    progressIndicatorBackgroundColor: Colors.red,
+    messageText: Row(
+      children: <Widget>[
+        Shimmer.fromColors(
+          baseColor: Colors.red,
+          highlightColor: Colors.yellow,
+          child: Icon(
+            Icons.warning,
+            size: 35,
+          ),
+        ),
+        SizedBox(width: 10),
+        Expanded(
+          child: Text(content,
+              style: TextStyle(
+                fontSize: getSizeH9(context),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+      ],
+    ),
+    duration: Duration(seconds: 3),
+  )..show(context);
 }

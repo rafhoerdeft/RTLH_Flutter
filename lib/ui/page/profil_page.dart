@@ -162,7 +162,7 @@ class _ProfilPageState extends State<ProfilPage> {
                   ),
                   Txt(
                     prof.nama_user.value,
-                    style: txtStyle.clone()..fontSize(getSizeH5(context)),
+                    style: txtStyle.clone()..fontSize(getSizeH6(context)),
                   ),
                   SizedBox(height: 10),
                   Parent(
@@ -173,37 +173,41 @@ class _ProfilPageState extends State<ProfilPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
-                            children: [
-                              Txt(
-                                'Pending',
-                                style: txtStyle.clone()
-                                  ..fontSize(getSizeH7(context)),
-                              ),
-                              Txt(
-                                prof.pending.value.toString(),
-                                style: txtStyle.clone()
-                                  ..fontSize(getSizeH7(context)),
-                              )
-                            ],
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Txt(
+                                  'Pending',
+                                  style: txtStyle.clone()
+                                    ..fontSize(getSizeH8(context)),
+                                ),
+                                Txt(
+                                  prof.pending.value.toString(),
+                                  style: txtStyle.clone()
+                                    ..fontSize(getSizeH8(context)),
+                                )
+                              ],
+                            ),
                           ),
                           VerticalDivider(
                             color: lightColor,
                             thickness: 1,
                           ),
-                          Column(
-                            children: [
-                              Txt(
-                                'Upload',
-                                style: txtStyle.clone()
-                                  ..fontSize(getSizeH7(context)),
-                              ),
-                              Txt(
-                                prof.upload.value.toString(),
-                                style: txtStyle.clone()
-                                  ..fontSize(getSizeH7(context)),
-                              )
-                            ],
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Txt(
+                                  'Upload',
+                                  style: txtStyle.clone()
+                                    ..fontSize(getSizeH8(context)),
+                                ),
+                                Txt(
+                                  prof.upload.value.toString(),
+                                  style: txtStyle.clone()
+                                    ..fontSize(getSizeH8(context)),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -220,7 +224,7 @@ class _ProfilPageState extends State<ProfilPage> {
               style: txtStyle.clone()
                 ..textAlign.left()
                 ..textColor(pmColor)
-                ..fontSize(getSizeH7(context)),
+                ..fontSize(getSizeH8(context)),
             ),
             SizedBox(
               height: 20,
@@ -276,6 +280,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       child: Text(
                         'Aplikasi ini dibuat oleh DISKOMINFO Kab. Magelang. Fungsi aplikasi ini adalah untuk mempermudah para petugas fasilitator RTLH melakukan verifikasi data di lapangan.',
                         textAlign: TextAlign.justify,
+                        style: TextStyle(fontSize: getSizeH9(context)),
                       ),
                     ),
                   ],

@@ -78,8 +78,8 @@ class _LoginPageState extends State<LoginPage> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50.0),
           borderSide: BorderSide(
-            color: Colors.grey[900],
-            width: 1.0,
+            color: scColor,
+            width: 1.2,
             style: BorderStyle.solid,
           ),
         ),
@@ -100,11 +100,17 @@ class _LoginPageState extends State<LoginPage> {
         //   // color: Colors.red,
         //   margin: EdgeInsets.only(right: 20.0),
         // ),
-        prefixIcon: Icon(Icons.person),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 15, right: 10),
+          child: Icon(
+            Icons.person,
+            size: getSizeH6(context),
+          ),
+        ),
         // prefixText: 'Email',
         // prefixStyle: TextStyle(color: Colors.red),
         labelText: 'Username',
-        labelStyle: TextStyle(fontSize: getSizeH7(context)),
+        labelStyle: TextStyle(fontSize: getSizeH8(context)),
         // hintText: 'Email',
         // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
@@ -133,25 +139,40 @@ class _LoginPageState extends State<LoginPage> {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50.0),
             borderSide: BorderSide(
-              color: Colors.grey[900],
-              width: 1.0,
+              color: scColor,
+              width: 1.2,
               style: BorderStyle.solid,
             ),
           ),
           // icon: Icon(Icons.lock),
-          prefixIcon: Icon(Icons.lock),
-          suffixIcon: IconButton(
-            icon: (showPass == false)
-                ? Icon(Icons.visibility_off)
-                : Icon(Icons.visibility),
-            onPressed: () {
-              setState(() {
-                showPass = !showPass;
-              });
-            },
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(left: 15, right: 10),
+            child: Icon(
+              Icons.lock,
+              size: getSizeH6(context),
+            ),
+          ),
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(left: 10, right: 5),
+            child: IconButton(
+              icon: (showPass == false)
+                  ? Icon(
+                      Icons.visibility_off,
+                      size: getSizeH6(context),
+                    )
+                  : Icon(
+                      Icons.visibility,
+                      size: getSizeH6(context),
+                    ),
+              onPressed: () {
+                setState(() {
+                  showPass = !showPass;
+                });
+              },
+            ),
           ),
           labelText: 'Password',
-          labelStyle: TextStyle(fontSize: getSizeH7(context)),
+          labelStyle: TextStyle(fontSize: getSizeH8(context)),
           // hintText: 'Password',
           // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0)),
@@ -219,6 +240,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final sliderButton = SliderButton(
+      // height: getSizeH1(context),
       action: () {
         if (_formKey.currentState.validate()) {
           cekAuth();
@@ -230,8 +252,8 @@ class _LoginPageState extends State<LoginPage> {
       dismissThresholds: 0.6,
       vibrationFlag: true,
       child: Container(
-        height: getWidth(context) / 100 * 14.6, //60
-        width: getWidth(context) / 100 * 14.6, //60
+        height: getSizeH1(context) + 10,
+        width: getSizeH1(context) + 10,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.orange, Colors.red],
@@ -249,22 +271,24 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: MaterialButton(
           padding: EdgeInsets.all(0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
-          ),
+          shape: CircleBorder(),
           // minWidth: 200.0,
           // height: 60.0,
           // color: Colors.orange,
           onPressed: () {},
           child: Obx(() => (login.loading.value)
-              ? SpinKitFadingCircle(
-                  color: Colors.white,
-                  size: getWidth(context) / 100 * 8.55, //35
+              ? LayoutBuilder(
+                  builder: (context, constraint) => SpinKitFadingCircle(
+                    color: Colors.white,
+                    size: constraint.biggest.height - 25, //35
+                  ),
                 )
-              : Icon(
-                  Icons.login_rounded,
-                  color: Colors.white,
-                  size: getWidth(context) / 100 * 9.75, //40
+              : LayoutBuilder(
+                  builder: (context, constraint) => Icon(
+                    Icons.login_rounded,
+                    color: Colors.white,
+                    size: constraint.biggest.height - 25, //40
+                  ),
                 )),
         ),
       ),
@@ -275,16 +299,19 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(
           color: Colors.grey[600],
           fontWeight: FontWeight.w500,
-          fontSize: getWidth(context) / 100 * 4.2, //17
+          fontSize: getSizeH8(context), //17
         ),
       ),
       icon: Center(
-          child: Icon(
-        Icons.login_rounded,
-        color: Colors.white,
-        size: getWidth(context) / 100 * 9.75, //40
-        semanticLabel: 'Text to announce in accessibility modes',
-      )),
+        child: LayoutBuilder(
+          builder: (context, constraint) => Icon(
+            Icons.login_rounded,
+            color: Colors.white,
+            size: constraint.biggest.height - 25, //40
+            semanticLabel: 'Text to announce in accessibility modes',
+          ),
+        ),
+      ),
 
       ///Change All the color and size from here.
       // width: 230,
@@ -294,14 +321,6 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.grey[300],
       highlightedColor: Colors.white,
       baseColor: Colors.red,
-    );
-
-    final forgotLabel = FlatButton(
-      child: Text(
-        'Forgot password?',
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () {},
     );
 
     final forms = Form(

@@ -25,7 +25,7 @@ class _RtlhPageState extends State<RtlhPage> {
         length: 3,
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(65.0),
+            preferredSize: Size.fromHeight(70.0),
             child: Parent(
               style: boxStyle.clone()
                 ..borderRadius(all: 0)

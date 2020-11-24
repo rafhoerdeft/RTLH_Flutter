@@ -28,21 +28,21 @@ class _TemplatePageState extends State<TemplatePage> {
         icon: Icons.web,
         title: 'Dashboard',
         color: redColor,
-        sizeIcon: getWidth(context) / 100 * 7.05, //29
+        sizeIcon: getSizeH5(context),
       ),
       PagesList(
         page: RtlhPage(),
         icon: RtlhIcon.logo_rtlh,
         title: 'RTLH',
         color: redColor,
-        sizeIcon: getWidth(context) / 100 * 6, //25
+        sizeIcon: getSizeH6(context) - 2,
       ),
       PagesList(
         page: ProfilPage(),
         icon: OMIcons.person,
         title: 'Profil',
         color: redColor,
-        sizeIcon: getWidth(context) / 100 * 7.05, //29
+        sizeIcon: getSizeH5(context),
       ),
     ];
 
@@ -59,6 +59,7 @@ class _TemplatePageState extends State<TemplatePage> {
     );
 
     var _bubbleNav = Container(
+      // height: getSizeH4(context) + getSizeH4(context),
       padding: EdgeInsets.all(16.0),
       child: Container(
         padding: EdgeInsets.all(4.0),
@@ -91,20 +92,24 @@ class _TemplatePageState extends State<TemplatePage> {
             items: pagesList.asMap().entries.map((pg) {
               return BubbleBottomBarItem(
                 backgroundColor: pg.value.color,
-                icon: Icon(
-                  pg.value.icon,
-                  color: Colors.grey[400],
-                  size: pg.value.sizeIcon,
+                icon: LayoutBuilder(
+                  builder: (context, constraint) => Icon(
+                    pg.value.icon,
+                    color: Colors.grey[400],
+                    size: pg.value.sizeIcon,
+                  ),
                 ),
-                activeIcon: Icon(
-                  pg.value.icon,
-                  color: lightColor,
-                  size: getWidth(context) / 100 * 8.1, //33,
+                activeIcon: LayoutBuilder(
+                  builder: (context, constraint) => Icon(
+                    pg.value.icon,
+                    color: lightColor,
+                    size: constraint.biggest.height - 15, //33,
+                  ),
                 ),
                 title: Text(
                   pg.value.title,
                   style: TextStyle(
-                      color: lightColor, fontSize: getSizeH9(context)),
+                      color: lightColor, fontSize: getSizeH9(context) - 2),
                 ),
               );
             }).toList(),
