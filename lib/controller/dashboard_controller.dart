@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../service/dash_service.dart';
 import '../model/grid_list_model.dart';
 import '../model/last_update_model.dart';
 import '../shared/login_shared.dart';
@@ -7,68 +8,106 @@ import '../widget/Icons/rtlh_icon_icons.dart';
 
 class DashboardController extends GetxController {
   final nama_user = ''.obs;
-  // final grid_list = GridList().obs;
+  final nama_desa = ''.obs;
+  final nama_kec = ''.obs;
   final list_grid = [].obs;
   final last_update = [].obs;
+  final syncs = false.obs;
 
   @override
   void onInit() {
-    getNama();
-    listGrid(
-      countRtlh: 1000,
-      countProses: 2000,
-      countTerima: 2000,
-      countTolak: 2000,
-    );
+    getInfo();
     lastUpdate();
   }
 
-  void getNama() async {
+  void getInfo() async {
     await getNamaUser().then((value) {
       nama_user.value = value;
     });
+
+    await getDesa().then((value) {
+      nama_desa.value = value;
+    });
+
+    await getKecamatan().then((value) {
+      nama_kec.value = value;
+    });
+
+    await getInfoDash();
+  }
+
+  void getInfoDash() async {
+    listGrid(
+      countRtlh: '0',
+      countTerima: '0',
+    );
+
+    DashService dash = DashService();
+    await getKodeWil().then((value) async {
+      await dash.infoDash(value).then((res) {
+        listGrid(
+          countRtlh: res['jml_rtlh'].toString(),
+          countTerima: res['jml_upload'].toString(),
+        );
+      });
+    });
+  }
+
+  void getLastUpdate() async {
+    last_update.value = [];
+    DashService dash = DashService();
+    await getKodeWil().then((value) async {
+      dynamic res = await dash.lastUpdate(value);
+      // print(dataLast);
+      // await dash.lastUpdate(value).then((res) {
+      for (final data in res) {
+        // print(data['nik_rtlh']);
+        last_update.value
+            .add(LastUpdate(nik: data['nik_rtlh'], nama: data['nkk_rtlh']));
+      }
+      // update();
+      // });
+    });
+  }
+
+  void getSyncs() async {
+    syncs.value = true;
+    await getInfoDash();
+    await getLastUpdate();
+    syncs.value = false;
   }
 
   void listGrid(
-      {int countRtlh, int countTerima, int countTolak, int countProses}) {
+      {String countRtlh,
+      String countTerima,
+      String countTolak,
+      String countProses}) {
     list_grid.value = [
       GridList(
         icon: RtlhIcon.logo_rtlh,
         title: 'RTLH',
-        count: countRtlh.toString(),
+        count: countRtlh,
       ),
       GridList(
         icon: Icons.verified,
-        title: 'Diterima',
-        count: countTerima.toString(),
+        title: 'Upload',
+        count: countTerima,
       ),
-      GridList(
-        icon: Icons.cancel_outlined,
-        title: 'Ditolak',
-        count: countTolak.toString(),
-      ),
-      GridList(
-        icon: Icons.settings,
-        title: 'Diproses',
-        count: countProses.toString(),
-      ),
+      // GridList(
+      //   icon: Icons.cancel_outlined,
+      //   title: 'Ditolak',
+      //   count: countTolak,
+      // ),
+      // GridList(
+      //   icon: Icons.settings,
+      //   title: 'Diproses',
+      //   count: countProses,
+      // ),
     ];
   }
 
   void lastUpdate() {
     last_update.value = [
-      LastUpdate(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      LastUpdate(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      LastUpdate(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
       LastUpdate(
         nik: '3308072505520002',
         nama: 'Rafho Caem',

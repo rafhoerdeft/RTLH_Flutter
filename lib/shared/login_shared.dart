@@ -8,6 +8,8 @@ void saveLogin(dynamic data) async {
   log.setBool("status", true);
   log.setString("username", data['username']);
   log.setString("kode_wil", data['kode_wil']);
+  log.setString("nama_desa", data['desa']);
+  log.setString("nama_kecamatan", data['kecamatan']);
   log.setString("nama_user", data['nama_user']);
   log.setString("alamat", data['alamat']);
   log.setString("no_telp", data['no_telp']);
@@ -20,6 +22,8 @@ void logout() async {
   log.setBool("status", false);
   log.setString("username", '');
   log.setString("kode_wil", '');
+  log.setString("nama_desa", '');
+  log.setString("nama_kecamatan", '');
   log.setString("nama_user", '');
   log.setString("alamat", '');
   log.setString("no_telp", '');
@@ -56,6 +60,18 @@ Future<String> getKodeWil() async {
   SharedPreferences log = await SharedPreferences.getInstance();
 
   return log.getString("kode_wil") ?? "";
+}
+
+Future<String> getDesa() async {
+  SharedPreferences log = await SharedPreferences.getInstance();
+
+  return log.getString("nama_desa") ?? "";
+}
+
+Future<String> getKecamatan() async {
+  SharedPreferences log = await SharedPreferences.getInstance();
+
+  return log.getString("nama_kecamatan") ?? "";
 }
 
 Future<String> getTelp() async {

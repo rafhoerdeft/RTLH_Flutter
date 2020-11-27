@@ -1,6 +1,8 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../config/config.dart';
 import '../../controller/dashboard_controller.dart';
 import '../style/dashboard_style.dart';
@@ -43,43 +45,54 @@ class _DashboardPageState extends State<DashboardPage> {
                   mainAxisSpacing: 20,
                   childAspectRatio: 1.5,
                   children: dash.list_grid.value.asMap().entries.map((grid) {
-                    return Parent(
-                      style: gridDashStyle,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  grid.value.title,
-                                  style: TextStyle(
-                                      color: lightColor,
-                                      fontSize: getSizeH9(context),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  grid.value.count,
-                                  style: TextStyle(
-                                      color: lightColor,
-                                      fontSize: getSizeH9(context),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                    if (grid.value.count == '0') {
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey[300],
+                        highlightColor: Colors.grey[100],
+                        child: Parent(
+                          style: gridDashStyle.clone()..padding(all: 0),
+                        ),
+                      );
+                    } else {
+                      return Parent(
+                        style: gridDashStyle,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    grid.value.title,
+                                    style: TextStyle(
+                                        color: lightColor,
+                                        fontSize: getSizeH9(context),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    grid.value.count,
+                                    style: TextStyle(
+                                        color: lightColor,
+                                        fontSize: getSizeH8(context),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          LayoutBuilder(
-                            builder: (context, constraint) => Icon(
-                              grid.value.icon,
-                              color: lightColor,
-                              size: constraint.biggest.height - 15,
+                            LayoutBuilder(
+                              builder: (context, constraint) => Icon(
+                                grid.value.icon,
+                                color: lightColor,
+                                size: constraint.biggest.height - 15,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
+                          ],
+                        ),
+                      );
+                    }
                   }).toList(),
                 ),
               ),
@@ -98,52 +111,69 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             SizedBox(height: 10),
             Obx(
-              () => Column(
-                children: dash.last_update.value.asMap().entries.map(
-                  (last) {
-                    return Parent(
-                      style: gridDashStyle.clone()
-                        ..background.color(lightColor)
-                        ..margin(top: 10),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.person,
-                            size: getSizeH1(context),
-                            color: redColor,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+              () => (dash.last_update.value.isEmpty)
+                  ? Container(
+                      height: 200,
+                      child: ListView.builder(
+                        itemCount: 5,
+                        itemBuilder: (context, i) {
+                          return Shimmer.fromColors(
+                            baseColor: Colors.grey[300],
+                            highlightColor: Colors.grey[100],
+                            child: Parent(
+                              style: gridDashStyle.clone()..margin(top: 10),
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  : Column(
+                      children: dash.last_update.value.asMap().entries.map(
+                        (last) {
+                          return Parent(
+                            style: gridDashStyle.clone()
+                              ..background.color(lightColor)
+                              ..margin(top: 10),
+                            child: Row(
                               children: <Widget>[
-                                Text(
-                                  "NIK : " + last.value.nik,
-                                  softWrap: true,
-                                  style: TextStyle(
-                                      fontSize: getSizeH8(context),
-                                      fontWeight: FontWeight.bold,
-                                      color: pmColor),
+                                Icon(
+                                  Icons.person,
+                                  size: getSizeH1(context),
+                                  color: redColor,
                                 ),
-                                Text(
-                                  "Nama : " + last.value.nama,
-                                  style: TextStyle(
-                                    fontSize: getSizeH9(context),
-                                    fontWeight: FontWeight.bold,
-                                    color: pmColor,
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "NIK : " + last.value.nik,
+                                        softWrap: true,
+                                        style: TextStyle(
+                                            fontSize: getSizeH8(context),
+                                            fontWeight: FontWeight.bold,
+                                            color: pmColor),
+                                      ),
+                                      Text(
+                                        "Nama : " + last.value.nama,
+                                        style: TextStyle(
+                                          fontSize: getSizeH9(context),
+                                          fontWeight: FontWeight.bold,
+                                          color: pmColor,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                )
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ).toList(),
-              ),
+                          );
+                        },
+                      ).toList(),
+                    ),
             ),
           ],
         )
@@ -214,11 +244,19 @@ class _DashboardPageState extends State<DashboardPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Butuh, Sawangan',
-                              style: TextStyle(
-                                  fontSize: getSizeH8(context),
-                                  color: lightColor),
+                            Obx(
+                              () => Text(
+                                dash.nama_desa.value
+                                        .capitalize('abc')
+                                        .toString() +
+                                    ", " +
+                                    dash.nama_kec.value
+                                        .capitalize('abc')
+                                        .toString(),
+                                style: TextStyle(
+                                    fontSize: getSizeH8(context),
+                                    color: lightColor),
+                              ),
                             ),
                             SizedBox(
                               height: getSizeH2(context),
@@ -228,12 +266,28 @@ class _DashboardPageState extends State<DashboardPage> {
                                 padding: EdgeInsets.all(0),
                                 elevation: 5,
                                 // color: redColor,
-                                onPressed: () {},
-                                shape: StadiumBorder(),
-                                child: Icon(
-                                  Icons.sync,
-                                  size: getSizeH4(context),
-                                  color: lightColor,
+                                onPressed: () {
+                                  dash.getSyncs();
+                                },
+                                shape: CircleBorder(),
+                                child: Obx(
+                                  () => (dash.syncs.value)
+                                      ? LayoutBuilder(
+                                          builder: (context, constraint) =>
+                                              SpinKitFadingCircle(
+                                            color: Colors.white,
+                                            size: constraint.biggest.height -
+                                                5, //35
+                                          ),
+                                        )
+                                      : LayoutBuilder(
+                                          builder: (context, constraint) =>
+                                              Icon(
+                                            Icons.sync,
+                                            size: constraint.biggest.height - 5,
+                                            color: lightColor,
+                                          ),
+                                        ),
                                 ),
                               ),
                             ),
