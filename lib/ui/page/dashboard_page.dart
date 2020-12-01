@@ -45,7 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   mainAxisSpacing: 20,
                   childAspectRatio: 1.5,
                   children: dash.list_grid.value.asMap().entries.map((grid) {
-                    if (grid.value.count == '0') {
+                    if (grid.value.count == 'x') {
                       return Shimmer.fromColors(
                         baseColor: Colors.grey[300],
                         highlightColor: Colors.grey[100],
@@ -111,21 +111,22 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             SizedBox(height: 10),
             Obx(
-              () => (dash.last_update.value.isEmpty)
-                  ? Container(
-                      height: 200,
-                      child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, i) {
+              () => (dash.loading_last_update.value)
+                  ? Column(
+                      children: dash.last_update.value.asMap().entries.map(
+                        (last) {
                           return Shimmer.fromColors(
                             baseColor: Colors.grey[300],
                             highlightColor: Colors.grey[100],
                             child: Parent(
-                              style: gridDashStyle.clone()..margin(top: 10),
+                              style: gridDashStyle.clone()
+                                ..margin(top: 10)
+                                ..padding(all: 15)
+                                ..height(80),
                             ),
                           );
                         },
-                      ),
+                      ).toList(),
                     )
                   : Column(
                       children: dash.last_update.value.asMap().entries.map(
@@ -133,6 +134,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           return Parent(
                             style: gridDashStyle.clone()
                               ..background.color(lightColor)
+                              ..padding(all: 15)
                               ..margin(top: 10),
                             child: Row(
                               children: <Widget>[

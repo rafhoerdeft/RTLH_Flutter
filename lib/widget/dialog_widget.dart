@@ -75,8 +75,8 @@ closeSnackBar() {
         ),
         SizedBox(width: 10),
         Expanded(
-            child: Text('Tap back again to close',
-                style: TextStyle(fontSize: 20))),
+            child: Text('Tekan Back lagi untuk keluar',
+                style: TextStyle(fontSize: 17))),
       ],
     ),
     behavior: SnackBarBehavior.floating,

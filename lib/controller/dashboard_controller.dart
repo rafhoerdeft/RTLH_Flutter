@@ -12,12 +12,12 @@ class DashboardController extends GetxController {
   final nama_kec = ''.obs;
   final list_grid = [].obs;
   final last_update = [].obs;
+  final loading_last_update = false.obs;
   final syncs = false.obs;
 
   @override
   void onInit() {
     getInfo();
-    lastUpdate();
   }
 
   void getInfo() async {
@@ -33,13 +33,14 @@ class DashboardController extends GetxController {
       nama_kec.value = value;
     });
 
-    await getInfoDash();
+    getInfoDash();
+    getLastUpdate();
   }
 
   void getInfoDash() async {
     listGrid(
-      countRtlh: '0',
-      countTerima: '0',
+      countRtlh: 'x',
+      countTerima: 'x',
     );
 
     DashService dash = DashService();
@@ -54,10 +55,12 @@ class DashboardController extends GetxController {
   }
 
   void getLastUpdate() async {
-    last_update.value = [];
+    lastUpdateLoading();
+    loading_last_update.value = true;
     DashService dash = DashService();
     await getKodeWil().then((value) async {
       dynamic res = await dash.lastUpdate(value);
+      last_update.value = [];
       // print(dataLast);
       // await dash.lastUpdate(value).then((res) {
       for (final data in res) {
@@ -65,6 +68,7 @@ class DashboardController extends GetxController {
         last_update.value
             .add(LastUpdate(nik: data['nik_rtlh'], nama: data['nkk_rtlh']));
       }
+      loading_last_update.value = false;
       // update();
       // });
     });
@@ -72,8 +76,8 @@ class DashboardController extends GetxController {
 
   void getSyncs() async {
     syncs.value = true;
-    await getInfoDash();
-    await getLastUpdate();
+    getInfoDash();
+    getLastUpdate();
     syncs.value = false;
   }
 
@@ -106,12 +110,7 @@ class DashboardController extends GetxController {
     ];
   }
 
-  void lastUpdate() {
-    last_update.value = [
-      LastUpdate(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-    ];
+  void lastUpdateLoading() {
+    last_update.value = [1, 2, 3, 4, 5];
   }
 }

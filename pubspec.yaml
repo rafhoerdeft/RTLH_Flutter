@@ -48,6 +48,7 @@ dependencies:
   modal_bottom_sheet: ^0.2.2
   outline_material_icons: ^0.1.1
   path_provider: ^1.6.18
+  pull_to_refresh: ^1.6.3
   shared_preferences: ^0.5.10
   shimmer: ^1.1.2
   slider_button: ^0.6.0

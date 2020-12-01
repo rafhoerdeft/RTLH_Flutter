@@ -2,14 +2,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../config/api_config.dart';
 
-class DashService {
-  Future<dynamic> infoDash(String kode_wil) async {
+class RtlhService {
+  Future<dynamic> listRtlh(String kode_wil, int limit, int offset) async {
     try {
       dynamic dataPost = {
         'kode_wil': kode_wil,
+        'limit': limit,
+        'offset': offset
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/getJmlRtlh";
+      String apiURL = "$api_rtlh/simpkp/service/getListRtlh";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,
