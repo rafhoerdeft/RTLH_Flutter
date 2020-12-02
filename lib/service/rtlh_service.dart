@@ -31,13 +31,15 @@ class RtlhService {
     }
   }
 
-  Future<dynamic> lastUpdate(String kode_wil) async {
+  Future<dynamic> searchRtlh(String kode_wil, String search, int limit) async {
     try {
       dynamic dataPost = {
         'kode_wil': kode_wil,
+        'search': search,
+        'limit': limit,
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/getLastUpdate";
+      String apiURL = "$api_rtlh/simpkp/service/searchListRtlh";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,

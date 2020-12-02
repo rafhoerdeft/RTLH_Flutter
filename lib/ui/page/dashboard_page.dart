@@ -50,7 +50,9 @@ class _DashboardPageState extends State<DashboardPage> {
                         baseColor: Colors.grey[300],
                         highlightColor: Colors.grey[100],
                         child: Parent(
-                          style: gridDashStyle.clone()..padding(all: 0),
+                          style: gridDashStyle.clone()
+                            ..padding(all: 0)
+                            ..background.color(lightColor),
                         ),
                       );
                     } else {
@@ -115,14 +117,58 @@ class _DashboardPageState extends State<DashboardPage> {
                   ? Column(
                       children: dash.last_update.value.asMap().entries.map(
                         (last) {
-                          return Shimmer.fromColors(
-                            baseColor: Colors.grey[300],
-                            highlightColor: Colors.grey[100],
-                            child: Parent(
-                              style: gridDashStyle.clone()
-                                ..margin(top: 10)
-                                ..padding(all: 15)
-                                ..height(80),
+                          return Parent(
+                            style: gridDashStyle.clone()
+                              ..background.color(lightColor)
+                              ..padding(all: 15)
+                              ..margin(top: 10),
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey[300],
+                              highlightColor: Colors.grey[100],
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: getSizeH1(context),
+                                    width: getSizeH1(context),
+                                    decoration: BoxDecoration(
+                                      color: lightColor,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: getSizeH8(context),
+                                          width: 220,
+                                          decoration: BoxDecoration(
+                                            color: lightColor,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Container(
+                                          height: getSizeH8(context),
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                            color: lightColor,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },

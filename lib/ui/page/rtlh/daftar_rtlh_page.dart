@@ -24,8 +24,11 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
       controller: list.ctrlCari,
       keyboardType: TextInputType.text,
       autofocus: false,
+      onEditingComplete: () {
+        list.refreshData();
+      },
       onChanged: (val) {
-        print(val);
+        list.refreshData();
       },
       style: TextStyle(color: pmColor, fontSize: getSizeH9(context)),
       // initialValue: 'Search ...',
@@ -77,29 +80,29 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                   flex: 6,
                   child: txtCari,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Text(
-                    'Filter',
-                    style: TextStyle(fontSize: getSizeH9(context)),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: MaterialButton(
-                    padding: EdgeInsets.all(5),
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.filter_list,
-                      color: redColor,
-                      size: getSizeH3(context),
-                    ),
-                    shape: CircleBorder(),
-                  ),
-                ),
+                // SizedBox(
+                //   width: 10,
+                // ),
+                // Flexible(
+                //   flex: 1,
+                //   child: Text(
+                //     'Filter',
+                //     style: TextStyle(fontSize: getSizeH9(context)),
+                //   ),
+                // ),
+                // Flexible(
+                //   flex: 1,
+                //   child: MaterialButton(
+                //     padding: EdgeInsets.all(5),
+                //     onPressed: () {},
+                //     child: Icon(
+                //       Icons.filter_list,
+                //       color: redColor,
+                //       size: getSizeH3(context),
+                //     ),
+                //     shape: CircleBorder(),
+                //   ),
+                // ),
               ],
             ),
             // SizedBox(
@@ -113,13 +116,29 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
             Obx(
               () => Expanded(
                 child: SmartRefresher(
-                    controller: list.refreshController,
-                    enablePullDown: true,
-                    enablePullUp: false,
-                    onRefresh: () {
-                      list.refreshData();
-                    },
-                    child: list.listUis.value),
+                  controller: list.refreshController,
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  onRefresh: () {
+                    list.refreshData();
+                  },
+                  child: (list.daftar_rtlh.value.length != 0)
+                      ? list.listUis.value
+                      : (!list.isLoading.value)
+                          ? ListView(
+                              controller: list.scrollController,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    'Data kosong',
+                                    style:
+                                        TextStyle(fontSize: getSizeH9(context)),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : list.listUis.value,
+                ),
               ),
             ),
           ],

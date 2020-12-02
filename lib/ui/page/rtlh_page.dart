@@ -16,13 +16,13 @@ class _RtlhPageState extends State<RtlhPage> {
   @override
   Widget build(BuildContext context) {
     final List<TabList> tabList = [
-      TabList(title: 'Daftar', page: DaftarRtlhPage()),
-      TabList(title: 'Pending', page: PendingRtlhPage()),
-      TabList(title: 'Upload', page: UploadRtlhPage()),
+      TabList(title: 'Belum Upload', page: DaftarRtlhPage()),
+      TabList(title: 'Sudah Upload', page: PendingRtlhPage()),
+      // TabList(title: 'Upload', page: UploadRtlhPage()),
     ];
 
     return DefaultTabController(
-        length: 3,
+        length: tabList.length,
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(70.0),

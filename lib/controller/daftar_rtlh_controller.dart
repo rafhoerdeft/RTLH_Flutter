@@ -33,7 +33,9 @@ class DaftarRtlhController extends GetxController {
     scrollController.addListener(() {
       if (scrollController.position.pixels >=
           (scrollController.position.maxScrollExtent - 25)) {
-        getMoreData(daftar_rtlh.value.length);
+        if (ctrlCari.text == '' || ctrlCari.text == null) {
+          getMoreData(daftar_rtlh.value.length);
+        }
       }
 
       if (scrollController.position.pixels >= 150) {
@@ -189,38 +191,6 @@ class DaftarRtlhController extends GetxController {
         nik: '3308072505520002',
         nama: 'Rafho Caem',
       ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
-      DaftarRtlh(
-        nik: '3308072505520002',
-        nama: 'Rafho Caem',
-      ),
     ];
   }
 
@@ -233,21 +203,49 @@ class DaftarRtlhController extends GetxController {
       await getKodeWil().then((value) async {
         dynamic res = await rtlh.listRtlh(value, limit, offset);
 
-        for (final data in res) {
-          // print(data['id']);
-          daftar_rtlh.value.add(DaftarRtlh(
-              nik: data['nik_rtlh'], nama: data['nkk_rtlh'], id: data['id']));
+        if (res != false) {
+          for (final data in res) {
+            // print(data['id']);
+            daftar_rtlh.value.add(DaftarRtlh(
+                nik: data['nik_rtlh'], nama: data['nkk_rtlh'], id: data['id']));
+          }
+          showListUi();
         }
         isLoading.value = false;
+      });
+    }
+  }
+
+  void searchData(String search) async {
+    if (!isLoading.value) {
+      isLoading.value = true;
+
+      RtlhService rtlh = RtlhService();
+      await getKodeWil().then((value) async {
+        int limit = 10;
+        // daftar_rtlh.value = [];
+        dynamic res = await rtlh.searchRtlh(value, search, limit);
+
+        if (res != false) {
+          for (final data in res) {
+            daftar_rtlh.value.add(DaftarRtlh(
+                nik: data['nik_rtlh'], nama: data['nkk_rtlh'], id: data['id']));
+          }
+        }
+
+        isLoading.value = false;
         showListUi();
-        // });
       });
     }
   }
 
   void refreshData() async {
     daftar_rtlh.value = [];
-    await getMoreData(daftar_rtlh.value.length);
+    if (ctrlCari.text != '' || ctrlCari.text != null) {
+      await searchData(ctrlCari.text);
+    } else {
+      await getMoreData(daftar_rtlh.value.length);
+    }
     refreshController.refreshCompleted();
   }
 

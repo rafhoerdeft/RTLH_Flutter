@@ -46,10 +46,12 @@ class DashboardController extends GetxController {
     DashService dash = DashService();
     await getKodeWil().then((value) async {
       await dash.infoDash(value).then((res) {
-        listGrid(
-          countRtlh: res['jml_rtlh'].toString(),
-          countTerima: res['jml_upload'].toString(),
-        );
+        if (res != false) {
+          listGrid(
+            countRtlh: res['jml_rtlh'].toString(),
+            countTerima: res['jml_upload'].toString(),
+          );
+        }
       });
     });
   }
@@ -60,15 +62,17 @@ class DashboardController extends GetxController {
     DashService dash = DashService();
     await getKodeWil().then((value) async {
       dynamic res = await dash.lastUpdate(value);
-      last_update.value = [];
       // print(dataLast);
       // await dash.lastUpdate(value).then((res) {
-      for (final data in res) {
-        // print(data['nik_rtlh']);
-        last_update.value
-            .add(LastUpdate(nik: data['nik_rtlh'], nama: data['nkk_rtlh']));
+      if (res != false) {
+        last_update.value = [];
+        for (final data in res) {
+          // print(data['nik_rtlh']);
+          last_update.value
+              .add(LastUpdate(nik: data['nik_rtlh'], nama: data['nkk_rtlh']));
+        }
+        loading_last_update.value = false;
       }
-      loading_last_update.value = false;
       // update();
       // });
     });
