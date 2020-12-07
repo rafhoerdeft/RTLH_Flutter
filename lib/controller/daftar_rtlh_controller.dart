@@ -17,6 +17,7 @@ class DaftarRtlhController extends GetxController {
   static Widget _listUi;
   final listUis = _listUi.obs;
   final showButton = false.obs;
+  final valCari = ''.obs;
 
   final formKey = GlobalKey<FormState>();
   TextEditingController ctrlCari = TextEditingController();
@@ -49,6 +50,10 @@ class DaftarRtlhController extends GetxController {
         showButton.value = false;
       }
     });
+  }
+
+  void changeValCari(String val) {
+    valCari.value = val;
   }
 
   Widget _buildProgressIndicator() {

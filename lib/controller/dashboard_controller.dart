@@ -64,15 +64,16 @@ class DashboardController extends GetxController {
       dynamic res = await dash.lastUpdate(value);
       // print(dataLast);
       // await dash.lastUpdate(value).then((res) {
+      last_update.value = [];
       if (res != false) {
-        last_update.value = [];
         for (final data in res) {
           // print(data['nik_rtlh']);
           last_update.value
               .add(LastUpdate(nik: data['nik_rtlh'], nama: data['nkk_rtlh']));
         }
-        loading_last_update.value = false;
       }
+
+      loading_last_update.value = false;
       // update();
       // });
     });

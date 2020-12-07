@@ -20,14 +20,16 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
 
   @override
   Widget build(BuildContext context) {
-    var txtCari = TextFormField(
+    var txtCari = TextField(
       controller: list.ctrlCari,
       keyboardType: TextInputType.text,
       autofocus: false,
-      onEditingComplete: () {
+      onSubmitted: (val) {
+        list.changeValCari(val);
         list.refreshData();
       },
       onChanged: (val) {
+        list.changeValCari(val);
         list.refreshData();
       },
       style: TextStyle(color: pmColor, fontSize: getSizeH9(context)),
@@ -43,6 +45,29 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
             size: getSizeH4(context),
             color: Colors.grey[400],
           ),
+        ),
+        suffixIcon: Obx(
+          () => (list.valCari.value != '')
+              ? Container(
+                  width: getSizeH4(context),
+                  child: MaterialButton(
+                    padding: EdgeInsets.all(0),
+                    child: Icon(
+                      Icons.close,
+                      size: getSizeH4(context),
+                      color: Colors.grey[400],
+                    ),
+                    shape: CircleBorder(),
+                    onPressed: () {
+                      list.ctrlCari.text = '';
+                      list.changeValCari(list.ctrlCari.text);
+                      list.refreshData();
+                    },
+                  ),
+                )
+              : Container(
+                  width: getSizeH4(context),
+                ),
         ),
         // labelText: 'Search ...',
         hintText: 'Search ...',
