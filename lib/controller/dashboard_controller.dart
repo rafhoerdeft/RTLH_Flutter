@@ -82,7 +82,7 @@ class DashboardController extends GetxController {
   void getSyncs() async {
     syncs.value = true;
     getInfoDash();
-    getLastUpdate();
+    await getLastUpdate();
     syncs.value = false;
   }
 
