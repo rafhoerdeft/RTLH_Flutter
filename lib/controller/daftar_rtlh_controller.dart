@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:supercharged/supercharged.dart';
+import '../config/routes/router_name.dart';
 import '../config/config.dart';
 import '../ui/style/dashboard_style.dart';
 import '../widget/dialog_widget.dart';
@@ -95,7 +97,10 @@ class DaftarRtlhController extends GetxController {
                   splashColor: pmColor,
                   padding: EdgeInsets.all(5),
                   color: yellowColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    print('Edit ' + last.id.toString());
+                    Get.toNamed(UpdateRtlhRoute, arguments: int.parse(last.id));
+                  },
                   child: Icon(
                     Icons.edit,
                     color: lightColor,
@@ -117,7 +122,10 @@ class DaftarRtlhController extends GetxController {
                   splashColor: pmColor,
                   padding: EdgeInsets.all(5),
                   color: redColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    print('Upload ' + last.id.toString());
+                    Get.toNamed(UploadRtlhRoute, arguments: int.parse(last.id));
+                  },
                   child: Icon(
                     Icons.cloud_upload,
                     color: lightColor,
