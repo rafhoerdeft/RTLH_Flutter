@@ -141,121 +141,10 @@ class _PendingRtlhPageState extends State<PendingRtlhPage> {
                   enablePullDown: true,
                   enablePullUp: false,
                   onRefresh: () {
-                    // list.refreshData();
+                    list.refreshData();
                   },
                   child: (list.daftar_rtlh.value.length != 0)
-                      ? GridView.builder(
-                          controller: list.scrollController,
-                          shrinkWrap: true,
-                          itemCount: list.daftar_rtlh.value.length + 1,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisSpacing: 5,
-                                  mainAxisSpacing: 5,
-                                  childAspectRatio: 0.8,
-                                  crossAxisCount: 2),
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index == list.daftar_rtlh.value.length) {
-                              return list.buildProgressIndicator();
-                            } else {
-                              dynamic last = list.daftar_rtlh.value[index];
-                              return Card(
-                                child: LayoutBuilder(
-                                  builder: (context, constraint) => Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Parent(
-                                          style: boxStyle.clone()
-                                            ..borderRadius(
-                                                topLeft: 5, topRight: 5)
-                                            ..padding(all: 0)
-                                            ..background.image(
-                                                url:
-                                                    'https://pemerintahan.memontum.com/wp-content/uploads/sites/5/2019/07/Ungkap-Permainan-Dana-RTLH-DPRD-Bondowoso-Bentuk-Pansus.jpg',
-                                                alignment: Alignment.topCenter,
-                                                fit: BoxFit.fitHeight),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(last.nik),
-                                            Text(last.nama),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: Align(
-                                                alignment: Alignment.bottomLeft,
-                                                child: RaisedButton(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(5),
-                                                    ),
-                                                  ),
-                                                  elevation: 0,
-                                                  child: Text(
-                                                    'Edit',
-                                                    style: TextStyle(
-                                                        color: lightColor,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  color: yellowColor,
-                                                  onPressed: () {},
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Align(
-                                                alignment:
-                                                    Alignment.bottomRight,
-                                                child: RaisedButton(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomRight:
-                                                          Radius.circular(5),
-                                                    ),
-                                                  ),
-                                                  elevation: 0,
-                                                  child: Text(
-                                                    'Upload',
-                                                    style: TextStyle(
-                                                        color: lightColor,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  color: redColor,
-                                                  onPressed: () {},
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }
-                          })
+                      ? list.listUis.value
                       : (!list.isLoading.value)
                           ? ListView(
                               controller: list.scrollController,
@@ -269,7 +158,7 @@ class _PendingRtlhPageState extends State<PendingRtlhPage> {
                                 ),
                               ],
                             )
-                          : Container(),
+                          : list.listUis.value,
                 ),
               ),
             ),

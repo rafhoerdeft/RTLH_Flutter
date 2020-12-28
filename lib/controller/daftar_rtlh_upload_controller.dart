@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../ui/style/all_style.dart';
 import '../config/config.dart';
 import '../ui/style/dashboard_style.dart';
 import '../widget/dialog_widget.dart';
@@ -71,123 +72,111 @@ class DaftarRtlhUploadController extends GetxController {
   }
 
   void showListUi() {
-    listUis.value = ListView.builder(
-      controller: scrollController,
-      itemCount: daftar_rtlh.value.length + 1,
-      itemBuilder: (BuildContext context, int index) {
-        if (index == daftar_rtlh.value.length) {
-          return buildProgressIndicator();
-        } else {
-          dynamic last = daftar_rtlh.value[index];
-
-          return Slidable(
-            key: ValueKey(index),
-            actionPane: SlidableDrawerActionPane(),
-            secondaryActions: <Widget>[
-              Parent(
-                style: gridDashStyle.clone()
-                  ..background.color(pmColor)
-                  ..padding(all: 10)
-                  ..borderRadius(
-                      bottomLeft: 10, topLeft: 10, topRight: 0, bottomRight: 0)
-                  ..margin(top: 10),
-                child: MaterialButton(
-                  splashColor: pmColor,
-                  padding: EdgeInsets.all(5),
-                  color: yellowColor,
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.edit,
-                    color: lightColor,
-                    size: getSizeH7(context),
-                  ),
-                  height: getSizeH1(context) + 20,
-                  shape: CircleBorder(),
-                ),
-              ),
-              Parent(
-                style: gridDashStyle.clone()
-                  ..background.color(pmColor)
-                  ..padding(all: 10)
-                  ..borderRadius(
-                      bottomLeft: 0, topLeft: 0, topRight: 10, bottomRight: 10)
-                  ..offset(-1, 0)
-                  ..margin(top: 10),
-                child: MaterialButton(
-                  splashColor: pmColor,
-                  padding: EdgeInsets.all(5),
-                  color: redColor,
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.cloud_upload,
-                    color: lightColor,
-                    size: getSizeH7(context),
-                  ),
-                  height: getSizeH1(context) + 20,
-                  shape: CircleBorder(),
-                ),
-              ),
-            ],
-            // dismissal: SlidableDismissal(
-            //   child: SlidableDrawerDismissal(),
-            //   closeOnCanceled: false,
-            //   onWillDismiss: (dynamic) {},
-            // ),
-            direction: Axis.horizontal,
-            child: Parent(
-              style: gridDashStyle.clone()
-                ..padding(all: 15)
-                ..background.color(lightColor)
-                ..margin(top: 10),
-              gesture: Gestures()
-                ..onTap(() {
-                  tampilFlushBar(
-                      context, 'Geser ke kiri untuk tombol operasi', scColor);
-                }),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.person,
-                    size: getSizeH1(context),
-                    color: redColor,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "NIK : " + last.nik,
-                          style: TextStyle(
-                              fontSize: getSizeH9(context),
-                              fontWeight: FontWeight.bold,
-                              color: pmColor),
-                        ),
-                        Text(
-                          "Nama : " + last.nama,
-                          style: TextStyle(
-                            fontSize: getSizeH9(context),
-                            fontWeight: FontWeight.bold,
-                            color: pmColor,
-                          ),
-                        ),
-                      ],
+    listUis.value = GridView.builder(
+        controller: scrollController,
+        shrinkWrap: true,
+        itemCount: daftar_rtlh.value.length + 1,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            childAspectRatio: 0.8,
+            crossAxisCount: 2),
+        itemBuilder: (BuildContext context, int index) {
+          if (index == daftar_rtlh.value.length) {
+            return buildProgressIndicator();
+          } else {
+            dynamic last = daftar_rtlh.value[index];
+            return Card(
+              child: LayoutBuilder(
+                builder: (context, constraint) => Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Parent(
+                        style: boxStyle.clone()
+                          ..borderRadius(topLeft: 5, topRight: 5)
+                          ..padding(all: 0)
+                          ..background.image(
+                              url:
+                                  'https://pemerintahan.memontum.com/wp-content/uploads/sites/5/2019/07/Ungkap-Permainan-Dana-RTLH-DPRD-Bondowoso-Bentuk-Pansus.jpg',
+                              alignment: Alignment.topCenter,
+                              fit: BoxFit.fitHeight),
+                      ),
                     ),
-                  ),
-                  Icon(
-                    Icons.arrow_back_ios,
-                    size: getSizeH9(context),
-                    color: scColor,
-                  ),
-                ],
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(last.nik),
+                                Text(last.nama),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(5),
+                                      ),
+                                    ),
+                                    elevation: 0,
+                                    child: Text(
+                                      'Edit',
+                                      style: TextStyle(
+                                          color: lightColor,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    color: yellowColor,
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(5),
+                                      ),
+                                    ),
+                                    elevation: 0,
+                                    child: Text(
+                                      'Upload',
+                                      style: TextStyle(
+                                          color: lightColor,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    color: redColor,
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
-        }
-      },
-    );
+            );
+          }
+        });
   }
 
   void daftarRtlh() {
