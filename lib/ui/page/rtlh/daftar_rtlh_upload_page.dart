@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../config/config.dart';
 import '../../../controller/daftar_rtlh_upload_controller.dart';
-import '../../../ui/style/all_style.dart';
+import '../../style/all_style.dart';
 
-class PendingRtlhPage extends StatefulWidget {
+class DaftarRtlhUploadPage extends StatefulWidget {
   @override
-  _PendingRtlhPageState createState() => _PendingRtlhPageState();
+  _DaftarRtlhUploadPageState createState() => _DaftarRtlhUploadPageState();
 }
 
-class _PendingRtlhPageState extends State<PendingRtlhPage> {
+class _DaftarRtlhUploadPageState extends State<DaftarRtlhUploadPage> {
   final DaftarRtlhUploadController list = Get.put(DaftarRtlhUploadController());
 
   @override

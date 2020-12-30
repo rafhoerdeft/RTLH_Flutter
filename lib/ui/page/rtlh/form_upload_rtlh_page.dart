@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UploadRtlhPage extends StatefulWidget {
+class FormUploadRtlhPage extends StatefulWidget {
   @override
-  _UploadRtlhPageState createState() => _UploadRtlhPageState();
+  _FormUploadRtlhPageState createState() => _FormUploadRtlhPageState();
 }
 
-class _UploadRtlhPageState extends State<UploadRtlhPage> {
+class _FormUploadRtlhPageState extends State<FormUploadRtlhPage> {
   @override
   Widget build(BuildContext context) {
     return Center(

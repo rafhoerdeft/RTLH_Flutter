@@ -99,7 +99,7 @@ class DaftarRtlhController extends GetxController {
                   color: yellowColor,
                   onPressed: () {
                     print('Edit ' + last.id.toString());
-                    Get.toNamed(UpdateRtlhRoute, arguments: int.parse(last.id));
+                    Get.toNamed(UpdateRtlhRoute + '?id=' + last.id);
                   },
                   child: Icon(
                     Icons.edit,

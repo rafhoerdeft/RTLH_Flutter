@@ -2,8 +2,8 @@ import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import '../../controller/rtlh_controller.dart';
 import '../../ui/page/rtlh/daftar_rtlh_page.dart';
-import '../../ui/page/rtlh/pending_rtlh_page.dart';
-import '../../ui/page/rtlh/upload_rtlh_page.dart';
+import 'rtlh/daftar_rtlh_upload_page.dart';
+// import '../../ui/page/rtlh/upload_rtlh_page.dart';
 import '../../config/config.dart';
 import '../../ui/style/all_style.dart';
 
@@ -17,7 +17,7 @@ class _RtlhPageState extends State<RtlhPage> {
   Widget build(BuildContext context) {
     final List<TabList> tabList = [
       TabList(title: 'Belum Upload', page: DaftarRtlhPage()),
-      TabList(title: 'Sudah Upload', page: PendingRtlhPage()),
+      TabList(title: 'Sudah Upload', page: DaftarRtlhUploadPage()),
       // TabList(title: 'Upload', page: UploadRtlhPage()),
     ];
 
