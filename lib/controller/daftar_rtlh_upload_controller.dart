@@ -1,13 +1,14 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+// import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:rtlh_app/config/api_config.dart';
 import '../ui/style/all_style.dart';
 import '../config/config.dart';
-import '../ui/style/dashboard_style.dart';
-import '../widget/dialog_widget.dart';
+// import '../ui/style/dashboard_style.dart';
+// import '../widget/dialog_widget.dart';
 import '../shared/login_shared.dart';
 import '../model/daftar_rtlh_model.dart';
 import '../service/rtlh_service.dart';
@@ -98,8 +99,7 @@ class DaftarRtlhUploadController extends GetxController {
                           ..borderRadius(topLeft: 5, topRight: 5)
                           ..padding(all: 0)
                           ..background.image(
-                              url:
-                                  'https://pemerintahan.memontum.com/wp-content/uploads/sites/5/2019/07/Ungkap-Permainan-Dana-RTLH-DPRD-Bondowoso-Bentuk-Pansus.jpg',
+                              url: last.foto,
                               alignment: Alignment.topCenter,
                               fit: BoxFit.fitHeight),
                       ),
@@ -195,13 +195,19 @@ class DaftarRtlhUploadController extends GetxController {
 
       RtlhService rtlh = RtlhService();
       await getKodeWil().then((value) async {
-        dynamic res = await rtlh.listRtlh(value, limit, offset);
+        dynamic res = await rtlh.listRtlhUpload(value, limit, offset);
 
         if (res != false) {
           for (final data in res) {
-            // print(data['id']);
+            String foto = api_rtlh +
+                "/simpkp/asset/upload/" +
+                data['file_foto'].split(';')[0];
+
             daftar_rtlh.value.add(DaftarRtlh(
-                nik: data['nik_rtlh'], nama: data['nkk_rtlh'], id: data['id']));
+                nik: data['nik_rtlh'],
+                nama: data['nkk_rtlh'],
+                foto: foto,
+                id: data['id']));
           }
           showListUi();
         }
@@ -218,12 +224,18 @@ class DaftarRtlhUploadController extends GetxController {
       await getKodeWil().then((value) async {
         int limit = 10;
         // daftar_rtlh.value = [];
-        dynamic res = await rtlh.searchRtlh(value, search, limit);
+        dynamic res = await rtlh.searchRtlhUpload(value, search, limit);
 
         if (res != false) {
           for (final data in res) {
+            String foto = api_rtlh +
+                "/simpkp/asset/upload/" +
+                data['file_foto'].split(';')[0];
             daftar_rtlh.value.add(DaftarRtlh(
-                nik: data['nik_rtlh'], nama: data['nkk_rtlh'], id: data['id']));
+                nik: data['nik_rtlh'],
+                nama: data['nkk_rtlh'],
+                foto: foto,
+                id: data['id']));
           }
         }
 

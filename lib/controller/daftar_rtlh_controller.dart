@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:supercharged/supercharged.dart';
+// import 'package:supercharged/supercharged.dart';
 import '../config/routes/router_name.dart';
 import '../config/config.dart';
 import '../ui/style/dashboard_style.dart';

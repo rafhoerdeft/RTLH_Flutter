@@ -1,9 +1,13 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import 'package:rtlh_app/config/config.dart';
-import 'package:rtlh_app/controller/form_update_rtlh_controller.dart';
+import '../../../controller/daftar_rtlh_controller.dart';
+import '../../../widget/dialog_widget.dart';
+import '../../../config/api_config.dart';
+import '../../../config/config.dart';
+import '../../../controller/form_update_rtlh_controller.dart';
 
 class FormUpdateRtlhPage extends StatefulWidget {
   @override
@@ -12,8 +16,17 @@ class FormUpdateRtlhPage extends StatefulWidget {
 
 class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
   final FormUpdateRtlhController fup = Get.put(FormUpdateRtlhController());
+  final DaftarRtlhController list = Get.put(DaftarRtlhController());
+
+  InAppWebViewController webViewCtrl;
 
   final id_rtlh = Get.parameters['id'];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var txtNik = TextFormField(
@@ -115,11 +128,78 @@ class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
       ),
     );
 
+    var webView = Obx(() => Stack(
+          children: [
+            InAppWebView(
+              initialUrl:
+                  "http://103.115.104.245/simpkp/mobile/updateRtlh/" + id_rtlh,
+              initialHeaders: requestHeader,
+              onConsoleMessage:
+                  (InAppWebViewController controller, ConsoleMessage alert) {
+                // print(alert.message);
+                if (alert.message == 'true') {
+                  tampilToast(context, 'Update data berhasil', yellowColor,
+                      Colors.white);
+                  list.refreshData();
+                  Get.back();
+                }
+                if (alert.message == 'false') {
+                  tampilToast(
+                      context, 'Update data gagal', redColor, Colors.white);
+                }
+              },
+              initialOptions: InAppWebViewGroupOptions(
+                  crossPlatform: InAppWebViewOptions(
+                debuggingEnabled: true,
+              )),
+              onWebViewCreated: (InAppWebViewController controller) {
+                webViewCtrl = controller;
+              },
+              onProgressChanged:
+                  (InAppWebViewController controller, int progress) {
+                fup.progres_bar.value = progress / 100;
+              },
+            ),
+            Container(
+              child: fup.progres_bar.value < 1.0
+                  ? LinearProgressIndicator(
+                      value: fup.progres_bar.value,
+                      backgroundColor: Colors.redAccent[100],
+                      valueColor: AlwaysStoppedAnimation(redColor),
+                    )
+                  : Container(),
+            ),
+            Center(
+              child: fup.progres_bar.value < 1.0
+                  ? CircularProgressIndicator(
+                      // value: fup.progres_bar.value,
+                      backgroundColor: Colors.redAccent[100],
+                      valueColor: AlwaysStoppedAnimation(redColor),
+                    )
+                  : Container(),
+            ),
+            // RaisedButton(
+            //   child: Text('Post'),
+            //   onPressed: () {
+            //     webViewCtrl.evaluateJavascript(source: "alerts('dancuk');");
+            //   },
+            // )
+          ],
+        ));
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Update Data RTLH'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              webViewCtrl.reload();
+            },
+          )
+        ],
       ),
-      body: formUpdate,
+      body: webView,
     );
   }
 }

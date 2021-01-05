@@ -115,8 +115,9 @@ closeFlushBar(BuildContext context) {
   )..show(context);
 }
 
-tampilToast(BuildContext context, String content, Color color) {
+tampilToast(BuildContext context, String content, Color color, Color txtColor) {
   Toast.show(content, context,
+      textColor: txtColor,
       backgroundColor: color,
       duration: Toast.LENGTH_LONG,
       gravity: Toast.BOTTOM);

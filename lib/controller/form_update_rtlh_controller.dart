@@ -17,6 +17,7 @@ class FormUpdateRtlhController extends GetxController {
       TextEditingController(); //status sejahtera
 
   final jk_rtlh = ''.obs;
+  final progres_bar = 0.0.obs;
 }
 
 class JenisKelamin {

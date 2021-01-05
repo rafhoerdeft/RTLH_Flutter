@@ -13,7 +13,8 @@ class LoginController extends GetxController {
     await auth.signIn(user, pass).then((res) {
       (res)
           ? Get.offAllNamed(HomeRoute)
-          : tampilToast(context, 'Sign In Failed!', Colors.red[900]);
+          : tampilToast(
+              context, 'Sign In Failed!', Colors.red[900], Colors.white);
     });
     loading.value = false;
   }

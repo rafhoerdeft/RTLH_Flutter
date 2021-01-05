@@ -7,9 +7,13 @@ import 'config/config.dart';
 import 'config/routes/router.dart';
 import 'config/routes/router_name.dart';
 import 'config/theme_config.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
+  // it should be the first line in main method
   WidgetsFlutterBinding.ensureInitialized();
+  //camera permision for webview
+  await Permission.camera.request();
   // await Firebase.initializeApp();
   // runApp(DevicePreview(builder: (context) => RtlhApp()));
   runApp(RtlhApp());
