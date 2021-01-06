@@ -156,13 +156,13 @@ class _ProfilPageState extends State<ProfilPage> {
                     tag: 'iconPP',
                     child: Icon(
                       Icons.account_circle,
-                      size: getSizeH1(context) + 50,
+                      size: getSizeH1() + 50,
                       color: lightColor,
                     ),
                   ),
                   Txt(
                     prof.nama_user.value,
-                    style: txtStyle.clone()..fontSize(getSizeH6(context)),
+                    style: txtStyle.clone()..fontSize(getSizeH6()),
                   ),
                   SizedBox(height: 10),
                   Parent(
@@ -179,12 +179,12 @@ class _ProfilPageState extends State<ProfilPage> {
                                 Txt(
                                   'Pending',
                                   style: txtStyle.clone()
-                                    ..fontSize(getSizeH8(context)),
+                                    ..fontSize(getSizeH8()),
                                 ),
                                 Txt(
                                   prof.pending.value.toString(),
                                   style: txtStyle.clone()
-                                    ..fontSize(getSizeH8(context)),
+                                    ..fontSize(getSizeH8()),
                                 )
                               ],
                             ),
@@ -199,12 +199,12 @@ class _ProfilPageState extends State<ProfilPage> {
                                 Txt(
                                   'Upload',
                                   style: txtStyle.clone()
-                                    ..fontSize(getSizeH8(context)),
+                                    ..fontSize(getSizeH8()),
                                 ),
                                 Txt(
                                   prof.upload.value.toString(),
                                   style: txtStyle.clone()
-                                    ..fontSize(getSizeH8(context)),
+                                    ..fontSize(getSizeH8()),
                                 )
                               ],
                             ),
@@ -224,7 +224,7 @@ class _ProfilPageState extends State<ProfilPage> {
               style: txtStyle.clone()
                 ..textAlign.left()
                 ..textColor(pmColor)
-                ..fontSize(getSizeH8(context)),
+                ..fontSize(getSizeH8()),
             ),
             SizedBox(
               height: 20,
@@ -241,7 +241,7 @@ class _ProfilPageState extends State<ProfilPage> {
                     ..padding(all: 10)
                     ..textAlign.left()
                     ..textColor(pmColor)
-                    ..fontSize(getSizeH9(context)),
+                    ..fontSize(getSizeH9()),
                 ),
                 expanded: Column(
                   children: [
@@ -268,7 +268,7 @@ class _ProfilPageState extends State<ProfilPage> {
                     ..padding(all: 10)
                     ..textAlign.left()
                     ..textColor(pmColor)
-                    ..fontSize(getSizeH9(context)),
+                    ..fontSize(getSizeH9()),
                 ),
                 expanded: Column(
                   children: [
@@ -280,7 +280,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       child: Text(
                         'Aplikasi ini dibuat oleh DISKOMINFO Kab. Magelang. Fungsi aplikasi ini adalah untuk mempermudah para petugas fasilitator RTLH melakukan verifikasi data di lapangan.',
                         textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: getSizeH9(context)),
+                        style: TextStyle(fontSize: getSizeH9()),
                       ),
                     ),
                   ],
@@ -299,14 +299,14 @@ class _ProfilPageState extends State<ProfilPage> {
                     style: txtStyle.clone()
                       ..textAlign.left()
                       ..textColor(pmColor)
-                      ..fontSize(getSizeH9(context)),
+                      ..fontSize(getSizeH9()),
                   ),
                   Txt(
                     prof.version.value,
                     style: txtStyle.clone()
                       ..textAlign.right()
                       ..textColor(pmColor)
-                      ..fontSize(getSizeH9(context)),
+                      ..fontSize(getSizeH9()),
                   ),
                 ],
               ),
@@ -345,11 +345,11 @@ class _ProfilPageState extends State<ProfilPage> {
                       style: txtStyle.clone()
                         ..textAlign.left()
                         ..textColor(pmColor)
-                        ..fontSize(getSizeH9(context)),
+                        ..fontSize(getSizeH9()),
                     ),
                     Icon(
                       Icons.logout,
-                      size: getSizeH7(context),
+                      size: getSizeH7(),
                     ),
                   ],
                 ),

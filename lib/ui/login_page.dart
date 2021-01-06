@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final user = TextFormField(
-      style: TextStyle(fontSize: getSizeH7(context), color: redColor),
+      style: TextStyle(fontSize: getSizeH7(), color: redColor),
       controller: ctrlUser,
       // maxLength: 50,
       keyboardType: TextInputType.text,
@@ -104,13 +104,13 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.only(left: 15, right: 10),
           child: Icon(
             Icons.person,
-            size: getSizeH6(context),
+            size: getSizeH6(),
           ),
         ),
         // prefixText: 'Email',
         // prefixStyle: TextStyle(color: Colors.red),
         labelText: 'Username',
-        labelStyle: TextStyle(fontSize: getSizeH8(context)),
+        labelStyle: TextStyle(fontSize: getSizeH8()),
         // hintText: 'Email',
         // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
-        style: TextStyle(fontSize: getSizeH7(context), color: redColor),
+        style: TextStyle(fontSize: getSizeH7(), color: redColor),
         controller: ctrlPass,
         obscureText: showPass,
         autofocus: false,
@@ -149,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.only(left: 15, right: 10),
             child: Icon(
               Icons.lock,
-              size: getSizeH6(context),
+              size: getSizeH6(),
             ),
           ),
           suffixIcon: Padding(
@@ -158,11 +158,11 @@ class _LoginPageState extends State<LoginPage> {
               icon: (showPass == false)
                   ? Icon(
                       Icons.visibility_off,
-                      size: getSizeH6(context),
+                      size: getSizeH6(),
                     )
                   : Icon(
                       Icons.visibility,
-                      size: getSizeH6(context),
+                      size: getSizeH6(),
                     ),
               onPressed: () {
                 setState(() {
@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           labelText: 'Password',
-          labelStyle: TextStyle(fontSize: getSizeH8(context)),
+          labelStyle: TextStyle(fontSize: getSizeH8()),
           // hintText: 'Password',
           // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0)),
@@ -240,7 +240,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final sliderButton = SliderButton(
-      // height: getSizeH1(context),
+      // height: getSizeH1(),
       action: () {
         if (_formKey.currentState.validate()) {
           cekAuth();
@@ -252,8 +252,8 @@ class _LoginPageState extends State<LoginPage> {
       dismissThresholds: 0.6,
       vibrationFlag: true,
       child: Container(
-        height: getSizeH1(context) + 10,
-        width: getSizeH1(context) + 10,
+        height: getSizeH1() + 10,
+        width: getSizeH1() + 10,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.orange, Colors.red],
@@ -299,7 +299,7 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(
           color: Colors.grey[600],
           fontWeight: FontWeight.w500,
-          fontSize: getSizeH8(context), //17
+          fontSize: getSizeH8(), //17
         ),
       ),
       icon: Center(

@@ -57,7 +57,7 @@
 
         <meta-data 
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDcBM8hFljWAtmwZC82_bMjtiI169z_n7k"/>
+            android:value="AIzaSyBjxO6B1aE-9WVRhnfYA5BrMfTilfUQLsc"/>
 
         <meta-data 
             android:name="android.webkit.WebView.EnableSafeBrowsing"

@@ -1,14 +1,13 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-// import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rtlh_app/config/api_config.dart';
+import 'package:rtlh_app/config/routes/router_name.dart';
 import '../ui/style/all_style.dart';
 import '../config/config.dart';
-// import '../ui/style/dashboard_style.dart';
-// import '../widget/dialog_widget.dart';
 import '../shared/login_shared.dart';
 import '../model/daftar_rtlh_model.dart';
 import '../service/rtlh_service.dart';
@@ -34,8 +33,9 @@ class DaftarRtlhUploadController extends GetxController {
     getMoreData(daftar_rtlh.value.length);
 
     scrollController.addListener(() {
-      if (scrollController.position.pixels >=
-          (scrollController.position.maxScrollExtent - 25)) {
+      if ((scrollController.position.pixels >=
+              (scrollController.position.maxScrollExtent - 25)) &&
+          (scrollController.position.maxScrollExtent > 0)) {
         if (ctrlCari.text == '' || ctrlCari.text == null) {
           getMoreData(daftar_rtlh.value.length);
         }
@@ -115,8 +115,16 @@ class DaftarRtlhUploadController extends GetxController {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(last.nik),
-                                Text(last.nama),
+                                AutoSizeText(
+                                  last.nik,
+                                  style: TextStyle(fontSize: getSizeH9()),
+                                  maxLines: 1,
+                                ),
+                                AutoSizeText(
+                                  last.nama,
+                                  style: TextStyle(fontSize: getSizeH9()),
+                                  maxLines: 1,
+                                ),
                               ],
                             ),
                           ),
@@ -133,14 +141,18 @@ class DaftarRtlhUploadController extends GetxController {
                                       ),
                                     ),
                                     elevation: 0,
-                                    child: Text(
+                                    child: AutoSizeText(
                                       'Edit',
                                       style: TextStyle(
                                           color: lightColor,
                                           fontWeight: FontWeight.bold),
+                                      maxLines: 1,
                                     ),
                                     color: yellowColor,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.toNamed(
+                                          UpdateRtlhRoute + '?id=' + last.id);
+                                    },
                                   ),
                                 ),
                               ),
@@ -155,14 +167,18 @@ class DaftarRtlhUploadController extends GetxController {
                                       ),
                                     ),
                                     elevation: 0,
-                                    child: Text(
+                                    child: AutoSizeText(
                                       'Upload',
                                       style: TextStyle(
                                           color: lightColor,
                                           fontWeight: FontWeight.bold),
+                                      maxLines: 1,
                                     ),
                                     color: redColor,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.toNamed(
+                                          UploadRtlhRoute + '?id=' + last.id);
+                                    },
                                   ),
                                 ),
                               ),
@@ -199,9 +215,8 @@ class DaftarRtlhUploadController extends GetxController {
 
         if (res != false) {
           for (final data in res) {
-            String foto = api_rtlh +
-                "/simpkp/asset/upload/" +
-                data['file_foto'].split(';')[0];
+            String foto =
+                api_rtlh + "/asset/upload/" + data['file_foto'].split(';')[0];
 
             daftar_rtlh.value.add(DaftarRtlh(
                 nik: data['nik_rtlh'],
@@ -228,9 +243,8 @@ class DaftarRtlhUploadController extends GetxController {
 
         if (res != false) {
           for (final data in res) {
-            String foto = api_rtlh +
-                "/simpkp/asset/upload/" +
-                data['file_foto'].split(';')[0];
+            String foto =
+                api_rtlh + "/asset/upload/" + data['file_foto'].split(';')[0];
             daftar_rtlh.value.add(DaftarRtlh(
                 nik: data['nik_rtlh'],
                 nama: data['nkk_rtlh'],

@@ -3,7 +3,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import 'package:rtlh_app/ui/page/rtlh_page.dart';
+import '../ui/page/rtlh_page.dart';
 import '../config/config.dart';
 import '../controller/template_controller.dart';
 import '../ui/page/dashboard_page.dart';
@@ -21,6 +21,13 @@ class _TemplatePageState extends State<TemplatePage> {
   final TemplateController tmp = Get.put(TemplateController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tmp.permissionAccessHardware();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final List<PagesList> pagesList = [
       PagesList(
@@ -28,21 +35,21 @@ class _TemplatePageState extends State<TemplatePage> {
         icon: Icons.web,
         title: 'Dashboard',
         color: redColor,
-        sizeIcon: getSizeH5(context),
+        sizeIcon: getSizeH5(),
       ),
       PagesList(
         page: RtlhPage(),
         icon: RtlhIcon.logo_rtlh,
         title: 'RTLH',
         color: redColor,
-        sizeIcon: getSizeH6(context) - 2,
+        sizeIcon: getSizeH6() - 2,
       ),
       PagesList(
         page: ProfilPage(),
         icon: OMIcons.person,
         title: 'Profil',
         color: redColor,
-        sizeIcon: getSizeH5(context),
+        sizeIcon: getSizeH5(),
       ),
     ];
 
@@ -59,7 +66,7 @@ class _TemplatePageState extends State<TemplatePage> {
     );
 
     var _bubbleNav = Container(
-      // height: getSizeH4(context) + getSizeH4(context),
+      // height: getSizeH4() + getSizeH4(),
       padding: EdgeInsets.all(16.0),
       child: Container(
         padding: EdgeInsets.all(4.0),
@@ -108,8 +115,8 @@ class _TemplatePageState extends State<TemplatePage> {
                 ),
                 title: Text(
                   pg.value.title,
-                  style: TextStyle(
-                      color: lightColor, fontSize: getSizeH9(context) - 2),
+                  style:
+                      TextStyle(color: lightColor, fontSize: getSizeH9() - 2),
                 ),
               );
             }).toList(),

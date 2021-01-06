@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-// import 'package:supercharged/supercharged.dart';
 import '../config/routes/router_name.dart';
 import '../config/config.dart';
 import '../ui/style/dashboard_style.dart';
@@ -34,8 +33,9 @@ class DaftarRtlhController extends GetxController {
     getMoreData(daftar_rtlh.value.length);
 
     scrollController.addListener(() {
-      if (scrollController.position.pixels >=
-          (scrollController.position.maxScrollExtent - 25)) {
+      if ((scrollController.position.pixels >=
+              (scrollController.position.maxScrollExtent - 25)) &&
+          (scrollController.position.maxScrollExtent > 0)) {
         if (ctrlCari.text == '' || ctrlCari.text == null) {
           getMoreData(daftar_rtlh.value.length);
         }
@@ -98,15 +98,14 @@ class DaftarRtlhController extends GetxController {
                   padding: EdgeInsets.all(5),
                   color: yellowColor,
                   onPressed: () {
-                    print('Edit ' + last.id.toString());
                     Get.toNamed(UpdateRtlhRoute + '?id=' + last.id);
                   },
                   child: Icon(
                     Icons.edit,
                     color: lightColor,
-                    size: getSizeH7(context),
+                    size: getSizeH7(),
                   ),
-                  height: getSizeH1(context) + 20,
+                  height: getSizeH1() + 20,
                   shape: CircleBorder(),
                 ),
               ),
@@ -123,15 +122,14 @@ class DaftarRtlhController extends GetxController {
                   padding: EdgeInsets.all(5),
                   color: redColor,
                   onPressed: () {
-                    print('Upload ' + last.id.toString());
-                    Get.toNamed(UploadRtlhRoute, arguments: int.parse(last.id));
+                    Get.toNamed(UploadRtlhRoute + '?id=' + last.id);
                   },
                   child: Icon(
                     Icons.cloud_upload,
                     color: lightColor,
-                    size: getSizeH7(context),
+                    size: getSizeH7(),
                   ),
-                  height: getSizeH1(context) + 20,
+                  height: getSizeH1() + 20,
                   shape: CircleBorder(),
                 ),
               ),
@@ -156,7 +154,7 @@ class DaftarRtlhController extends GetxController {
                 children: <Widget>[
                   Icon(
                     Icons.person,
-                    size: getSizeH1(context),
+                    size: getSizeH1(),
                     color: redColor,
                   ),
                   SizedBox(
@@ -169,14 +167,14 @@ class DaftarRtlhController extends GetxController {
                         Text(
                           "NIK : " + last.nik,
                           style: TextStyle(
-                              fontSize: getSizeH9(context),
+                              fontSize: getSizeH9(),
                               fontWeight: FontWeight.bold,
                               color: pmColor),
                         ),
                         Text(
                           "Nama : " + last.nama,
                           style: TextStyle(
-                            fontSize: getSizeH9(context),
+                            fontSize: getSizeH9(),
                             fontWeight: FontWeight.bold,
                             color: pmColor,
                           ),
@@ -186,7 +184,7 @@ class DaftarRtlhController extends GetxController {
                   ),
                   Icon(
                     Icons.arrow_back_ios,
-                    size: getSizeH9(context),
+                    size: getSizeH9(),
                     color: scColor,
                   ),
                 ],

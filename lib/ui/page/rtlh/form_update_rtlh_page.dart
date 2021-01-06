@@ -7,7 +7,7 @@ import '../../../controller/daftar_rtlh_controller.dart';
 import '../../../widget/dialog_widget.dart';
 import '../../../config/api_config.dart';
 import '../../../config/config.dart';
-import '../../../controller/form_update_rtlh_controller.dart';
+import '../../../controller/form_rtlh_controller.dart';
 
 class FormUpdateRtlhPage extends StatefulWidget {
   @override
@@ -15,17 +15,12 @@ class FormUpdateRtlhPage extends StatefulWidget {
 }
 
 class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
-  final FormUpdateRtlhController fup = Get.put(FormUpdateRtlhController());
+  final FormRtlhController fup = Get.put(FormRtlhController());
   final DaftarRtlhController list = Get.put(DaftarRtlhController());
 
   InAppWebViewController webViewCtrl;
 
   final id_rtlh = Get.parameters['id'];
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +126,7 @@ class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
     var webView = Obx(() => Stack(
           children: [
             InAppWebView(
-              initialUrl:
-                  "http://103.115.104.245/simpkp/mobile/updateRtlh/" + id_rtlh,
+              initialUrl: api_rtlh + "/mobile/updateRtlh/" + id_rtlh,
               initialHeaders: requestHeader,
               onConsoleMessage:
                   (InAppWebViewController controller, ConsoleMessage alert) {

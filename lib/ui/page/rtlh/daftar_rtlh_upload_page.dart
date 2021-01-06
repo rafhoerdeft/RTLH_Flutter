@@ -26,7 +26,7 @@ class _DaftarRtlhUploadPageState extends State<DaftarRtlhUploadPage> {
         list.changeValCari(val);
         list.refreshData();
       },
-      style: TextStyle(color: pmColor, fontSize: getSizeH9(context)),
+      style: TextStyle(color: pmColor, fontSize: getSizeH9()),
       // initialValue: 'Search ...',
       decoration: InputDecoration(
         focusColor: redColor,
@@ -36,19 +36,19 @@ class _DaftarRtlhUploadPageState extends State<DaftarRtlhUploadPage> {
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: Icon(
             Icons.search,
-            size: getSizeH4(context),
+            size: getSizeH4(),
             color: Colors.grey[400],
           ),
         ),
         suffixIcon: Obx(
           () => (list.valCari.value != '')
               ? Container(
-                  width: getSizeH4(context),
+                  width: getSizeH4(),
                   child: MaterialButton(
                     padding: EdgeInsets.all(0),
                     child: Icon(
                       Icons.close,
-                      size: getSizeH4(context),
+                      size: getSizeH4(),
                       color: Colors.grey[400],
                     ),
                     shape: CircleBorder(),
@@ -60,7 +60,7 @@ class _DaftarRtlhUploadPageState extends State<DaftarRtlhUploadPage> {
                   ),
                 )
               : Container(
-                  width: getSizeH4(context),
+                  width: getSizeH4(),
                 ),
         ),
         // labelText: 'Search ...',
@@ -106,22 +106,22 @@ class _DaftarRtlhUploadPageState extends State<DaftarRtlhUploadPage> {
                 //   flex: 1,
                 //   child: Text(
                 //     'Filter',
-                //     style: TextStyle(fontSize: getSizeH9(context)),
+                //     style: TextStyle(fontSize: getSizeH9()),
                 //   ),
                 // ),
-                Flexible(
-                  flex: 1,
-                  child: MaterialButton(
-                    padding: EdgeInsets.all(5),
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.filter_list,
-                      color: redColor,
-                      size: getSizeH3(context),
-                    ),
-                    shape: CircleBorder(),
-                  ),
-                ),
+                // Flexible(
+                //   flex: 1,
+                //   child: MaterialButton(
+                //     padding: EdgeInsets.all(5),
+                //     onPressed: () {},
+                //     child: Icon(
+                //       Icons.filter_list,
+                //       color: redColor,
+                //       size: getSizeH3(),
+                //     ),
+                //     shape: CircleBorder(),
+                //   ),
+                // ),
               ],
             ),
             // SizedBox(
@@ -150,8 +150,7 @@ class _DaftarRtlhUploadPageState extends State<DaftarRtlhUploadPage> {
                                 Center(
                                   child: Text(
                                     'Data kosong',
-                                    style:
-                                        TextStyle(fontSize: getSizeH9(context)),
+                                    style: TextStyle(fontSize: getSizeH9()),
                                   ),
                                 ),
                               ],

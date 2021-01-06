@@ -104,7 +104,7 @@ closeFlushBar(BuildContext context) {
         Expanded(
           child: Text('Tekan tombol Back lagi untuk keluar',
               style: TextStyle(
-                fontSize: getSizeH9(context),
+                fontSize: getSizeH9(),
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               )),
@@ -144,7 +144,7 @@ tampilFlushBar(BuildContext context, String content, Color color) {
         Expanded(
           child: Text(content,
               style: TextStyle(
-                fontSize: getSizeH9(context),
+                fontSize: getSizeH9(),
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               )),

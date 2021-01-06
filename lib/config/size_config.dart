@@ -35,65 +35,74 @@ getHeight(BuildContext context) {
   return height = sizeConf.height;
 }
 
-getSizeH1(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 12.18;
+getSizeH1() {
   double txtSize = 50;
 
   return txtSize; //50
 }
 
-getSizeH2(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 9.75;
+getSizeH2() {
   double txtSize = 40;
 
   return txtSize; //40
 }
 
-getSizeH3(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 8.55;
+getSizeH3() {
   double txtSize = 35;
 
   return txtSize; //35
 }
 
-getSizeH4(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 7.3;
+getSizeH4() {
   double txtSize = 30;
 
   return txtSize; //30
 }
 
-getSizeH5(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 6.55;
+getSizeH5() {
   double txtSize = 27;
 
   return txtSize; //27
 }
 
-getSizeH6(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 6.1;
+getSizeH6() {
   double txtSize = 25;
 
   return txtSize; //25
 }
 
-getSizeH7(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 4.9;
+getSizeH7() {
   double txtSize = 20;
 
   return txtSize; //20
 }
 
-getSizeH8(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 4.15;
+getSizeH8() {
   double txtSize = 17;
 
   return txtSize; //17
 }
 
-getSizeH9(BuildContext context) {
-  // double txtSize = getWidth(context) / 100 * 3.65;
+getSizeH9() {
   double txtSize = 15;
+
+  return txtSize; //15
+}
+
+getSizeH10() {
+  double txtSize = 12;
+
+  return txtSize; //15
+}
+
+getSizeH11() {
+  double txtSize = 10;
+
+  return txtSize; //15
+}
+
+getSizeH12() {
+  double txtSize = 8;
 
   return txtSize; //15
 }

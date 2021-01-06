@@ -9,7 +9,7 @@ class DashService {
         'kode_wil': kode_wil,
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/getJmlRtlh";
+      String apiURL = "$api_rtlh/service/getJmlRtlh";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,
@@ -35,7 +35,7 @@ class DashService {
         'kode_wil': kode_wil,
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/getLastUpdate";
+      String apiURL = "$api_rtlh/service/getLastUpdate";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,

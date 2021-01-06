@@ -17,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    // print(getWidth(context) / 100 * 3.65);
+    // print(getWidth() / 100 * 3.65);
     var _list = ListView(
       shrinkWrap: true,
       padding: EdgeInsets.only(left: 20, top: 15, right: 20, bottom: 95),
@@ -30,11 +30,11 @@ class _DashboardPageState extends State<DashboardPage> {
               'Dashboard',
               style: TextStyle(
                   color: pmColor,
-                  fontSize: getSizeH8(context),
+                  fontSize: getSizeH8(),
                   fontWeight: FontWeight.bold),
             ),
             Container(
-              // height: getHeight(context) * 1 / 2.35,
+              // height: getHeight() * 1 / 2.35,
               child: Obx(
                 () => GridView.count(
                   padding: EdgeInsets.only(top: 20, bottom: 20),
@@ -71,14 +71,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                     grid.value.title,
                                     style: TextStyle(
                                         color: lightColor,
-                                        fontSize: getSizeH9(context),
+                                        fontSize: getSizeH9(),
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     grid.value.count,
                                     style: TextStyle(
                                         color: lightColor,
-                                        fontSize: getSizeH8(context),
+                                        fontSize: getSizeH8(),
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -108,7 +108,7 @@ class _DashboardPageState extends State<DashboardPage> {
               'Terakhir Update',
               style: TextStyle(
                   color: pmColor,
-                  fontSize: getSizeH8(context),
+                  fontSize: getSizeH8(),
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -128,8 +128,8 @@ class _DashboardPageState extends State<DashboardPage> {
                               child: Row(
                                 children: [
                                   Container(
-                                    height: getSizeH1(context),
-                                    width: getSizeH1(context),
+                                    height: getSizeH1(),
+                                    width: getSizeH1(),
                                     decoration: BoxDecoration(
                                       color: lightColor,
                                       borderRadius: BorderRadius.circular(50),
@@ -144,7 +144,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          height: getSizeH8(context),
+                                          height: getSizeH8(),
                                           width: 220,
                                           decoration: BoxDecoration(
                                             color: lightColor,
@@ -156,7 +156,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                           height: 10,
                                         ),
                                         Container(
-                                          height: getSizeH8(context),
+                                          height: getSizeH8(),
                                           width: 150,
                                           decoration: BoxDecoration(
                                             color: lightColor,
@@ -186,7 +186,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               children: <Widget>[
                                 Icon(
                                   Icons.person,
-                                  size: getSizeH1(context),
+                                  size: getSizeH1(),
                                   color: redColor,
                                 ),
                                 SizedBox(
@@ -201,14 +201,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                         "NIK : " + last.value.nik,
                                         softWrap: true,
                                         style: TextStyle(
-                                            fontSize: getSizeH8(context),
+                                            fontSize: getSizeH9(),
                                             fontWeight: FontWeight.bold,
                                             color: pmColor),
                                       ),
                                       Text(
                                         "Nama : " + last.value.nama,
                                         style: TextStyle(
-                                          fontSize: getSizeH9(context),
+                                          fontSize: getSizeH9(),
                                           fontWeight: FontWeight.bold,
                                           color: pmColor,
                                         ),
@@ -264,14 +264,13 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Text(
                                   'Hi, ',
                                   style: TextStyle(
-                                      fontSize: getSizeH6(context),
-                                      color: lightColor),
+                                      fontSize: getSizeH6(), color: lightColor),
                                 ),
                                 Obx(
                                   () => Text(
                                     dash.nama_user.value,
                                     style: TextStyle(
-                                        fontSize: getSizeH6(context),
+                                        fontSize: getSizeH6(),
                                         color: lightColor,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -282,7 +281,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               tag: 'iconPP',
                               child: Icon(
                                 Icons.account_circle,
-                                size: getSizeH1(context),
+                                size: getSizeH1(),
                                 color: lightColor,
                               ),
                             ),
@@ -302,13 +301,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                         .capitalize('abc')
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: getSizeH8(context),
-                                    color: lightColor),
+                                    fontSize: getSizeH8(), color: lightColor),
                               ),
                             ),
                             SizedBox(
-                              height: getSizeH2(context),
-                              width: getSizeH1(context),
+                              height: getSizeH2(),
+                              width: getSizeH1(),
                               child: MaterialButton(
                                 splashColor: redColor,
                                 padding: EdgeInsets.all(0),

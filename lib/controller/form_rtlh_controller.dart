@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
-class FormUpdateRtlhController extends GetxController {
+class FormRtlhController extends GetxController {
   final formKey = GlobalKey<FormState>();
   TextEditingController nik_rtlh = TextEditingController(); //nik
   TextEditingController nkk_rtlh = TextEditingController(); //nama
@@ -17,7 +18,27 @@ class FormUpdateRtlhController extends GetxController {
       TextEditingController(); //status sejahtera
 
   final jk_rtlh = ''.obs;
+
   final progres_bar = 0.0.obs;
+
+  final latitude = 0.0.obs;
+  final longitude = 0.0.obs;
+  final isGetPosition = false.obs;
+
+  @override
+  void onInit() {
+    // getPosition();
+  }
+
+  getPosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    latitude.value = position.latitude;
+    longitude.value = position.longitude;
+
+    isGetPosition.value = true;
+    print(position.toString());
+  }
 }
 
 class JenisKelamin {

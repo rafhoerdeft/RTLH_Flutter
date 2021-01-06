@@ -1,14 +1,8 @@
-// import 'package:awesome_dialog/awesome_dialog.dart';
-// import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-// import 'package:rtlh_app/controller/rtlh_controller.dart';
-// import 'package:rtlh_app/widget/dialog_widget.dart';
 import '../../../config/config.dart';
 import '../../../controller/daftar_rtlh_controller.dart';
-// import '../../../ui/style/dashboard_style.dart';
 
 class DaftarRtlhPage extends StatefulWidget {
   @override
@@ -32,7 +26,7 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
         list.changeValCari(val);
         list.refreshData();
       },
-      style: TextStyle(color: pmColor, fontSize: getSizeH9(context)),
+      style: TextStyle(color: pmColor, fontSize: getSizeH9()),
       // initialValue: 'Search ...',
       decoration: InputDecoration(
         focusColor: redColor,
@@ -42,19 +36,19 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: Icon(
             Icons.search,
-            size: getSizeH4(context),
+            size: getSizeH4(),
             color: Colors.grey[400],
           ),
         ),
         suffixIcon: Obx(
           () => (list.valCari.value != '')
               ? Container(
-                  width: getSizeH4(context),
+                  width: getSizeH4(),
                   child: MaterialButton(
                     padding: EdgeInsets.all(0),
                     child: Icon(
                       Icons.close,
-                      size: getSizeH4(context),
+                      size: getSizeH4(),
                       color: Colors.grey[400],
                     ),
                     shape: CircleBorder(),
@@ -66,7 +60,7 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                   ),
                 )
               : Container(
-                  width: getSizeH4(context),
+                  width: getSizeH4(),
                 ),
         ),
         // labelText: 'Search ...',
@@ -112,7 +106,7 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                 //   flex: 1,
                 //   child: Text(
                 //     'Filter',
-                //     style: TextStyle(fontSize: getSizeH9(context)),
+                //     style: TextStyle(fontSize: getSizeH9()),
                 //   ),
                 // ),
                 // Flexible(
@@ -123,7 +117,7 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                 //     child: Icon(
                 //       Icons.filter_list,
                 //       color: redColor,
-                //       size: getSizeH3(context),
+                //       size: getSizeH3(),
                 //     ),
                 //     shape: CircleBorder(),
                 //   ),
@@ -156,8 +150,7 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                                 Center(
                                   child: Text(
                                     'Data kosong',
-                                    style:
-                                        TextStyle(fontSize: getSizeH9(context)),
+                                    style: TextStyle(fontSize: getSizeH9()),
                                   ),
                                 ),
                               ],

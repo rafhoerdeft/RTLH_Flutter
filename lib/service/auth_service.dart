@@ -19,7 +19,7 @@ class AuthService {
       // ioc.badCertificateCallback =
       //     (X509Certificate cert, String host, int port) => true;
       // final http = new IOClient(ioc);
-      String apiURL = "$api_rtlh/simpkp/service/signIn";
+      String apiURL = "$api_rtlh/service/signIn";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,

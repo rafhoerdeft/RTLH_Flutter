@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class TemplateController extends GetxController {
   final page_active = 0.obs;
@@ -17,6 +18,13 @@ class TemplateController extends GetxController {
     pageCtrl.jumpToPage(page_active.value);
     update();
     title.value = ttl;
+  }
+
+  permissionAccessHardware() async {
+    //Camera permission
+    await Permission.camera.request();
+    //GPS permission
+    await Permission.location.request();
   }
 }
 

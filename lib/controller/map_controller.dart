@@ -66,8 +66,8 @@ class MapController extends GetxController {
   }
 
   getPosition() async {
-    Position position =
-        await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     latitude.value = position.latitude;
     longitude.value = position.longitude;
 

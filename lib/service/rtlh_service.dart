@@ -11,7 +11,7 @@ class RtlhService {
         'offset': offset
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/getListRtlh";
+      String apiURL = "$api_rtlh/service/getListRtlh";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,
@@ -39,7 +39,7 @@ class RtlhService {
         'limit': limit,
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/searchListRtlh";
+      String apiURL = "$api_rtlh/service/searchListRtlh";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,
@@ -67,7 +67,7 @@ class RtlhService {
         'offset': offset
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/getListRtlhUpload";
+      String apiURL = "$api_rtlh/service/getListRtlhUpload";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,
@@ -96,7 +96,7 @@ class RtlhService {
         'limit': limit,
       };
 
-      String apiURL = "$api_rtlh/simpkp/service/searchListRtlhUpload";
+      String apiURL = "$api_rtlh/service/searchListRtlhUpload";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,

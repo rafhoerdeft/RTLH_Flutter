@@ -53,7 +53,7 @@ class _RtlhPageState extends State<RtlhPage> {
                         alignment: Alignment.center,
                         child: Txt(
                           tab.value.title,
-                          style: txtStyle.clone()..fontSize(getSizeH9(context)),
+                          style: txtStyle.clone()..fontSize(getSizeH9()),
                         ),
                       ),
                     );
