@@ -19,6 +19,7 @@ class DaftarRtlhUploadController extends GetxController {
   final listUis = _listUi.obs;
   final showButton = false.obs;
   final valCari = ''.obs;
+  final id_user = ''.obs;
 
   final formKey = GlobalKey<FormState>();
   TextEditingController ctrlCari = TextEditingController();
@@ -31,6 +32,7 @@ class DaftarRtlhUploadController extends GetxController {
     // daftarRtlh();
     showListUi();
     getMoreData(daftar_rtlh.value.length);
+    getIds();
 
     scrollController.addListener(() {
       if ((scrollController.position.pixels >=
@@ -51,6 +53,12 @@ class DaftarRtlhUploadController extends GetxController {
           ScrollDirection.forward) {
         showButton.value = false;
       }
+    });
+  }
+
+  void getIds() async {
+    await getIdUser().then((value) {
+      id_user.value = value;
     });
   }
 
@@ -150,8 +158,11 @@ class DaftarRtlhUploadController extends GetxController {
                                     ),
                                     color: yellowColor,
                                     onPressed: () {
-                                      Get.toNamed(
-                                          UpdateRtlhRoute + '?id=' + last.id);
+                                      Get.toNamed(UpdateRtlhRoute +
+                                          '?id=' +
+                                          last.id +
+                                          '&&id_user=' +
+                                          id_user.value);
                                     },
                                   ),
                                 ),
@@ -176,8 +187,11 @@ class DaftarRtlhUploadController extends GetxController {
                                     ),
                                     color: redColor,
                                     onPressed: () {
-                                      Get.toNamed(
-                                          UploadRtlhRoute + '?id=' + last.id);
+                                      Get.toNamed(UploadRtlhRoute +
+                                          '?id=' +
+                                          last.id +
+                                          '&&id_user=' +
+                                          id_user.value);
                                     },
                                   ),
                                 ),

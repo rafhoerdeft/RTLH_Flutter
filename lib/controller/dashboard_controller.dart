@@ -14,24 +14,28 @@ class DashboardController extends GetxController {
   final last_update = [].obs;
   final loading_last_update = false.obs;
   final syncs = false.obs;
+  final id_user = ''.obs;
 
   @override
-  void onInit() {
-    getInfo();
+  void onInit() async {
+    await getIds();
+    await getInfo();
+  }
+
+  void getIds() async {
+    id_user.value = await getIdUser();
+  }
+
+  void getNama() async {
+    nama_user.value = await getNamaUser();
   }
 
   void getInfo() async {
-    await getNamaUser().then((value) {
-      nama_user.value = value;
-    });
+    nama_user.value = await getNamaUser();
 
-    await getDesa().then((value) {
-      nama_desa.value = value;
-    });
+    nama_desa.value = await getDesa();
 
-    await getKecamatan().then((value) {
-      nama_kec.value = value;
-    });
+    nama_kec.value = await getKecamatan();
 
     getInfoDash();
     getLastUpdate();
@@ -61,7 +65,7 @@ class DashboardController extends GetxController {
     loading_last_update.value = true;
     DashService dash = DashService();
     await getKodeWil().then((value) async {
-      dynamic res = await dash.lastUpdate(value);
+      dynamic res = await dash.lastUpdate(value, id_user.value);
       // print(dataLast);
       // await dash.lastUpdate(value).then((res) {
       last_update.value = [];

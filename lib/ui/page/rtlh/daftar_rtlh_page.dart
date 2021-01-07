@@ -99,16 +99,6 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                   flex: 6,
                   child: txtCari,
                 ),
-                // SizedBox(
-                //   width: 10,
-                // ),
-                // Flexible(
-                //   flex: 1,
-                //   child: Text(
-                //     'Filter',
-                //     style: TextStyle(fontSize: getSizeH9()),
-                //   ),
-                // ),
                 // Flexible(
                 //   flex: 1,
                 //   child: MaterialButton(
@@ -122,6 +112,45 @@ class _DaftarRtlhPageState extends State<DaftarRtlhPage> {
                 //     shape: CircleBorder(),
                 //   ),
                 // ),
+                Flexible(
+                  flex: 1,
+                  child: Obx(
+                    () => PopupMenuButton<String>(
+                      onSelected: (String value) {
+                        list.filterSelected.value = value;
+                        list.refreshData();
+                      },
+                      initialValue: list.filterSelected.value,
+                      tooltip: 'Filter Menu',
+                      icon: Icon(
+                        Icons.filter_list,
+                        color: redColor,
+                        size: getSizeH3(),
+                      ),
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<String>>[
+                        PopupMenuItem<String>(
+                          value: '0',
+                          child: Text(
+                            'Tampil semua',
+                            style: (list.filterSelected.value == '0')
+                                ? TextStyle(color: redColor)
+                                : null,
+                          ),
+                        ),
+                        PopupMenuItem<String>(
+                          value: '1',
+                          child: Text(
+                            'Belum upload',
+                            style: (list.filterSelected.value == '1')
+                                ? TextStyle(color: redColor)
+                                : null,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
             // SizedBox(

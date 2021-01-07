@@ -3,10 +3,12 @@ import 'package:http/http.dart' as http;
 import '../config/api_config.dart';
 
 class RtlhService {
-  Future<dynamic> listRtlh(String kode_wil, int limit, int offset) async {
+  Future<dynamic> listRtlh(
+      String kode_wil, int limit, int offset, String filter) async {
     try {
       dynamic dataPost = {
         'kode_wil': kode_wil,
+        'filter': filter,
         'limit': limit,
         'offset': offset
       };
@@ -31,10 +33,12 @@ class RtlhService {
     }
   }
 
-  Future<dynamic> searchRtlh(String kode_wil, String search, int limit) async {
+  Future<dynamic> searchRtlh(
+      String kode_wil, String search, int limit, String filter) async {
     try {
       dynamic dataPost = {
         'kode_wil': kode_wil,
+        'filter': filter,
         'search': search,
         'limit': limit,
       };

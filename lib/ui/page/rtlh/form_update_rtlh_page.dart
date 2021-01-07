@@ -2,7 +2,10 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import '../../../controller/dashboard_controller.dart';
+import '../../../controller/daftar_rtlh_upload_controller.dart';
 import '../../../controller/daftar_rtlh_controller.dart';
 import '../../../widget/dialog_widget.dart';
 import '../../../config/api_config.dart';
@@ -16,11 +19,15 @@ class FormUpdateRtlhPage extends StatefulWidget {
 
 class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
   final FormRtlhController fup = Get.put(FormRtlhController());
+  final DashboardController dash = Get.put(DashboardController());
   final DaftarRtlhController list = Get.put(DaftarRtlhController());
+  final DaftarRtlhUploadController list_upload =
+      Get.put(DaftarRtlhUploadController());
 
   InAppWebViewController webViewCtrl;
 
   final id_rtlh = Get.parameters['id'];
+  final id_user = Get.parameters['id_user'];
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +133,8 @@ class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
     var webView = Obx(() => Stack(
           children: [
             InAppWebView(
-              initialUrl: api_rtlh + "/mobile/updateRtlh/" + id_rtlh,
+              initialUrl:
+                  api_rtlh + "/mobile/updateRtlh/" + id_rtlh + "/" + id_user,
               initialHeaders: requestHeader,
               onConsoleMessage:
                   (InAppWebViewController controller, ConsoleMessage alert) {
@@ -135,6 +143,8 @@ class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
                   tampilToast(context, 'Update data berhasil', yellowColor,
                       Colors.white);
                   list.refreshData();
+                  list_upload.refreshData();
+                  dash.getInfo();
                   Get.back();
                 }
                 if (alert.message == 'false') {
@@ -165,10 +175,14 @@ class _FormUpdateRtlhPageState extends State<FormUpdateRtlhPage> {
             ),
             Center(
               child: fup.progres_bar.value < 1.0
-                  ? CircularProgressIndicator(
-                      // value: fup.progres_bar.value,
-                      backgroundColor: Colors.redAccent[100],
-                      valueColor: AlwaysStoppedAnimation(redColor),
+                  ? Container(
+                      color: Colors.blueGrey.withOpacity(0.3),
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: SpinKitWave(
+                        color: redColor,
+                        size: 35.0,
+                      ),
                     )
                   : Container(),
             ),

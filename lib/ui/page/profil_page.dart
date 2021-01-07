@@ -3,7 +3,9 @@ import 'package:division/division.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:rtlh_app/widget/dialog_widget.dart';
 import '../../shared/login_shared.dart';
 import '../../controller/profil_controller.dart';
 import '../../ui/style/all_style.dart';
@@ -85,8 +87,11 @@ class _ProfilPageState extends State<ProfilPage> {
       validator: (value) {
         if (value.isEmpty) {
           return 'Data harus diisi!';
+        } else if (value.length < 6) {
+          return "Password harus minimal 6 karakter";
+        } else {
+          return null;
         }
-        return null;
       },
     );
 
@@ -104,7 +109,7 @@ class _ProfilPageState extends State<ProfilPage> {
         if (value.isEmpty) {
           return 'Data harus diisi!';
         } else {
-          if (prof.ctrlPass.text != prof.ctrlConfPass.text) {
+          if (prof.ctrlPass.text != value) {
             return 'Password tidak sama!';
           }
         }
@@ -113,8 +118,15 @@ class _ProfilPageState extends State<ProfilPage> {
     );
 
     var btnSave = AnimatedButton(
-      pressEvent: () {
-        if (prof.formKey.currentState.validate()) {}
+      pressEvent: () async {
+        if (prof.formKey.currentState.validate()) {
+          bool res = await prof.simpanProfil();
+          if (res) {
+            tampilToast(context, 'Berhasil simpan profil', scColor, lightColor);
+          } else {
+            tampilToast(context, 'Gagal simpan profil', redColor, lightColor);
+          }
+        }
       },
       text: 'Simpan',
       width: double.infinity,
@@ -142,219 +154,234 @@ class _ProfilPageState extends State<ProfilPage> {
 
     return Obx(
       () => SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+        child: Stack(
           children: [
-            Parent(
-              style: boxStyle.clone()
-                ..borderRadius(all: 20)
-                ..elevation(4, opacity: 0.8),
-              child: Column(
-                children: [
-                  Hero(
-                    tag: 'iconPP',
-                    child: Icon(
-                      Icons.account_circle,
-                      size: getSizeH1() + 50,
-                      color: lightColor,
-                    ),
-                  ),
-                  Txt(
-                    prof.nama_user.value,
-                    style: txtStyle.clone()..fontSize(getSizeH6()),
-                  ),
-                  SizedBox(height: 10),
-                  Parent(
-                    style: boxStyle.clone()
-                      ..background.color(redColor)
-                      ..padding(all: 10),
-                    child: IntrinsicHeight(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Txt(
-                                  'Pending',
-                                  style: txtStyle.clone()
-                                    ..fontSize(getSizeH8()),
-                                ),
-                                Txt(
-                                  prof.pending.value.toString(),
-                                  style: txtStyle.clone()
-                                    ..fontSize(getSizeH8()),
-                                )
-                              ],
-                            ),
-                          ),
-                          VerticalDivider(
-                            color: lightColor,
-                            thickness: 1,
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Txt(
-                                  'Upload',
-                                  style: txtStyle.clone()
-                                    ..fontSize(getSizeH8()),
-                                ),
-                                Txt(
-                                  prof.upload.value.toString(),
-                                  style: txtStyle.clone()
-                                    ..fontSize(getSizeH8()),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+            ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+              children: [
+                Parent(
+                  style: boxStyle.clone()
+                    ..borderRadius(all: 20)
+                    ..elevation(4, opacity: 0.8),
+                  child: Column(
+                    children: [
+                      Hero(
+                        tag: 'iconPP',
+                        child: Icon(
+                          Icons.account_circle,
+                          size: getSizeH1() + 50,
+                          color: lightColor,
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Txt(
-              'Pengaturan Aplikasi',
-              style: txtStyle.clone()
-                ..textAlign.left()
-                ..textColor(pmColor)
-                ..fontSize(getSizeH8()),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Parent(
-              style: boxStyle.clone()
-                ..padding(left: 6, top: 6, bottom: 4, right: 6)
-                ..background.color(lightColor)
-                ..margin(bottom: 10),
-              child: ExpandablePanel(
-                header: Txt(
-                  'Edit Profil',
+                      Txt(
+                        prof.nama_user.value,
+                        style: txtStyle.clone()..fontSize(getSizeH6()),
+                      ),
+                      SizedBox(height: 10),
+                      Parent(
+                        style: boxStyle.clone()
+                          ..background.color(redColor)
+                          ..padding(all: 10),
+                        child: IntrinsicHeight(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Txt(
+                                      'Diupdate',
+                                      style: txtStyle.clone()
+                                        ..fontSize(getSizeH8()),
+                                    ),
+                                    Txt(
+                                      prof.diupdate.value,
+                                      style: txtStyle.clone()
+                                        ..fontSize(getSizeH8()),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              VerticalDivider(
+                                color: lightColor,
+                                thickness: 1,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Txt(
+                                      'Diupload',
+                                      style: txtStyle.clone()
+                                        ..fontSize(getSizeH8()),
+                                    ),
+                                    Txt(
+                                      prof.diupload.value,
+                                      style: txtStyle.clone()
+                                        ..fontSize(getSizeH8()),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Txt(
+                  'Pengaturan Aplikasi',
                   style: txtStyle.clone()
-                    ..padding(all: 10)
                     ..textAlign.left()
                     ..textColor(pmColor)
-                    ..fontSize(getSizeH9()),
+                    ..fontSize(getSizeH8()),
                 ),
-                expanded: Column(
-                  children: [
-                    Divider(
-                      thickness: 1,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: formProfil,
-                    ),
-                  ],
+                SizedBox(
+                  height: 20,
                 ),
-              ),
-            ),
-            Parent(
-              style: boxStyle.clone()
-                ..padding(left: 6, top: 6, bottom: 4, right: 6)
-                ..background.color(lightColor)
-                ..margin(bottom: 10),
-              child: ExpandablePanel(
-                header: Txt(
-                  'Tentang Aplikasi',
-                  style: txtStyle.clone()
-                    ..padding(all: 10)
-                    ..textAlign.left()
-                    ..textColor(pmColor)
-                    ..fontSize(getSizeH9()),
-                ),
-                expanded: Column(
-                  children: [
-                    Divider(
-                      thickness: 1,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'Aplikasi ini dibuat oleh DISKOMINFO Kab. Magelang. Fungsi aplikasi ini adalah untuk mempermudah para petugas fasilitator RTLH melakukan verifikasi data di lapangan.',
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(fontSize: getSizeH9()),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Parent(
-              style: boxStyle.clone()
-                ..background.color(lightColor)
-                ..margin(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Txt(
-                    'Versi',
-                    style: txtStyle.clone()
-                      ..textAlign.left()
-                      ..textColor(pmColor)
-                      ..fontSize(getSizeH9()),
-                  ),
-                  Txt(
-                    prof.version.value,
-                    style: txtStyle.clone()
-                      ..textAlign.right()
-                      ..textColor(pmColor)
-                      ..fontSize(getSizeH9()),
-                  ),
-                ],
-              ),
-            ),
-            Parent(
-              style: boxStyle.clone()
-                ..background.color(lightColor)
-                ..padding(all: 0)
-                ..margin(bottom: 10),
-              child: MaterialButton(
-                padding: EdgeInsets.all(15),
-                onPressed: () {
-                  // print('Logout');
-                  AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.WARNING,
-                    headerAnimationLoop: false,
-                    animType: AnimType.TOPSLIDE,
-                    title: 'Logout',
-                    desc: 'Apakah anda yakin akan logout?',
-                    btnCancelIcon: Icons.cancel,
-                    btnCancelText: 'Batal',
-                    btnCancelOnPress: () {},
-                    btnOkIcon: Icons.check_circle,
-                    btnOkText: 'Ya',
-                    btnOkOnPress: () {
-                      logout();
-                    },
-                  )..show();
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Txt(
-                      'Logout',
+                Parent(
+                  style: boxStyle.clone()
+                    ..padding(left: 6, top: 6, bottom: 4, right: 6)
+                    ..background.color(lightColor)
+                    ..margin(bottom: 10),
+                  child: ExpandablePanel(
+                    header: Txt(
+                      'Edit Profil',
                       style: txtStyle.clone()
+                        ..padding(all: 10)
                         ..textAlign.left()
                         ..textColor(pmColor)
                         ..fontSize(getSizeH9()),
                     ),
-                    Icon(
-                      Icons.logout,
-                      size: getSizeH7(),
+                    expanded: Column(
+                      children: [
+                        Divider(
+                          thickness: 1,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: formProfil,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                Parent(
+                  style: boxStyle.clone()
+                    ..padding(left: 6, top: 6, bottom: 4, right: 6)
+                    ..background.color(lightColor)
+                    ..margin(bottom: 10),
+                  child: ExpandablePanel(
+                    header: Txt(
+                      'Tentang Aplikasi',
+                      style: txtStyle.clone()
+                        ..padding(all: 10)
+                        ..textAlign.left()
+                        ..textColor(pmColor)
+                        ..fontSize(getSizeH9()),
+                    ),
+                    expanded: Column(
+                      children: [
+                        Divider(
+                          thickness: 1,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            'Aplikasi ini dibuat oleh DISKOMINFO Kab. Magelang. Fungsi aplikasi ini adalah untuk mempermudah para petugas fasilitator RTLH melakukan verifikasi data di lapangan.',
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(fontSize: getSizeH9()),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Parent(
+                  style: boxStyle.clone()
+                    ..background.color(lightColor)
+                    ..margin(bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Txt(
+                        'Versi',
+                        style: txtStyle.clone()
+                          ..textAlign.left()
+                          ..textColor(pmColor)
+                          ..fontSize(getSizeH9()),
+                      ),
+                      Txt(
+                        prof.version.value,
+                        style: txtStyle.clone()
+                          ..textAlign.right()
+                          ..textColor(pmColor)
+                          ..fontSize(getSizeH9()),
+                      ),
+                    ],
+                  ),
+                ),
+                Parent(
+                  style: boxStyle.clone()
+                    ..background.color(lightColor)
+                    ..padding(all: 0)
+                    ..margin(bottom: 10),
+                  child: MaterialButton(
+                    padding: EdgeInsets.all(15),
+                    onPressed: () {
+                      // print('Logout');
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.WARNING,
+                        headerAnimationLoop: false,
+                        animType: AnimType.TOPSLIDE,
+                        title: 'Logout',
+                        desc: 'Apakah anda yakin akan logout?',
+                        btnCancelIcon: Icons.cancel,
+                        btnCancelText: 'Batal',
+                        btnCancelOnPress: () {},
+                        btnOkIcon: Icons.check_circle,
+                        btnOkText: 'Ya',
+                        btnOkOnPress: () {
+                          logout();
+                        },
+                      )..show();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Txt(
+                          'Logout',
+                          style: txtStyle.clone()
+                            ..textAlign.left()
+                            ..textColor(pmColor)
+                            ..fontSize(getSizeH9()),
+                        ),
+                        Icon(
+                          Icons.logout,
+                          size: getSizeH7(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
+            (prof.isLoadingUpdate.value)
+                ? Container(
+                    color: Colors.blueGrey.withOpacity(0.3),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: SpinKitWave(
+                      color: redColor,
+                      size: 35.0,
+                    ),
+                  )
+                : Container()
           ],
         ),
       ),

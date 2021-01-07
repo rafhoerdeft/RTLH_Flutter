@@ -6,6 +6,7 @@ void saveLogin(dynamic data) async {
   SharedPreferences log = await SharedPreferences.getInstance();
 
   log.setBool("status", true);
+  log.setString("id_user", data['id_user']);
   log.setString("username", data['username']);
   log.setString("kode_wil", data['kode_wil']);
   log.setString("nama_desa", data['desa']);
@@ -20,6 +21,7 @@ void logout() async {
   SharedPreferences log = await SharedPreferences.getInstance();
 
   log.setBool("status", false);
+  log.setString("id_user", '');
   log.setString("username", '');
   log.setString("kode_wil", '');
   log.setString("nama_desa", '');
@@ -32,10 +34,24 @@ void logout() async {
   Get.offAllNamed(LoginRoute);
 }
 
+void setUpdateProfil(
+    {String nama_user, String username, String no_telp}) async {
+  SharedPreferences log = await SharedPreferences.getInstance();
+  log.setString("nama_user", nama_user);
+  log.setString("username", username);
+  log.setString("no_telp", no_telp);
+}
+
 Future<bool> getStatus() async {
   SharedPreferences log = await SharedPreferences.getInstance();
 
   return log.getBool("status") ?? false;
+}
+
+Future<String> getIdUser() async {
+  SharedPreferences log = await SharedPreferences.getInstance();
+
+  return log.getString("id_user") ?? "";
 }
 
 Future<String> getUsername() async {

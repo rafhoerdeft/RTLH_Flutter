@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import '../shared/login_shared.dart';
 
 class FormRtlhController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -26,9 +27,7 @@ class FormRtlhController extends GetxController {
   final isGetPosition = false.obs;
 
   @override
-  void onInit() {
-    // getPosition();
-  }
+  void onInit() {}
 
   getPosition() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -37,7 +36,7 @@ class FormRtlhController extends GetxController {
     longitude.value = position.longitude;
 
     isGetPosition.value = true;
-    print(position.toString());
+    // print(position.toString());
   }
 }
 

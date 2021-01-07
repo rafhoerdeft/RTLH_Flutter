@@ -19,6 +19,8 @@ class DaftarRtlhController extends GetxController {
   final listUis = _listUi.obs;
   final showButton = false.obs;
   final valCari = ''.obs;
+  final filterSelected = '0'.obs;
+  final id_user = ''.obs;
 
   final formKey = GlobalKey<FormState>();
   TextEditingController ctrlCari = TextEditingController();
@@ -31,6 +33,7 @@ class DaftarRtlhController extends GetxController {
     // daftarRtlh();
     showListUi();
     getMoreData(daftar_rtlh.value.length);
+    getIds();
 
     scrollController.addListener(() {
       if ((scrollController.position.pixels >=
@@ -51,6 +54,12 @@ class DaftarRtlhController extends GetxController {
           ScrollDirection.forward) {
         showButton.value = false;
       }
+    });
+  }
+
+  void getIds() async {
+    await getIdUser().then((value) {
+      id_user.value = value;
     });
   }
 
@@ -98,7 +107,11 @@ class DaftarRtlhController extends GetxController {
                   padding: EdgeInsets.all(5),
                   color: yellowColor,
                   onPressed: () {
-                    Get.toNamed(UpdateRtlhRoute + '?id=' + last.id);
+                    Get.toNamed(UpdateRtlhRoute +
+                        '?id=' +
+                        last.id +
+                        '&&id_user=' +
+                        id_user.value);
                   },
                   child: Icon(
                     Icons.edit,
@@ -122,7 +135,11 @@ class DaftarRtlhController extends GetxController {
                   padding: EdgeInsets.all(5),
                   color: redColor,
                   onPressed: () {
-                    Get.toNamed(UploadRtlhRoute + '?id=' + last.id);
+                    Get.toNamed(UploadRtlhRoute +
+                        '?id=' +
+                        last.id +
+                        '&&id_user=' +
+                        id_user.value);
                   },
                   child: Icon(
                     Icons.cloud_upload,
@@ -212,7 +229,8 @@ class DaftarRtlhController extends GetxController {
 
       RtlhService rtlh = RtlhService();
       await getKodeWil().then((value) async {
-        dynamic res = await rtlh.listRtlh(value, limit, offset);
+        dynamic res =
+            await rtlh.listRtlh(value, limit, offset, filterSelected.value);
 
         if (res != false) {
           for (final data in res) {
@@ -235,7 +253,8 @@ class DaftarRtlhController extends GetxController {
       await getKodeWil().then((value) async {
         int limit = 10;
         // daftar_rtlh.value = [];
-        dynamic res = await rtlh.searchRtlh(value, search, limit);
+        dynamic res =
+            await rtlh.searchRtlh(value, search, limit, filterSelected.value);
 
         if (res != false) {
           for (final data in res) {

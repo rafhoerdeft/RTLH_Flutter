@@ -1,15 +1,17 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:rtlh_app/shared/login_shared.dart';
 import '../config/api_config.dart';
 
-class DashService {
-  Future<dynamic> infoDash(String kode_wil) async {
+class ProfilService {
+  Future<dynamic> infoDash(String kode_wil, String id_user) async {
     try {
       dynamic dataPost = {
         'kode_wil': kode_wil,
+        'id_user': id_user,
       };
 
-      String apiURL = "$api_rtlh/service/getJmlRtlh";
+      String apiURL = "$api_rtlh/service/getInfoAksiUser";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,
@@ -29,14 +31,22 @@ class DashService {
     }
   }
 
-  Future<dynamic> lastUpdate(String kode_wil, String id_user) async {
+  Future<dynamic> updateProfil(
+      {String id_user,
+      String nama_user,
+      String username,
+      String no_hp,
+      String password}) async {
     try {
       dynamic dataPost = {
-        'kode_wil': kode_wil,
         'id_user': id_user,
+        'nama_user': nama_user,
+        'username': username,
+        'no_hp': no_hp,
+        'password': password,
       };
 
-      String apiURL = "$api_rtlh/service/getLastUpdate";
+      String apiURL = "$api_rtlh/service/updateProfil";
       var apiResult = await http.post(
         apiURL,
         headers: requestHeader,
@@ -46,7 +56,9 @@ class DashService {
       Map res = jsonDecode(apiResult.body);
 
       if (res['respon']) {
-        return res['data'];
+        setUpdateProfil(
+            username: username, nama_user: nama_user, no_telp: no_hp);
+        return true;
       } else {
         return false;
       }
