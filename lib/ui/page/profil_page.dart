@@ -120,11 +120,11 @@ class _ProfilPageState extends State<ProfilPage> {
     var btnSave = AnimatedButton(
       pressEvent: () async {
         if (prof.formKey.currentState.validate()) {
-          bool res = await prof.simpanProfil();
-          if (res) {
+          dynamic res = await prof.simpanProfil();
+          if (res == true) {
             tampilToast(context, 'Berhasil simpan profil', scColor, lightColor);
           } else {
-            tampilToast(context, 'Gagal simpan profil', redColor, lightColor);
+            tampilToast(context, res.toString(), redColor, lightColor);
           }
         }
       },

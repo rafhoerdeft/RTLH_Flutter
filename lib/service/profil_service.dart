@@ -60,7 +60,7 @@ class ProfilService {
             username: username, nama_user: nama_user, no_telp: no_hp);
         return true;
       } else {
-        return false;
+        return res['data'];
       }
     } catch (e) {
       print('Caught error: $e');

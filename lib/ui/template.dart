@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
@@ -113,10 +114,11 @@ class _TemplatePageState extends State<TemplatePage> {
                     size: constraint.biggest.height - 15, //33,
                   ),
                 ),
-                title: Text(
+                title: AutoSizeText(
                   pg.value.title,
                   style:
                       TextStyle(color: lightColor, fontSize: getSizeH9() - 2),
+                  maxLines: 1,
                 ),
               );
             }).toList(),

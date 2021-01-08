@@ -82,6 +82,7 @@ class DaftarRtlhUploadController extends GetxController {
 
   void showListUi() {
     listUis.value = GridView.builder(
+        padding: EdgeInsets.only(bottom: 95),
         controller: scrollController,
         shrinkWrap: true,
         itemCount: daftar_rtlh.value.length + 1,
@@ -125,12 +126,12 @@ class DaftarRtlhUploadController extends GetxController {
                               children: [
                                 AutoSizeText(
                                   last.nik,
-                                  style: TextStyle(fontSize: getSizeH9()),
+                                  style: TextStyle(fontSize: getSizeH10()),
                                   maxLines: 1,
                                 ),
                                 AutoSizeText(
                                   last.nama,
-                                  style: TextStyle(fontSize: getSizeH9()),
+                                  style: TextStyle(fontSize: getSizeH10()),
                                   maxLines: 1,
                                 ),
                               ],
@@ -142,28 +143,31 @@ class DaftarRtlhUploadController extends GetxController {
                                 flex: 1,
                                 child: Align(
                                   alignment: Alignment.bottomLeft,
-                                  child: RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(5),
+                                  child: Material(
+                                    color: yellowColor,
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(5)),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.toNamed(UpdateRtlhRoute +
+                                            '?id=' +
+                                            last.id +
+                                            '&&id_user=' +
+                                            id_user.value);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Center(
+                                          child: AutoSizeText(
+                                            'Edit',
+                                            style: TextStyle(
+                                                color: lightColor,
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 1,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                    elevation: 0,
-                                    child: AutoSizeText(
-                                      'Edit',
-                                      style: TextStyle(
-                                          color: lightColor,
-                                          fontWeight: FontWeight.bold),
-                                      maxLines: 1,
-                                    ),
-                                    color: yellowColor,
-                                    onPressed: () {
-                                      Get.toNamed(UpdateRtlhRoute +
-                                          '?id=' +
-                                          last.id +
-                                          '&&id_user=' +
-                                          id_user.value);
-                                    },
                                   ),
                                 ),
                               ),
@@ -171,28 +175,31 @@ class DaftarRtlhUploadController extends GetxController {
                                 flex: 1,
                                 child: Align(
                                   alignment: Alignment.bottomRight,
-                                  child: RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        bottomRight: Radius.circular(5),
+                                  child: Material(
+                                    color: redColor,
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(5)),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.toNamed(UploadRtlhRoute +
+                                            '?id=' +
+                                            last.id +
+                                            '&&id_user=' +
+                                            id_user.value);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Center(
+                                          child: AutoSizeText(
+                                            'Upload',
+                                            style: TextStyle(
+                                                color: lightColor,
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 1,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                    elevation: 0,
-                                    child: AutoSizeText(
-                                      'Upload',
-                                      style: TextStyle(
-                                          color: lightColor,
-                                          fontWeight: FontWeight.bold),
-                                      maxLines: 1,
-                                    ),
-                                    color: redColor,
-                                    onPressed: () {
-                                      Get.toNamed(UploadRtlhRoute +
-                                          '?id=' +
-                                          last.id +
-                                          '&&id_user=' +
-                                          id_user.value);
-                                    },
                                   ),
                                 ),
                               ),

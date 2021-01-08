@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -67,19 +68,21 @@ class _DashboardPageState extends State<DashboardPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text(
+                                  AutoSizeText(
                                     grid.value.title,
                                     style: TextStyle(
                                         color: lightColor,
                                         fontSize: getSizeH9(),
                                         fontWeight: FontWeight.bold),
+                                    maxLines: 1,
                                   ),
-                                  Text(
+                                  AutoSizeText(
                                     grid.value.count,
                                     style: TextStyle(
                                         color: lightColor,
                                         fontSize: getSizeH8(),
                                         fontWeight: FontWeight.bold),
+                                    maxLines: 1,
                                   ),
                                 ],
                               ),

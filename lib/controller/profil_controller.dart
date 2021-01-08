@@ -57,13 +57,13 @@ class ProfilController extends GetxController {
   Future<dynamic> simpanProfil() async {
     isLoadingUpdate.value = true;
     ProfilService prof = ProfilService();
-    bool respon = await prof.updateProfil(
+    dynamic respon = await prof.updateProfil(
         id_user: id_user.value,
         nama_user: ctrlNama.text,
         username: ctrlUser.text,
         no_hp: ctrlNoHp.text,
         password: ctrlPass.text);
-    if (respon) {
+    if (respon == true) {
       getNama();
       showProfil();
       dash.getNama();

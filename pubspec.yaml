@@ -36,6 +36,7 @@ dependencies:
   expandable: ^4.1.4
   flushbar: ^1.10.4
   flutter_inappwebview: ^4.0.0+4
+  flutter_launcher_icons: ^0.8.1
   flutter_slidable: ^0.5.7
   flutter_speed_dial: ^1.2.5
   flutter_spinkit: ^4.1.2
@@ -64,6 +65,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path: "assets/logo/logo_rtlh_red_2.png" 
+  android: true
+  ios: false
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

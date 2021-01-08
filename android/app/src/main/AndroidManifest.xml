@@ -18,7 +18,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="RTLH APP"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/logo_rtlh_clr">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
