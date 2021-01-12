@@ -63,7 +63,12 @@ tampilSnackbar(scaffoldKey, String lbl, String ctn) {
 closeSnackBar() {
   return SnackBar(
     backgroundColor: Colors.amber[900],
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(50)),
+    ),
     content: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Shimmer.fromColors(
           baseColor: Colors.red,
@@ -83,7 +88,7 @@ closeSnackBar() {
   );
 }
 
-closeFlushBar(BuildContext context) {
+closeFlushBar() {
   return Flushbar(
     // title: "Keluar Aplikasi",
     // message: "Tekan tombol Back lagi untuk keluar",
@@ -111,8 +116,8 @@ closeFlushBar(BuildContext context) {
         ),
       ],
     ),
-    duration: Duration(seconds: 3),
-  )..show(context);
+    duration: Duration(seconds: 2),
+  );
 }
 
 tampilToast(BuildContext context, String content, Color color, Color txtColor) {
@@ -153,4 +158,36 @@ tampilFlushBar(BuildContext context, String content, Color color) {
     ),
     duration: Duration(seconds: 3),
   )..show(context);
+}
+
+tampilFlushBarErr(String content) {
+  return Flushbar(
+    // title: "Keluar Aplikasi",
+    // message: "Tekan tombol Back lagi untuk keluar",
+    backgroundColor: redColor,
+    showProgressIndicator: false,
+    progressIndicatorBackgroundColor: Colors.red,
+    messageText: Row(
+      children: <Widget>[
+        Shimmer.fromColors(
+          baseColor: Colors.red,
+          highlightColor: Colors.yellow,
+          child: Icon(
+            Icons.warning,
+            size: 35,
+          ),
+        ),
+        SizedBox(width: 10),
+        Expanded(
+          child: Text(content,
+              style: TextStyle(
+                fontSize: getSizeH9(),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+      ],
+    ),
+    // duration: Duration(seconds: 3),
+  );
 }
