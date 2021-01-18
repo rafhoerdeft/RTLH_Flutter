@@ -13,6 +13,7 @@ class ProfilController extends GetxController {
   final version = '...'.obs;
   final id_user = ''.obs;
   final isLoadingUpdate = false.obs;
+  final syncs = false.obs;
 
   final formKey = GlobalKey<FormState>();
   TextEditingController ctrlNama = TextEditingController();
@@ -25,11 +26,17 @@ class ProfilController extends GetxController {
 
   @override
   void onInit() async {
+    await getSyncs();
+  }
+
+  void getSyncs() async {
+    syncs.value = true;
     getNama();
     getVersion();
     showProfil();
     await getIds();
     await getInfo();
+    syncs.value = false;
   }
 
   void getIds() async {

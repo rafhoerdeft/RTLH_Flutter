@@ -2,15 +2,28 @@ import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:get_version/get_version.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rtlh_app/service/version_service.dart';
 import '../widget/dialog_widget.dart';
 
 class TemplateController extends GetxController {
   final page_active = 0.obs;
   final title = 'Dahsboard'.obs;
+  final verApp = '0.0.0'.obs;
+  final verCek = '0.0.0'.obs;
+  final linkUpdate = ''.obs;
+
   PageController pageCtrl = PageController(initialPage: 0);
+
+  // @override
+  // void onInit() async {
+  //   await getVerApp();
+  //   await getVerCek();
+  // }
 
   changePage(val, ttl) {
     page_active.value = val;
@@ -62,6 +75,34 @@ class TemplateController extends GetxController {
         }
       }
     });
+  }
+
+  void getVerApp() async {
+    try {
+      verApp.value = await GetVersion.projectVersion;
+    } on PlatformException {
+      verApp.value = '0.0.0';
+    }
+  }
+
+  void getVerCek() async {
+    VersionService ver = VersionService();
+    await ver.cekVersion().then((res) {
+      if (res != false) {
+        verCek.value = res['nama_ver'];
+        linkUpdate.value = res['link_update_ver'];
+      }
+    });
+  }
+
+  checkUpdateApp(BuildContext context) async {
+    await getVerApp();
+    await getVerCek();
+    int verAppConv = int.parse(verApp.value.replaceAll('.', ''));
+    int verCekConv = int.parse(verCek.value.replaceAll('.', ''));
+    if (verAppConv < verCekConv) {
+      tampilAlertUpdate(context, linkUpdate.value);
+    }
   }
 }
 

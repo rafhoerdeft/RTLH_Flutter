@@ -30,6 +30,7 @@ class _TemplatePageState extends State<TemplatePage> {
 
   @override
   Widget build(BuildContext context) {
+    tmp.checkUpdateApp(context);
     tmp.checkConnectInternet(context);
 
     final List<PagesList> pagesList = [

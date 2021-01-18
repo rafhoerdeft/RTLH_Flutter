@@ -1,8 +1,48 @@
+import 'dart:io';
+
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:rtlh_app/config/config.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:toast/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+tampilAlertUpdate(BuildContext ctx, String url) {
+  showDialog(
+      context: ctx,
+      barrierDismissible: false,
+      builder: (ctx) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: Text('Alert'),
+            content: Text(
+                'Versi baru sudah rilis di PlayStore. Silahkan update aplikasi untuk menggunakan!'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Update'),
+                onPressed: () async {
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    // throw 'Tidak dapat membuka link PlayStore';
+                    tampilToast(ctx, 'Tidak dapat membuka link PlayStore',
+                        redColor, lightColor);
+                    exit(0);
+                  }
+                },
+              ),
+              FlatButton(
+                child: Text('Keluar'),
+                onPressed: () {
+                  exit(0);
+                },
+              ),
+            ],
+          ),
+        );
+      });
+}
 
 tampilAlert(BuildContext ctx, String ctn) {
   showDialog(

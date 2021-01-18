@@ -24,19 +24,19 @@ class FormRtlhController extends GetxController {
 
   final latitude = 0.0.obs;
   final longitude = 0.0.obs;
-  final isGetPosition = false.obs;
+  final loadingPos = false.obs;
 
   @override
   void onInit() {}
 
   getPosition() async {
-    isGetPosition.value = false;
+    loadingPos.value = true;
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     latitude.value = position.latitude;
     longitude.value = position.longitude;
 
-    isGetPosition.value = true;
+    loadingPos.value = false;
     // print(position.toString());
   }
 }

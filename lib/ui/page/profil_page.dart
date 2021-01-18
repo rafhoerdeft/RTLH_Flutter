@@ -233,12 +233,48 @@ class _ProfilPageState extends State<ProfilPage> {
                 SizedBox(
                   height: 20,
                 ),
-                Txt(
-                  'Pengaturan Aplikasi',
-                  style: txtStyle.clone()
-                    ..textAlign.left()
-                    ..textColor(pmColor)
-                    ..fontSize(getSizeH8()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Txt(
+                      'Pengaturan Aplikasi',
+                      style: txtStyle.clone()
+                        ..textAlign.left()
+                        ..textColor(pmColor)
+                        ..fontSize(getSizeH8()),
+                    ),
+                    SizedBox(
+                      height: getSizeH2(),
+                      width: getSizeH1(),
+                      child: MaterialButton(
+                        splashColor: lightColor,
+                        padding: EdgeInsets.all(0),
+                        elevation: 5,
+                        // color: redColor,
+                        onPressed: () {
+                          prof.getSyncs();
+                        },
+                        shape: CircleBorder(),
+                        child: Obx(
+                          () => (prof.syncs.value)
+                              ? LayoutBuilder(
+                                  builder: (context, constraint) =>
+                                      SpinKitFadingCircle(
+                                    color: Colors.black,
+                                    size: constraint.biggest.height - 5, //35
+                                  ),
+                                )
+                              : LayoutBuilder(
+                                  builder: (context, constraint) => Icon(
+                                    Icons.sync,
+                                    size: constraint.biggest.height - 5,
+                                    // color: lightColor,
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 20,

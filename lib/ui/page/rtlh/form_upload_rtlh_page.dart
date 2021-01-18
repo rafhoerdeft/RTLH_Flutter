@@ -82,7 +82,7 @@ class _FormUploadRtlhPageState extends State<FormUploadRtlhPage> {
                   : Container(),
             ),
             Center(
-              child: fup.progres_bar.value < 1.0
+              child: (fup.progres_bar.value < 1.0) || (fup.loadingPos.value)
                   ? Container(
                       color: Colors.blueGrey.withOpacity(0.3),
                       width: MediaQuery.of(context).size.width,
