@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:rtlh_app/config/config.dart';
@@ -8,40 +9,40 @@ import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 tampilAlertUpdate(BuildContext ctx, String url) {
-  showDialog(
-      context: ctx,
-      barrierDismissible: false,
-      builder: (ctx) {
-        return WillPopScope(
-          onWillPop: () async => false,
-          child: AlertDialog(
-            title: Text('Alert'),
-            content: Text(
-                'Versi baru sudah rilis di PlayStore. Silahkan update aplikasi untuk menggunakan!'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Update'),
-                onPressed: () async {
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                  } else {
-                    // throw 'Tidak dapat membuka link PlayStore';
-                    tampilToast(ctx, 'Tidak dapat membuka link PlayStore',
-                        redColor, lightColor);
-                    exit(0);
-                  }
-                },
-              ),
-              FlatButton(
-                child: Text('Keluar'),
-                onPressed: () {
-                  exit(0);
-                },
-              ),
-            ],
-          ),
-        );
-      });
+  AwesomeDialog(
+    dismissOnBackKeyPress: false,
+    dismissOnTouchOutside: false,
+    context: ctx,
+    customHeader: LayoutBuilder(
+      builder: (context, constraint) => Image.asset(
+        'assets/img/icon/icon_play.png',
+        height: constraint.biggest.height - 40,
+      ),
+    ),
+    headerAnimationLoop: false,
+    animType: AnimType.TOPSLIDE,
+    title: 'Update Aplikasi',
+    desc:
+        'Versi baru sudah rilis di PlayStore. Silahkan update aplikasi untuk menggunakan!',
+    btnCancelIcon: Icons.cancel,
+    btnCancelText: 'Keluar',
+    btnCancelOnPress: () {
+      exit(0);
+    },
+    btnOkIcon: Icons.check_circle,
+    btnOkText: 'Update',
+    btnOkOnPress: () async {
+      if (await canLaunch(url)) {
+        await launch(url);
+        exit(0);
+      } else {
+        // throw 'Tidak dapat membuka link PlayStore';
+        tampilToast(
+            ctx, 'Tidak dapat membuka link PlayStore', redColor, lightColor);
+        exit(0);
+      }
+    },
+  )..show();
 }
 
 tampilAlert(BuildContext ctx, String ctn) {
